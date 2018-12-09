@@ -6,12 +6,15 @@ import * as React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { Container } from 'semantic-ui-react'
 
+import BoostInfo from './BoostInfo';
 import BoostMain from './BoostMain';
 import MainMenu from './MainMenu'
 import ManualControl from './ManualControl';
 
 interface IState {
-  boost: LegoBoost
+  boost: LegoBoost,
+  distance: number
+  ledColor: string
 }
 
 class App extends React.Component<{}, IState> {
@@ -20,12 +23,22 @@ class App extends React.Component<{}, IState> {
     super(props);
     this.state = {
       boost: new LegoBoost(),
+      distance: 0,
+      ledColor: ''
     };
   }
+
+  componentDidMount() {
+    this.setState({
+      distance: this.state.boost.deviceInfo.distance,
+      ledColor: this.state.boost.color
+    });
+  };
 
   public render() {
 
     // const newProps = { ...this.props, ...this.state };
+    const specsProps = { ...this.state };
     const newProps = { boost: this.state.boost };
 
     const CreateBoostMain = () => (<BoostMain  {...newProps} />);
@@ -40,6 +53,7 @@ class App extends React.Component<{}, IState> {
               <h1 className="App-title">Boost</h1>
             </header> */}
             <MainMenu />
+            <BoostInfo {...specsProps} />
             <div className="content">
               <Route exact path="/" component={CreateBoostMain} />
               <Route path="/manual" component={CreateManualControl} />
