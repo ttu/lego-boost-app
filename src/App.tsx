@@ -1,10 +1,10 @@
 import './App.css';
 import logo from './lego_logo.svg';
 
+import LegoBoost from 'lego-boost-browser';
 import * as React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { Container } from 'semantic-ui-react'
-import { LegoBoost } from './boost/legoBoost';
 
 import BoostMain from './BoostMain';
 import MainMenu from './MainMenu'

@@ -6,7 +6,8 @@
     "react-dom": "^16.6.3",
     "react-router-dom": "^4.3.1",
     "react-scripts-ts": "^4.0.8",
-    "semantic-ui-react": "^0.83.0"
+    "semantic-ui-react": "^0.83.0",
+    "lego-boost-browser": "git+https://github.com/ttu/lego-boost-browser.git"
   },
   "scripts": {
     "start": "react-scripts-ts start",
@@ -20,7 +21,6 @@
     "@types/react": "^16.7.13",
     "@types/react-dom": "^16.0.11",
     "@types/react-router-dom": "^4.3.1",
-    "@types/web-bluetooth": "0.0.4",
     "typescript": "^3.2.2"
   },
   "browserslist": [

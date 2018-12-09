@@ -1,6 +1,6 @@
+import LegoBoost from 'lego-boost-browser';
 import * as React from 'react';
 import { Button, Grid } from 'semantic-ui-react'
-import { LegoBoost } from './boost/legoBoost';
 
 interface IProps {
   boost: LegoBoost
