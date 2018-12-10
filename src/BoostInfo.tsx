@@ -22,12 +22,12 @@ class BoostInfo extends React.Component<IDeviceInfo> {
             <Table.Cell>{this.props.connected ? "yes" : "no"}</Table.Cell>
           </Table.Row>
           <Table.Row>
-            <Table.Cell>LED</Table.Cell>
+            <Table.Cell>Sensor color</Table.Cell>
             <Table.Cell>{this.props.color}</Table.Cell>
           </Table.Row>
           <Table.Row>
             <Table.Cell>Distance</Table.Cell>
-            <Table.Cell>{this.props.distance}</Table.Cell>
+            <Table.Cell>{this.props.distance === Number.MAX_SAFE_INTEGER ? 'Not connected': this.props.distance}</Table.Cell>
           </Table.Row>
           <Table.Row>
             <Table.Cell>RSSI</Table.Cell>
@@ -38,11 +38,10 @@ class BoostInfo extends React.Component<IDeviceInfo> {
             <Table.Cell>{this.props.error}</Table.Cell>
           </Table.Row>
           {Object.keys(this.props.ports).map(element => (
-            <Table.Row>
+            <Table.Row key={element}>
               <Table.Cell>{element}</Table.Cell>
               <Table.Cell>
-                Action: {this.props.ports[element].action} - Angle:{" "}
-                {this.props.ports[element].angle}
+                Action: {this.props.ports[element].action} - Angle: {this.props.ports[element].angle}
               </Table.Cell>
             </Table.Row>
           ))}

@@ -1,13 +1,13 @@
 import "./App.css";
-import logo from "./lego_logo.svg";
+// import logo from "./lego_logo.svg";
 
 import LegoBoost from "lego-boost-browser";
 import * as React from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import { Container } from "semantic-ui-react";
 
-import BoostInfo from "./BoostInfo";
 import BoostControlInfo from "./BoostControlInfo";
+import BoostInfo from "./BoostInfo";
 import BoostMain from "./BoostMain";
 import MainMenu from "./MainMenu";
 import ManualControl from "./ManualControl";
@@ -22,9 +22,9 @@ class App extends React.Component<{}, IDeviceInfo> {
   constructor(props) {
     super(props);
     this.state = {
+      color: '',
       connected: false,
       distance: 0,
-      color: '',
       error: '',
       rssi: 0,
       ports: {
@@ -43,9 +43,9 @@ class App extends React.Component<{}, IDeviceInfo> {
     this.stateUpdaterId = setInterval(() => {
       // TODO: Deep copy for certain parts
       this.setState({
-        connected: false, //this.boost.deviceInfo.connected,
+        color: this.boost.deviceInfo.color,
+        connected: this.boost.deviceInfo.connected,
         distance: this.boost.deviceInfo.distance,
-        color: 'pink', //this.boost.deviceInfo.color,
         error: this.boost.deviceInfo.error,
         rssi: this.boost.deviceInfo.rssi,
         ports: {
@@ -56,11 +56,11 @@ class App extends React.Component<{}, IDeviceInfo> {
           D: { action: this.boost.deviceInfo.ports.D.action, angle: this.boost.deviceInfo.ports.D.angle },
           LED: { action: this.boost.deviceInfo.ports.LED.action, angle: this.boost.deviceInfo.ports.LED.angle }
         },
-        controlData: { 
+        controlData: {
+          forceState: this.boost.controlData.forceState,
+          input: this.boost.controlData.input,
           speed: this.boost.controlData.speed,
           turnAngle: this.boost.controlData.turnAngle,
-          input: this.boost.controlData.input,
-          forceState: this.boost.controlData.forceState,
           updateInputMode: this.boost.controlData.updateInputMode,
         }
       });
@@ -69,7 +69,7 @@ class App extends React.Component<{}, IDeviceInfo> {
 
   componentWillUnmount() {
     clearInterval(this.stateUpdaterId);
-}
+  }
 
   public render() {
     const specsProps = { ...this.state };
@@ -88,12 +88,12 @@ class App extends React.Component<{}, IDeviceInfo> {
               <h1 className="App-title">Boost</h1>
             </header> */}
             <MainMenu />
-            <BoostInfo {...specsProps} />
-            <BoostControlInfo {...controlProps} />
             <div className="content">
               <Route exact path="/" component={CreateBoostMain} />
               <Route path="/manual" component={CreateManualControl} />
             </div>
+            <BoostInfo {...specsProps} />
+            <BoostControlInfo {...controlProps} />
           </Container>
         </BrowserRouter>
       </div>
