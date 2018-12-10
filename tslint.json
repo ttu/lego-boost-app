@@ -3,6 +3,8 @@
   "exctends": [],
   "defaultSeverity": "warning",
   "quotemark": [true, "single", "jsx-double"],
+  "object-literal-sort-keys": true,
+  "member-access": false,
   "linterOptions": {
     "exclude": [
       "config/**/*.js",
