@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Table } from "semantic-ui-react";
-import { IControlData } from "./Models";
+import { IControlData } from "../Models";
 
 class BoostControlInfo extends React.Component<IControlData> {
   constructor(props) {

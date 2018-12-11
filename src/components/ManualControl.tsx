@@ -1,6 +1,6 @@
 import LegoBoost from "lego-boost-browser";
 import * as React from "react";
-import { IControlData } from "./Models";
+import { IControlData } from "../Models";
 import BoostControlInfo from "./BoostControlInfo";
 
 interface IProps {

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Table } from "semantic-ui-react";
-import { IDeviceInfo } from "./Models";
+import { IDeviceInfo } from "../Models";
 
 class BoostDeviceInfo extends React.Component<IDeviceInfo> {
   constructor(props) {

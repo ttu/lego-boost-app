@@ -6,11 +6,13 @@ import * as React from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import { Container } from "semantic-ui-react";
 
-import BoostDeviceInfo from "./BoostDeviceInfo";
-import BoostMain from "./BoostMain";
+import BoostDeviceInfo from "./components/BoostDeviceInfo";
+import BoostMain from "./components/BoostMain";
 import MainMenu from "./MainMenu";
-import ManualControl from "./ManualControl";
+import ManualControl from "./components/ManualControl";
 import { IDeviceInfo } from './Models';
+import AiControl from "./components/AiControl";
+import CodeControl from "./components/CodeControl";
 
 
 class App extends React.Component<{}, IDeviceInfo> {
@@ -72,10 +74,13 @@ class App extends React.Component<{}, IDeviceInfo> {
 
   public render() {
     const specsProps = { ...this.state };
-    const newProps = { boost: this.boost, controlData: this.state.controlData};
+    const newProps = { boost: this.boost, controlData: this.state.controlData };
+    const boostProps = { boost: this.boost };
 
     const CreateBoostMain = () => <BoostMain {...newProps} />;
     const CreateManualControl = () => <ManualControl {...newProps} />;
+    const CreateAiControl = () => <AiControl  { ...boostProps } />;
+    const CreateCodeControl = () => <CodeControl { ...boostProps } />;
 
     return (
       <div className="App">
@@ -89,6 +94,8 @@ class App extends React.Component<{}, IDeviceInfo> {
             <div className="content">
               <Route exact path="/" component={CreateBoostMain} />
               <Route path="/manual" component={CreateManualControl} />
+              <Route path="/ai" component={CreateAiControl} />
+              <Route path="/code" component={CreateCodeControl} />
             </div>
             <BoostDeviceInfo {...specsProps} />
           </Container>
