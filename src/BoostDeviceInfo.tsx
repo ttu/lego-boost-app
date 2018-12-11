@@ -2,7 +2,7 @@ import * as React from "react";
 import { Table } from "semantic-ui-react";
 import { IDeviceInfo } from "./Models";
 
-class BoostInfo extends React.Component<IDeviceInfo> {
+class BoostDeviceInfo extends React.Component<IDeviceInfo> {
   constructor(props) {
     super(props);
   }
@@ -51,4 +51,4 @@ class BoostInfo extends React.Component<IDeviceInfo> {
   }
 }
 
-export default BoostInfo;
+export default BoostDeviceInfo;

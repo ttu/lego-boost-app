@@ -6,8 +6,7 @@ import * as React from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import { Container } from "semantic-ui-react";
 
-import BoostControlInfo from "./BoostControlInfo";
-import BoostInfo from "./BoostInfo";
+import BoostDeviceInfo from "./BoostDeviceInfo";
 import BoostMain from "./BoostMain";
 import MainMenu from "./MainMenu";
 import ManualControl from "./ManualControl";
@@ -73,8 +72,7 @@ class App extends React.Component<{}, IDeviceInfo> {
 
   public render() {
     const specsProps = { ...this.state };
-    const controlProps = { ...this.state.controlData };
-    const newProps = { boost: this.boost };
+    const newProps = { boost: this.boost, controlData: this.state.controlData};
 
     const CreateBoostMain = () => <BoostMain {...newProps} />;
     const CreateManualControl = () => <ManualControl {...newProps} />;
@@ -92,8 +90,7 @@ class App extends React.Component<{}, IDeviceInfo> {
               <Route exact path="/" component={CreateBoostMain} />
               <Route path="/manual" component={CreateManualControl} />
             </div>
-            <BoostInfo {...specsProps} />
-            <BoostControlInfo {...controlProps} />
+            <BoostDeviceInfo {...specsProps} />
           </Container>
         </BrowserRouter>
       </div>
