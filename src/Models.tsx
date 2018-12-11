@@ -12,7 +12,6 @@ export interface IDeviceInfo {
   color: string;
   error: string;
   rssi: number;
-  controlData: IControlData;
   ports: {
     A: { action: string; angle: number };
     B: { action: string; angle: number };

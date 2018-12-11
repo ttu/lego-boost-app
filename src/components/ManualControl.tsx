@@ -5,7 +5,6 @@ import BoostControlInfo from "./BoostControlInfo";
 
 interface IProps {
   boost: LegoBoost;
-  controlData: IControlData;
 }
 
 class ManualControl extends React.Component<IProps> {
@@ -14,7 +13,7 @@ class ManualControl extends React.Component<IProps> {
   }
 
   render() {
-    const controlProps = { ...this.props.controlData };
+    const controlProps = { ...this.props };
 
     return (
       <div className="ManualControl">
