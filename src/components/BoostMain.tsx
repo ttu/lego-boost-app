@@ -31,9 +31,6 @@ class BoostMain extends React.Component<IProps> {
               <Button secondary onClick={this.props.boost.changeLed.bind(this.props.boost)}>Led</Button>
             </Grid.Column>
             <Grid.Column>
-              <Button secondary onClick={this.props.boost.driveToDirection.bind(this.props.boost)}>Drive</Button>
-            </Grid.Column>
-            <Grid.Column>
               <Button secondary onClick={this.props.boost.ai.bind(this.props.boost)}>AI</Button>
             </Grid.Column>
             <Grid.Column>
