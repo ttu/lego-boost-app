@@ -1,9 +1,12 @@
 import LegoBoost from 'lego-boost-browser';
 import * as React from 'react';
-import { Button, Grid } from 'semantic-ui-react'
+import { Button, Grid, Container } from 'semantic-ui-react'
+import MessageBlock from './MessageBlock';
 
 interface IProps {
-  boost: LegoBoost
+  boost: LegoBoost;
+  infoVisible: boolean;
+  onInfoClose: Function
 }
 
 class BoostMain extends React.Component<IProps> {
@@ -21,18 +24,21 @@ class BoostMain extends React.Component<IProps> {
 
   render() {
     return (
-      <Grid>
-        <Grid.Row columns={1}>
+      <Container>
+        <MessageBlock visible={this.props.infoVisible} onClose={this.props.onInfoClose} content="Click Connect and go to Manual, AI or Code page and start controlling your Lego Boost." />
+        <Grid>
+          <Grid.Row columns={1}>
+            <Grid.Column>
+              <Button primary onClick={this.props.boost.connect.bind(this.props.boost)}>Connect</Button>
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row columns={1}>
           <Grid.Column>
-            <Button primary onClick={this.props.boost.connect.bind(this.props.boost)}>Connect</Button>
-          </Grid.Column>
-        </Grid.Row>
-        <Grid.Row columns={1}>
-         <Grid.Column>
-            Click Connect and go to Manual, AI or Code page and start controlling your Lego Boost.
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
+              
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </Container>
     );
   }
 }

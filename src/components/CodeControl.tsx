@@ -1,9 +1,12 @@
 import LegoBoost from "lego-boost-browser";
 import * as React from "react";
-import { Grid, TextArea, Button, TextAreaProps, Header } from "semantic-ui-react";
+import { Grid, TextArea, Button, TextAreaProps, Header, Container } from "semantic-ui-react";
+import MessageBlock from "./MessageBlock";
 
 interface IProps {
   boost: LegoBoost;
+  infoVisible: boolean;
+  onInfoClose: Function;
 }
 
 interface IState {
@@ -32,22 +35,26 @@ class CodeControl extends React.Component<IProps, IState> {
 
   render() {
     return (
-      <Grid centered columns="equal">
-      <Grid.Row>
-          <Header as="h3">Execute Code Control</Header>
-        </Grid.Row>
+      <Container>
+        <MessageBlock visible={this.props.infoVisible} onClose={this.props.onInfoClose} content="Under Construction! Control Lego Boost by executing javascript code." />
+        
+        <Grid centered columns="equal">
         <Grid.Row>
-          <TextArea
-          placeholder="Execute code"
-          value={this.state.codeToRun}
-          onChange={this.updateCode}
-          style={{ minHeight: 100, minWidth:400 }}
-        />
-        </Grid.Row>
-        <Grid.Row>
-          <Button primary name="execute" onClick={this.handleItemClick}>Execute</Button>
-        </Grid.Row>
-        </Grid>
+            <Header as="h3">Execute Code Control</Header>
+          </Grid.Row>
+          <Grid.Row>
+            <TextArea
+            placeholder="Execute code"
+            value={this.state.codeToRun}
+            onChange={this.updateCode}
+            style={{ minHeight: 100, minWidth:400 }}
+          />
+          </Grid.Row>
+          <Grid.Row>
+            <Button primary name="execute" onClick={this.handleItemClick}>Execute</Button>
+          </Grid.Row>
+          </Grid>
+      </Container>
     );
   }
 }

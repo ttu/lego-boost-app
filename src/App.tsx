@@ -17,20 +17,44 @@ import Info from "./components/Info";
 const APP_BUILD_TIME = process.env.REACT_APP_BUILD_TIME || "not defined";
 const APP_VERSION = process.env.REACT_APP_VERSION || "not defined";
 
-class App extends React.Component<{}> {
+
+interface IApplicationState {
+  aiInfoVisible: boolean;
+  mainInfoVisible: boolean;
+  codeInfoVisible: boolean;
+}
+
+class App extends React.Component<{}, IApplicationState> {
   boost = new LegoBoost();
 
   constructor(props) {
     super(props);
+    this.state = { 
+      aiInfoVisible: true,
+      mainInfoVisible: true,
+      codeInfoVisible: true
+    }
+  }
+
+  onAiInfoClose = () => {
+    this.setState({ aiInfoVisible: false });
+  }
+
+  onMainInfoClose = () => {
+    this.setState({ mainInfoVisible: false });
+  }
+
+  onCodeInfoClose = () => {
+    this.setState({ codeInfoVisible: false });
   }
 
   public render() {
     const boostProps = { boost: this.boost };
 
-    const CreateBoostMain = () => <BoostMain {...boostProps} />;
+    const CreateBoostMain = () => <BoostMain {...boostProps} infoVisible={this.state.mainInfoVisible} onInfoClose={this.onMainInfoClose} />;
     const CreateManualControl = () => <ManualControl {...boostProps} />;
-    const CreateAiControl = () => <AiControl {...boostProps} />;
-    const CreateCodeControl = () => <CodeControl {...boostProps} />;
+    const CreateAiControl = () => <AiControl {...boostProps} infoVisible={this.state.aiInfoVisible} onInfoClose={this.onAiInfoClose} />;
+    const CreateCodeControl = () => <CodeControl {...boostProps} infoVisible={this.state.codeInfoVisible} onInfoClose={this.onCodeInfoClose} />;
     const CreateInfoComponent = () => (
       <Info version={APP_VERSION} date={APP_BUILD_TIME} />
     );

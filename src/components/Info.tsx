@@ -13,10 +13,16 @@ const Info = ({ version, date }: AboutProps) => (
       <List bulleted>
         <List.Item>Works only with computers (Windows, macOS, Linux) and Android</List.Item>
         <List.Item>Supported Browsers Chrome and Opera</List.Item>
-        <List.Item>Requires https. Check that url starts with https://</List.Item>
-        <List.Item> Manual control won't work. Refresh page and reconnect</List.Item>
-        <List.Item> In case of problem, refresh page and reconnect</List.Item>
-        <List.Item>Lego Boost's is connected and can't reconnect. Remove batteries and try again.</List.Item>
+        <List.Item>
+          Common Problems:
+          <List>
+            <List.Item>Connection buttone doesn't work: Site requires https. Check that url starts with https://</List.Item>
+            <List.Item>Manual control won't work: Refresh the page and reconnect</List.Item>
+            <List.Item>In case of problem unknown problem: Refresh the page and reconnect</List.Item>
+            <List.Item>Distance sensor doesn't work: Unplug sensor from the boost and reconnect</List.Item>
+            <List.Item>Page shows no connection but Boost's LEDs show it is connected: Remove batteries and try again</List.Item>
+          </List>
+        </List.Item>
         <List.Item>Read more from: <a href="https://github.com/ttu/lego-boost-app">https://github.com/ttu/lego-boost-app</a></List.Item>
       </List>
     </Container>

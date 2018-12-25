@@ -1,10 +1,13 @@
 import LegoBoost from "lego-boost-browser";
 import * as React from "react";
 import { IControlData } from "../Models";
-import { Grid, Button } from "semantic-ui-react";
+import { Grid, Button, Container } from "semantic-ui-react";
+import MessageBlock from "./MessageBlock";
 
 interface IProps {
   boost: LegoBoost;
+  infoVisible: boolean;
+  onInfoClose: Function;
 }
 
 class AiControl extends React.Component<IProps> {
@@ -14,16 +17,19 @@ class AiControl extends React.Component<IProps> {
 
   render() {
     return (
-      <Grid centered columns="equal">
-        <Grid.Row>
-          <Grid.Column>
-            <Button secondary onClick={this.props.boost.ai.bind(this.props.boost)}>AI</Button>
-          </Grid.Column>
-          <Grid.Column>
-            <Button secondary onClick={this.props.boost.stop.bind(this.props.boost)}>Stop</Button>
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
+      <Container>
+        <MessageBlock visible={this.props.infoVisible} onClose={this.props.onInfoClose} content="AI-mode controls Lego Boost automatically. When sensor notices an object, the robot will try to turn away from the object and continue driving. If it notices the object too late, the robot will back away and turn to a new direction." />
+        <Grid centered>
+          <Grid.Row>
+            <Grid.Column>
+              <Button secondary onClick={this.props.boost.ai.bind(this.props.boost)}>AI</Button>
+            </Grid.Column>
+            <Grid.Column>
+              <Button secondary onClick={this.props.boost.stop.bind(this.props.boost)}>Stop</Button>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </Container>
     );
   }
 }
