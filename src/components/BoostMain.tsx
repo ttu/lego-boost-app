@@ -22,7 +22,7 @@ class BoostMain extends React.Component<IProps> {
   render() {
     return (
       <div className="BoostMain">
-        <Grid columns="five" divided>
+        <Grid columns="four" divided>
           <Grid.Row>
             <Grid.Column>
               <Button primary onClick={this.props.boost.connect.bind(this.props.boost)}>Connect</Button>
