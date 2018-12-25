@@ -99,13 +99,13 @@ class BoostDeviceInfo extends React.Component<IProps, IDeviceInfoAccordion> {
           index={0}
           onClick={this.handleAccordionClick}
         >
-          <Header as='h3'><Icon name="dropdown" />Device Info</Header>
+          <Header as='h3'><Icon name="dropdown" />Lego Boost Info</Header>
         </Accordion.Title>
         <Accordion.Content active={this.state.activeIndex === 0}>
           <Table definition>
             <Table.Header>
               <Table.Row>
-                <Table.HeaderCell>Name</Table.HeaderCell>
+                <Table.HeaderCell></Table.HeaderCell>
                 <Table.HeaderCell>Status</Table.HeaderCell>
               </Table.Row>
             </Table.Header>
@@ -144,8 +144,8 @@ class BoostDeviceInfo extends React.Component<IProps, IDeviceInfoAccordion> {
                 </Table.Cell>
               </Table.Row>
               <Table.Row>
-                <Table.Cell>Error</Table.Cell>
-                <Table.Cell>{this.state.error}</Table.Cell>
+                <Table.Cell>Error message</Table.Cell>
+                <Table.Cell>{this.state.error === '' ? 'No errors from the Boost' : this.state.error}</Table.Cell>
               </Table.Row>
               <Table.Row />
             </Table.Body>

@@ -41,12 +41,6 @@ class BoostControlInfo extends React.Component<IProps, IControlData> {
   render() {
     return (
       <Table definition>
-        <Table.Header>
-          <Table.Row>
-            <Table.HeaderCell>Control Info</Table.HeaderCell>
-            <Table.HeaderCell />
-          </Table.Row>
-        </Table.Header>
         <Table.Body>
           <Table.Row>
             <Table.Cell>Speed</Table.Cell>
@@ -55,6 +49,10 @@ class BoostControlInfo extends React.Component<IProps, IControlData> {
           <Table.Row>
             <Table.Cell>Turn Angle</Table.Cell>
             <Table.Cell>{this.state.turnAngle}</Table.Cell>
+          </Table.Row>
+          <Table.Row>
+            <Table.Cell>Input mode</Table.Cell>
+            <Table.Cell>{this.state.input}</Table.Cell>
           </Table.Row>
         </Table.Body>
       </Table>

@@ -1,6 +1,6 @@
 import LegoBoost from "lego-boost-browser";
 import * as React from "react";
-import { Container, Grid, Image, Segment, GridColumn } from "semantic-ui-react";
+import { Container, Grid, Image, Button } from "semantic-ui-react";
 
 import BoostControlInfo from "./BoostControlInfo";
 
@@ -14,22 +14,30 @@ interface IProps {
   boost: LegoBoost;
 }
 
-class ManualControl extends React.Component<IProps> {
+interface IManualState {
+  lastCommand: string
+}
+
+class ManualControl extends React.Component<IProps, IManualState> {
   constructor(props) {
     super(props);
+    this.state = {
+      lastCommand: ''
+    }
   }
 
   controlClick = async command => {
-    console.log(command);
+    this.setState({ lastCommand: command });
+
     switch (command) {
       case 'stop':
         await this.props.boost.stop();
         break;
       case 'left':
-        await this.props.boost.turnUntil(0);
+        await this.props.boost.turn(-90);
         break;
       case 'right':
-        await this.props.boost.turnUntil(1);
+        await this.props.boost.turn(90);
         break;
       case 'up':
         await this.props.boost.driveToDirection();
@@ -85,6 +93,16 @@ class ManualControl extends React.Component<IProps> {
               />
             </Grid.Column>
             <Grid.Column />
+          </Grid.Row>
+          <Grid.Row columns={1}>
+            <Grid.Column>
+              Last command: {this.state.lastCommand}
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row columns={1}>
+            <Grid.Column>
+              <Button secondary onClick={this.props.boost.changeLed.bind(this.props.boost)}>Change led color</Button>
+            </Grid.Column>
           </Grid.Row>
           <Grid.Row columns={1}>
             <Grid.Column>

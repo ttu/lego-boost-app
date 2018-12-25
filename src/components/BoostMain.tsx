@@ -21,13 +21,15 @@ class BoostMain extends React.Component<IProps> {
 
   render() {
     return (
-      <Grid centered columns="equal">
-        <Grid.Row>
+      <Grid>
+        <Grid.Row columns={1}>
           <Grid.Column>
             <Button primary onClick={this.props.boost.connect.bind(this.props.boost)}>Connect</Button>
           </Grid.Column>
-          <Grid.Column>
-            <Button secondary onClick={this.props.boost.changeLed.bind(this.props.boost)}>Led</Button>
+        </Grid.Row>
+        <Grid.Row columns={1}>
+         <Grid.Column>
+            Click Connect and go to Manual, AI or Code page and start controlling your Lego Boost.
           </Grid.Column>
         </Grid.Row>
       </Grid>
