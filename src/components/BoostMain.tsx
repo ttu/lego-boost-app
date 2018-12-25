@@ -25,16 +25,11 @@ class BoostMain extends React.Component<IProps> {
   render() {
     return (
       <Container>
-        <MessageBlock visible={this.props.infoVisible} onClose={this.props.onInfoClose} content="Click Connect and go to Manual, AI or Code page and start controlling your Lego Boost." />
+        <MessageBlock visible={this.props.infoVisible} onClose={this.props.onInfoClose} content="Click Connect and go to Manual, AI or Code page and start controlling your Lego Boost. Note! For now only works with Vernie setup." />
         <Grid>
           <Grid.Row columns={1}>
             <Grid.Column>
               <Button primary onClick={this.props.boost.connect.bind(this.props.boost)}>Connect</Button>
-            </Grid.Column>
-          </Grid.Row>
-          <Grid.Row columns={1}>
-          <Grid.Column>
-              
             </Grid.Column>
           </Grid.Row>
         </Grid>

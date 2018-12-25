@@ -15,7 +15,7 @@ interface IProps {
 }
 
 interface IManualState {
-  lastCommand: string
+  lastCommand: string;
 }
 
 class ManualControl extends React.Component<IProps, IManualState> {
@@ -23,7 +23,7 @@ class ManualControl extends React.Component<IProps, IManualState> {
     super(props);
     this.state = {
       lastCommand: ''
-    }
+    };
   }
 
   controlClick = async command => {
@@ -53,55 +53,43 @@ class ManualControl extends React.Component<IProps, IManualState> {
 
     return (
       <Container>
-        <Grid columns={3} divided style={{ height: '100vh' }}>
-          <Grid.Row stretched style={{ "height": "20%" }}>
+        <Grid columns={3} celled padded style={{ height: "90vh" }}>
+          <Grid.Row style={{ height: "33%" }}>
             <Grid.Column />
-            <Grid.Column>
-              <Image
-                src={ControlUp}
-                onClick={() => this.controlClick("up")}
-              />
+            <Grid.Column verticalAlign="middle" onClick={() => this.controlClick("up")}>
+              <Image src={ControlUp} style={{ width: "100%" }} />
             </Grid.Column>
             <Grid.Column />
           </Grid.Row>
-          <Grid.Row stretched style={{ "height": "20%" }}>
-            <Grid.Column>
-              <Image
-                src={ControlLeft}
-                onClick={() => this.controlClick("left")}
-              />
+          <Grid.Row style={{ height: "33%" }}>
+            <Grid.Column verticalAlign="middle" onClick={() => this.controlClick("left")}>
+              <Image src={ControlLeft} style={{ width: "100%" }} />
             </Grid.Column>
-            <Grid.Column>
-              <Image
-                src={ControlStop}
-                onClick={() => this.controlClick("stop")}
-              />
+            <Grid.Column verticalAlign="middle" onClick={() => this.controlClick("stop")}>
+              <Image src={ControlStop} style={{ width: "100%" }} />
             </Grid.Column>
-            <Grid.Column>
-              <Image
-                src={ControlRight}
-                onClick={() => this.controlClick("right")}
-              />
+            <Grid.Column verticalAlign="middle" onClick={() => this.controlClick("right")}>
+              <Image src={ControlRight} style={{ width: "100%" }} />
             </Grid.Column>
           </Grid.Row>
-          <Grid.Row stretched style={{ "height": "20%" }}>
+          <Grid.Row style={{ height: "33%" }}>
             <Grid.Column />
-            <Grid.Column>
-              <Image
-                src={ControlDown}
-                onClick={() => this.controlClick("down")}
-              />
+            <Grid.Column verticalAlign="middle" onClick={() => this.controlClick("down")}>
+              <Image circular src={ControlDown} />
             </Grid.Column>
             <Grid.Column />
           </Grid.Row>
+          </Grid>
+
+          <Grid>
+          {/* <Grid.Row columns={1}>
+            <Grid.Column>Last command: {this.state.lastCommand}</Grid.Column>
+          </Grid.Row> */}
           <Grid.Row columns={1}>
             <Grid.Column>
-              Last command: {this.state.lastCommand}
-            </Grid.Column>
-          </Grid.Row>
-          <Grid.Row columns={1}>
-            <Grid.Column>
-              <Button secondary onClick={this.props.boost.changeLed.bind(this.props.boost)}>Change led color</Button>
+              <Button secondary onClick={this.props.boost.changeLed.bind(this.props.boost)}>
+                Change led color
+              </Button>
             </Grid.Column>
           </Grid.Row>
           <Grid.Row columns={1}>
