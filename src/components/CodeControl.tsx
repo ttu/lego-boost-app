@@ -1,6 +1,6 @@
 import LegoBoost from "lego-boost-browser";
 import * as React from "react";
-import { TextArea, Button, TextAreaProps } from "semantic-ui-react";
+import { Grid, TextArea, Button, TextAreaProps, Header } from "semantic-ui-react";
 
 interface IProps {
   boost: LegoBoost;
@@ -32,18 +32,22 @@ class CodeControl extends React.Component<IProps, IState> {
 
   render() {
     return (
-      <div className="CodeControl">
-        <div>Execute Code Control</div>
-        <div>
+      <Grid centered columns="equal">
+      <Grid.Row>
+          <Header as="h3">Execute Code Control</Header>
+        </Grid.Row>
+        <Grid.Row>
           <TextArea
-            placeholder="Execute code"
-            value={this.state.codeToRun}
-            onChange={this.updateCode}
-            style={{ minHeight: 100 }}
-          />
-        </div>
-        <Button primary name="execute" onClick={this.handleItemClick}>Execute</Button>
-      </div>
+          placeholder="Execute code"
+          value={this.state.codeToRun}
+          onChange={this.updateCode}
+          style={{ minHeight: 100, minWidth:400 }}
+        />
+        </Grid.Row>
+        <Grid.Row>
+          <Button primary name="execute" onClick={this.handleItemClick}>Execute</Button>
+        </Grid.Row>
+        </Grid>
     );
   }
 }
