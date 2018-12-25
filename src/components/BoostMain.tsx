@@ -21,24 +21,16 @@ class BoostMain extends React.Component<IProps> {
 
   render() {
     return (
-      <div className="BoostMain">
-        <Grid columns="four" divided>
-          <Grid.Row>
-            <Grid.Column>
-              <Button primary onClick={this.props.boost.connect.bind(this.props.boost)}>Connect</Button>
-            </Grid.Column>
-            <Grid.Column>
-              <Button secondary onClick={this.props.boost.changeLed.bind(this.props.boost)}>Led</Button>
-            </Grid.Column>
-            <Grid.Column>
-              <Button secondary onClick={this.props.boost.ai.bind(this.props.boost)}>AI</Button>
-            </Grid.Column>
-            <Grid.Column>
-              <Button secondary onClick={this.props.boost.stop.bind(this.props.boost)}>Stop</Button>
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
-      </div>
+      <Grid centered columns="equal">
+        <Grid.Row>
+          <Grid.Column>
+            <Button primary onClick={this.props.boost.connect.bind(this.props.boost)}>Connect</Button>
+          </Grid.Column>
+          <Grid.Column>
+            <Button secondary onClick={this.props.boost.changeLed.bind(this.props.boost)}>Led</Button>
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
     );
   }
 }

@@ -93,7 +93,7 @@ class BoostDeviceInfo extends React.Component<IProps, IDeviceInfoAccordion> {
 
   render() {
     return (
-      <Accordion>
+      <Accordion fluid>
         <Accordion.Title
           active={this.state.activeIndex === 0}
           index={0}
