@@ -12,7 +12,7 @@ import MainMenu from "./MainMenu";
 import ManualControl from "./components/ManualControl";
 import AiControl from "./components/AiControl";
 import CodeControl from "./components/CodeControl";
-import About from "./components/About";
+import Info from "./components/Info";
 
 const APP_BUILD_TIME = process.env.REACT_APP_BUILD_TIME || "not defined";
 const APP_VERSION = process.env.REACT_APP_VERSION || "not defined";
@@ -31,8 +31,8 @@ class App extends React.Component<{}> {
     const CreateManualControl = () => <ManualControl {...boostProps} />;
     const CreateAiControl = () => <AiControl {...boostProps} />;
     const CreateCodeControl = () => <CodeControl {...boostProps} />;
-    const CreateAboutComponent = () => (
-      <About version={APP_VERSION} date={APP_BUILD_TIME} />
+    const CreateInfoComponent = () => (
+      <Info version={APP_VERSION} date={APP_BUILD_TIME} />
     );
 
     return (
@@ -45,7 +45,7 @@ class App extends React.Component<{}> {
               <Route path="/manual" component={CreateManualControl} />
               <Route path="/ai" component={CreateAiControl} />
               <Route path="/code" component={CreateCodeControl} />
-              <Route path="/about" component={CreateAboutComponent} />
+              <Route path="/info" component={CreateInfoComponent} />
             </Grid.Row>
             <Grid.Row>
               <BoostDeviceInfo {...boostProps} />

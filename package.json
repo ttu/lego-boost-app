@@ -11,7 +11,7 @@
   },
   "scripts": {
     "start": "react-scripts-ts start",
-    "build": "SET REACT_APP_BUILD_TIME=25.12.2018 && SET REACT_APP_VERSION=0.1.0 && react-scripts-ts build",
+    "build": "SET REACT_APP_BUILD_TIME=25.12.2018 && SET REACT_APP_VERSION='Development version' && react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject"
   },

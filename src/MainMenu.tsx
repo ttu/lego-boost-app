@@ -17,8 +17,8 @@ const MainMenu = ({ location }) => (
     <Menu.Item active={location.pathname === '/code'}>
       <Link to="/code">Code</Link>
     </Menu.Item>
-    <Menu.Item active={location.pathname === '/about'}>
-      <Link to="/about">About</Link>
+    <Menu.Item active={location.pathname === '/info'}>
+      <Link to="/info">Info</Link>
     </Menu.Item>
   </Menu>
 );
