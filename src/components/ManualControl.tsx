@@ -4,11 +4,6 @@ import { Container, Grid, Image, Button } from "semantic-ui-react";
 
 import BoostControlInfo from "./BoostControlInfo";
 
-import ControlStop from "../images/stop-circle.svg";
-import ControlDown from "../images/triangle-down.svg";
-import ControlLeft from "../images/triangle-left.svg";
-import ControlRight from "../images/triangle-right.svg";
-import ControlUp from "../images/triangle-up.svg";
 
 interface IProps {
   boost: LegoBoost;
@@ -56,32 +51,27 @@ class ManualControl extends React.Component<IProps, IManualState> {
         <Grid columns={3} celled padded style={{ height: "90vh" }}>
           <Grid.Row style={{ height: "33%" }}>
             <Grid.Column />
-            <Grid.Column verticalAlign="middle" onClick={() => this.controlClick("up")}>
-              <Image src={ControlUp} style={{ width: "100%" }} />
+            <Grid.Column onClick={() => this.controlClick("up")} className="up-control">
             </Grid.Column>
             <Grid.Column />
           </Grid.Row>
           <Grid.Row style={{ height: "33%" }}>
-            <Grid.Column verticalAlign="middle" onClick={() => this.controlClick("left")}>
-              <Image src={ControlLeft} style={{ width: "100%" }} />
+            <Grid.Column  className="left-control" onClick={() => this.controlClick("left")}>
             </Grid.Column>
-            <Grid.Column verticalAlign="middle" onClick={() => this.controlClick("stop")}>
-              <Image src={ControlStop} style={{ width: "100%" }} />
+            <Grid.Column  className="stop-control" onClick={() => this.controlClick("stop")}>
             </Grid.Column>
-            <Grid.Column verticalAlign="middle" onClick={() => this.controlClick("right")}>
-              <Image src={ControlRight} style={{ width: "100%" }} />
+            <Grid.Column className="right-control" onClick={() => this.controlClick("right")}>
             </Grid.Column>
           </Grid.Row>
           <Grid.Row style={{ height: "33%" }}>
             <Grid.Column />
-            <Grid.Column verticalAlign="middle" onClick={() => this.controlClick("down")}>
-              <Image circular src={ControlDown} />
+            <Grid.Column className="down-control" onClick={() => this.controlClick("down")}>
             </Grid.Column>
             <Grid.Column />
           </Grid.Row>
-          </Grid>
+        </Grid>
 
-          <Grid>
+        <Grid>
           {/* <Grid.Row columns={1}>
             <Grid.Column>Last command: {this.state.lastCommand}</Grid.Column>
           </Grid.Row> */}

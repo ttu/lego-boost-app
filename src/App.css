@@ -26,3 +26,33 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.up-control {
+  background-image:url(./images/triangle-up.svg);
+  background-size: cover;
+  background-position: center;
+}
+
+.down-control {
+  background-image:url(./images/triangle-down.svg);
+  background-size: cover;
+  background-position: center;
+}
+
+.left-control {
+  background-image:url(./images/triangle-left.svg);
+  background-size: cover;
+  background-position: center;
+}
+
+.right-control {
+  background-image:url(./images/triangle-right.svg);
+  background-size: cover;
+  background-position: center;
+}
+
+.stop-control {
+  background-image:url(./images/stop-circle.svg);
+  background-size: cover;
+  background-position: center;
+}
