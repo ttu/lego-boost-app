@@ -23,19 +23,29 @@ const codeExamples = [
   {
     header: 'Drive and back',
     description: 'Drive 40cm, turn 180 degrees and drive 40cm',
-    code: `boost.drive(40);
-boost.turn(180);
-boost.drive(40);`
+    code: `await boost.drive(40);
+await boost.turn(180);
+await boost.drive(40);`
   },
   {
     header: 'Drive for 500 motor degrees',
     description: 'Turn motors A and B for 20% power for 500 degrees',
-    code: `boost.motorAngleMulti(500, 20, 20);`
+    code: `await boost.motorAngleMultiAsync(500, 20, 20);`
   },
   {
     header: 'Drive a circle',
     description: 'Drive a circle for 60 seconds',
-    code: `boost.motorTimeMulti(60, 50, 10);`
+    code: `await boost.motorTimeMultiAsync(60, 50, 10);`
+  },
+  {
+    header: 'Driva a snake',
+    description: 'Repeat motor command for 5 times. Every other time motor A is 30 and B is 10. Every other A is 10 and B is 30.',
+    code: `for(let i = 0; i < 6; i++){
+  if (i % 2 == 0)
+    await boost.motorAngleMultiAsync(500, 30, 10);
+  else
+    await boost.motorAngleMultiAsync(500, 10, 30);    
+}`
   },
   {
     header: 'Drive a square route',
@@ -43,20 +53,20 @@ boost.drive(40);`
     code: `const distanceToDrive = 50;
 const degreestoTurn = 90;
 
-boost.drive(distanceToDrive);
-boost.turn(degreestoTurn);
-boost.drive(distanceToDrive);
-boost.turn(degreestoTurn);
-boost.drive(distanceToDrive);
-boost.turn(degreestoTurn);
-boost.drive(distanceToDrive);`
+await boost.drive(distanceToDrive);
+await boost.turn(degreestoTurn);
+await boost.drive(distanceToDrive);
+await boost.turn(degreestoTurn);
+await boost.drive(distanceToDrive);
+await boost.turn(degreestoTurn);
+await boost.drive(distanceToDrive);`
   },
   {
     header: 'Drive until reach an object',
     description: 'If distance sendor reading is over 100, drive for 10 angles. Repeat',
     code: `while (true) {
   if (boost.deviceInfo.distance > 100) {
-    boost.motorAngleMulti(10, 100, 100)
+    await boost.motorAngleMultiAsync(10, 100, 100)
   } else {
     break;
   }
@@ -72,14 +82,18 @@ class CodeControl extends React.Component<IProps, IState> {
       codeToRun: `boost.changeLed();`,
       activeIndex: 0
     };
+
+    (window as any).boost = this.props.boost;
   }
 
   handleItemClick = (e, { name }) => {
+    this.setState({ codeToRun: this.state.codeToRun});
     // eval evaluates a string as a JavaScript expression within the current execution scope and can access local variables
     // Typescript eval doesn't create closures on their creation context. They are always created on global scope. Maybe like new Function()?
-    (window as any).boost = this.props.boost;
-    eval(this.state.codeToRun);
-    (window as any).boost = null;
+    // Wrap executble code to a function
+    const functionToExecute = `(async () => {${this.state.codeToRun}})()`;
+    eval(functionToExecute);
+    // new Function(`return async function() {${this.state.codeToRun}}`)()();
   };
 
   updateCode = (e,data: TextAreaProps) => {
@@ -94,7 +108,6 @@ class CodeControl extends React.Component<IProps, IState> {
     this.setState({ activeIndex: newIndex });
   };
 
-  
   render() {
     return (
       <Container>
@@ -132,7 +145,7 @@ class CodeControl extends React.Component<IProps, IState> {
                 <Container>
                   <Header as="h4">{example.header}</Header>
                   <Container>{example.description}</Container>
-                  <TextArea value={example.code} readonly autoHeight style={{ minWidth:400 }} />
+                  <TextArea value={example.code} readOnly autoHeight style={{ minWidth:400 }} />
                   <Divider />
                 </Container>
               ))};
