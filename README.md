@@ -5,13 +5,21 @@ Control Lego Boost from the browser without any installations.
 Deployed to: https://legoboost.azurewebsites.net/
 
 
-Uses [Web Bluetooth API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Bluetooth_API). Works with most computers (__Windows, Mac, Linux__) and __Android__ devices with __Chrome__ and __Opera__ browsers. Unfortunately Apple iOS doesn't support Web Bluetooth. 
+## Web Bluetooth API
 
+Application uses [Web Bluetooth API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Bluetooth_API) to communicate with Lego Boost. 
 
-### Problems
+Web Bluetooth API works with __Windows, Mac, Linux__ and __Android__ devices with __Chrome__ and __Opera__ browsers. Unfortunately Apple iOS doesn't support Web Bluetooth. 
 
-* Web Bluetooth only work with __https__
-* Won't work with __iOS__ (iPhonen and iPad)
+[Supported devices](https://github.com/WebBluetoothCG/web-bluetooth/blob/master/implementation-status.md)
+
+### Communication module
+
+Uses [lego-boost-browser](https://github.com/ttu/lego-boost-browser) for device communication and control.
+
+### Known problems
+
+* Doesn't work with __iOS__ (iPhone and iPad)
 * Known bluetooth problems with:
   * Microsoft Surface Book 2
   * ...
@@ -34,7 +42,7 @@ $ npm run build
 
 ### Docker
 
-For easier deployment.
+TODO
 
 ## Contributing
 
@@ -44,7 +52,7 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 LEGO and BOOST are Trademarks from The LEGO Company, which do not support this project. 
 
-Project maintaines are not responsible for any damage on your LEGO BOOST devices - use it at your own risk.
+Project maintainers are not responsible for any damage on your LEGO BOOST devices - use it at your own risk.
 
 ## License
 
