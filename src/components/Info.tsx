@@ -11,12 +11,13 @@ const Info = ({ version, date }: AboutProps) => (
   <Container>
     <Container textAlign="left">
       <List bulleted>
-        <List.Item>Works only with computers (Windows, macOS, Linux) and Android</List.Item>
+        <List.Item>Works only with computers (Windows, macOS, Linux) and Android 6.0 or newer</List.Item>
         <List.Item>Supported Browsers Chrome and Opera</List.Item>
         <List.Item>
           Common Problems:
           <List>
             <List.Item>Connection buttone doesn't work: Site requires https. Check that url starts with https://</List.Item>
+            <List.Item>Connection buttone doesn't work: Update Chorome. Check that OS is Android 6.0 or newer</List.Item>
             <List.Item>Manual control won't work: Refresh the page and reconnect</List.Item>
             <List.Item>In case of problem unknown problem: Refresh the page and reconnect</List.Item>
             <List.Item>Distance sensor doesn't work: Unplug sensor from the boost and reconnect</List.Item>

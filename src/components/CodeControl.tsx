@@ -44,7 +44,7 @@ await boost.drive(40);`
   if (i % 2 == 0)
     await boost.motorAngleMultiAsync(500, 30, 10);
   else
-    await boost.motorAngleMultiAsync(500, 10, 30);    
+    await boost.motorAngleMultiAsync(500, 10, 30);
 }`
   },
   {
@@ -66,7 +66,7 @@ await boost.drive(distanceToDrive);`
     description: 'If distance sendor reading is over 100, drive for 10 angles. Repeat',
     code: `while (true) {
   if (boost.deviceInfo.distance > 100) {
-    await boost.motorAngleMultiAsync(10, 100, 100)
+    await boost.motorAngleMultiAsync(10, 100, 100);
   } else {
     break;
   }
@@ -83,6 +83,7 @@ class CodeControl extends React.Component<IProps, IState> {
       activeIndex: 0
     };
 
+    // Need to set this at the constructor as can't set before eval and remove after that as using async function, it is not known when eval is ready
     (window as any).boost = this.props.boost;
   }
 
@@ -142,10 +143,10 @@ class CodeControl extends React.Component<IProps, IState> {
 
               <Container textAlign="center" fluid>
               {codeExamples.map(example => (
-                <Container>
+                <Container key={example.header}>
                   <Header as="h4">{example.header}</Header>
                   <Container>{example.description}</Container>
-                  <TextArea value={example.code} readOnly autoHeight style={{ minWidth:400 }} />
+                  <TextArea value={example.code} readOnly autoHeight style={{ minWidth: 350, maxWidth: 600 }} />
                   <Divider />
                 </Container>
               ))};

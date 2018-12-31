@@ -9,7 +9,7 @@ Deployed to: https://legoboost.azurewebsites.net/
 
 Application uses [Web Bluetooth API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Bluetooth_API) to communicate with Lego Boost. 
 
-Web Bluetooth API works with __Windows, Mac, Linux__ and __Android__ devices with __Chrome__ and __Opera__ browsers. Unfortunately Apple iOS doesn't support Web Bluetooth. 
+Web Bluetooth API works with __Windows, Mac, Linux__ and __Android__ (6.0->) devices with __Chrome__ and __Opera__ browsers. Unfortunately Apple iOS doesn't support Web Bluetooth. 
 
 [Supported devices](https://github.com/WebBluetoothCG/web-bluetooth/blob/master/implementation-status.md)
 
