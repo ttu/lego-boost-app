@@ -14,11 +14,13 @@ interface IState {
   activeIndex: number;
 }
 
-const codeExamples = [
+const CODE_EXAMPLES = [
   {
     header: 'Change the color of the led',
-    description: 'Choose one color: red, blue, green, pink',
-    code: `boost.led('red');`
+    description: 'Change the color from red to green. Supported colors: off, pink, purple, blue, lightblue, cyan, green, yellow, orange, red, white',
+    code: `await boost.ledAsync('red');
+await boost.ledAsync('yellow');
+await boost.ledAsync('green');`
   },
   {
     header: 'Drive and back',
@@ -39,13 +41,22 @@ await boost.drive(40);`
   },
   {
     header: 'Driva a snake',
-    description: 'Repeat motor command for 5 times. Every other time motor A is 30 and B is 10. Every other A is 10 and B is 30.',
+    description: 'Repeat motor command for 5 times. Every other time motor A power is 30 and B is 10. Every other power for A is 10 and B is 30.',
     code: `for(let i = 0; i < 6; i++){
   if (i % 2 == 0)
     await boost.motorAngleMultiAsync(500, 30, 10);
   else
     await boost.motorAngleMultiAsync(500, 10, 30);
 }`
+  },
+  {
+    header: `Turn Vernie's head`,
+    description: `Turn Vernie's head first to the left, wait 1 second, turn to the right, wait 1 second, then back to the center.`,
+    code: `await boost.motorAngleAsync('D', 50, 10);
+await new Promise(resolve => setTimeout(resolve, 1000));
+await boost.motorAngleAsync('D', 100, -10);
+await new Promise(resolve => setTimeout(resolve, 1000));
+await boost.motorAngleAsync('D', 50, 10);`
   },
   {
     header: 'Drive a square route',
@@ -79,7 +90,7 @@ class CodeControl extends React.Component<IProps, IState> {
   constructor(props) {
     super(props);
     this.state = {
-      codeToRun: `boost.changeLed();`,
+      codeToRun: CODE_EXAMPLES[0].code,
       activeIndex: 0
     };
 
@@ -142,31 +153,42 @@ class CodeControl extends React.Component<IProps, IState> {
               <Header as="h5">Copy/paste the code from example to the execution text area and press execute</Header>
 
               <Container textAlign="center" fluid>
-              {codeExamples.map(example => (
+              {CODE_EXAMPLES.map(example => (
                 <Container key={example.header}>
                   <Header as="h4">{example.header}</Header>
                   <Container>{example.description}</Container>
-                  <TextArea value={example.code} readOnly autoHeight style={{ minWidth: 350, maxWidth: 600 }} />
+                  <TextArea value={example.code} readOnly autoHeight style={{ minWidth: 400, maxWidth: 500 }} />
                   <Divider />
                 </Container>
-              ))};
+              ))}
               
               <Divider />
 
-              <pre style={{ textAlign: 'left', maxWidth: 400, margin: '0 auto' }}>
+              <pre style={{ textAlign: 'left', maxWidth: 350, margin: '0 auto' }}>
               <h4>Supported functions</h4>
               Descriptions coming soon.<br/>
               <br/>
+              boost is the class with Lego Boost functionality.<br/>
+              <br/>
+              It has been already created and is used by the application to control the Lego Boost:<br/>
+              const boost = new LegoBoost(bluetoothCommunication)<br/>
+              <br/>
               boost.drive(distance)<br/>
               boost.turn(degrees)<br/>
-              boost.motorTime(motorPort, seconds, dutyCycle)<br/>
-              boost.motorTimeMulti(seconds, powerA, powerB)<br/>
-              boost.motorAngle(motorPort, angle, power)<br/>
-              boost.motorAngleMulti(angle, powerA, powerB)<br/>
-              boost.led(color)<br/>
+              boost.motorTimeAsync(motorPort, seconds, dutyCycle)<br/>
+              boost.motorTimeMultiAsync(seconds, powerA, powerB)<br/>
+              boost.motorAngleAsync(motorPort, angle, power)<br/>
+              boost.motorAngleMultiAsync(angle, powerA, powerB)<br/>
+              boost.ledAsync(color)<br/>
               boost.changeLed()<br/>
               boost.deviceInfo.distance<br/>
               boost.deviceInfo.color<br/>
+              <br/>
+              Check documentation from:<br/>
+              <a href="https://github.com/ttu/node-movehub-async#hub">node-movehub-async</a><br/>
+              <a href="https://github.com/hobbyquaker/node-movehub#hub">node-movehub</a><br/>
+              <br/>
+              await in the front of the command means, that execution will wait that sent command is finished<br/>
               </pre>
               </Container>
             </Accordion.Content>
