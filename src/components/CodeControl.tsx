@@ -1,6 +1,6 @@
 import LegoBoost from "lego-boost-browser";
 import * as React from "react";
-import { Grid, TextArea, Button, TextAreaProps, Header, Container, Accordion, Icon, Divider } from "semantic-ui-react";
+import { Grid, TextArea, Button, TextAreaProps, Header, Container, Accordion, Icon, Divider, Message } from "semantic-ui-react";
 import MessageBlock from "./MessageBlock";
 
 interface IProps {
@@ -12,6 +12,7 @@ interface IProps {
 interface IState {
   codeToRun: string;
   activeIndex: number;
+  executionError: string
 }
 
 const CODE_EXAMPLES = [
@@ -83,7 +84,7 @@ await boost.drive(distanceToDrive);`
   }
 }`
   }
-]
+];
 
 
 class CodeControl extends React.Component<IProps, IState> {
@@ -91,24 +92,30 @@ class CodeControl extends React.Component<IProps, IState> {
     super(props);
     this.state = {
       codeToRun: CODE_EXAMPLES[0].code,
+      executionError: '',
       activeIndex: 0
     };
 
     // Need to set this at the constructor as can't set before eval and remove after that as using async function, it is not known when eval is ready
     (window as any).boost = this.props.boost;
+
+    // Execute will throw Unhandled Rejection (ReferenceError)
+    window.onunhandledrejection = (e) => {
+      this.setState({ executionError: e.reason.message || 'Unknown error' });
+    };
   }
 
   handleItemClick = (e, { name }) => {
-    this.setState({ codeToRun: this.state.codeToRun});
+    this.setState({ executionError: '' });
     // eval evaluates a string as a JavaScript expression within the current execution scope and can access local variables
     // Typescript eval doesn't create closures on their creation context. They are always created on global scope. Maybe like new Function()?
     // Wrap executble code to a function
     const functionToExecute = `(async () => {${this.state.codeToRun}})()`;
-    eval(functionToExecute);
+    eval(functionToExecute); 
     // new Function(`return async function() {${this.state.codeToRun}}`)()();
   };
 
-  updateCode = (e,data: TextAreaProps) => {
+  updateCode = (e, data: TextAreaProps) => {
     this.setState({ codeToRun: data.value.toString() });
   };
 
@@ -134,11 +141,14 @@ class CodeControl extends React.Component<IProps, IState> {
             placeholder="Execute code"
             value={this.state.codeToRun}
             onChange={this.updateCode}
-            style={{ minHeight: 100, minWidth:400 }}
+            style={{ minHeight: 200, width: '90%' }}
           />
           </Grid.Row>
           <Grid.Row>
             <Button primary name="execute" onClick={this.handleItemClick}>Execute</Button>
+          </Grid.Row>
+          <Grid.Row>
+            {this.state.executionError !== '' ? (<Message negative>{this.state.executionError}</Message>): ''}
           </Grid.Row>
         </Grid>
 
@@ -161,36 +171,34 @@ class CodeControl extends React.Component<IProps, IState> {
                   <Divider />
                 </Container>
               ))}
-              
-              <Divider />
+              </Container>
 
               <pre style={{ textAlign: 'left', maxWidth: 350, margin: '0 auto' }}>
-              <h4>Supported functions</h4>
-              Descriptions coming soon.<br/>
-              <br/>
-              boost is the class with Lego Boost functionality.<br/>
-              <br/>
-              It has been already created and is used by the application to control the Lego Boost:<br/>
-              const boost = new LegoBoost(bluetoothCommunication)<br/>
-              <br/>
-              boost.drive(distance)<br/>
-              boost.turn(degrees)<br/>
-              boost.motorTimeAsync(motorPort, seconds, dutyCycle)<br/>
-              boost.motorTimeMultiAsync(seconds, powerA, powerB)<br/>
-              boost.motorAngleAsync(motorPort, angle, power)<br/>
-              boost.motorAngleMultiAsync(angle, powerA, powerB)<br/>
-              boost.ledAsync(color)<br/>
-              boost.changeLed()<br/>
-              boost.deviceInfo.distance<br/>
-              boost.deviceInfo.color<br/>
-              <br/>
-              Check documentation from:<br/>
-              <a href="https://github.com/ttu/node-movehub-async#hub">node-movehub-async</a><br/>
-              <a href="https://github.com/hobbyquaker/node-movehub#hub">node-movehub</a><br/>
-              <br/>
-              await in the front of the command means, that execution will wait that sent command is finished<br/>
+                <h4>Supported functions</h4>
+                Descriptions coming soon.<br/>
+                <br/>
+                boost is the class with Lego Boost functionality.<br/>
+                <br/>
+                It has been already created and is used by the application to control the Lego Boost:<br/>
+                const boost = new LegoBoost(bluetoothCommunication)<br/>
+                <br/>
+                boost.drive(distance)<br/>
+                boost.turn(degrees)<br/>
+                boost.motorTimeAsync(motorPort, seconds, dutyCycle)<br/>
+                boost.motorTimeMultiAsync(seconds, powerA, powerB)<br/>
+                boost.motorAngleAsync(motorPort, angle, power)<br/>
+                boost.motorAngleMultiAsync(angle, powerA, powerB)<br/>
+                boost.ledAsync(color)<br/>
+                boost.changeLed()<br/>
+                boost.deviceInfo.distance<br/>
+                boost.deviceInfo.color<br/>
+                <br/>
+                Check documentation from:<br/>
+                <a href="https://github.com/ttu/node-movehub-async#hub">node-movehub-async</a><br/>
+                <a href="https://github.com/hobbyquaker/node-movehub#hub">node-movehub</a><br/>
+                <br/>
+                await in the front of the command means, that execution will wait that sent command is finished<br/>
               </pre>
-              </Container>
             </Accordion.Content>
           </Accordion>
         </Container>

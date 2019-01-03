@@ -38,4 +38,4 @@ class BoostMain extends React.Component<IProps> {
   }
 }
 
-export default BoostMain
+export default BoostMain;
