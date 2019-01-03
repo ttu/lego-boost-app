@@ -11,28 +11,40 @@ interface IProps {
 
 interface IManualState {
   lastCommand: string;
+  mode: string
 }
 
 class ManualControl extends React.Component<IProps, IManualState> {
   constructor(props) {
     super(props);
     this.state = {
-      lastCommand: ''
+      lastCommand: '',
+      mode: 'A'
     };
   }
 
-  controlClick = async command => {
+  controlClick = async (command: string) => {
     this.setState({ lastCommand: command });
+    await this.handleCommand(command);
+  };
 
+  controlRelease = async (command: string) => {
+    if (this.state.mode === 'B') {
+      await this.props.boost.stop();
+      this.setState({ lastCommand: `stop ${command}` });
+    }
+  }
+
+  handleCommand = async (command: string) => {
     switch (command) {
       case 'stop':
         await this.props.boost.stop();
         break;
       case 'left':
-        await this.props.boost.turn(-90);
+        await this.props.boost.turn(-90 * (this.state.mode === 'A' ? 1 : 400));
         break;
       case 'right':
-        await this.props.boost.turn(90);
+        await this.props.boost.turn(90 * (this.state.mode === 'A' ? 1 : 400));
         break;
       case 'up':
         await this.props.boost.driveToDirection();
@@ -46,27 +58,29 @@ class ManualControl extends React.Component<IProps, IManualState> {
   render() {
     const controlProps = { ...this.props };
 
+    const createControl = (name) => {
+      return (<Grid.Column className={name+"-control"} 
+                    onMouseDown={() => this.controlClick(name)} 
+                    onTouchStart={() => this.controlClick(name)} 
+                    onMouseUp={() => this.controlRelease(name)}/>);
+    };
+
     return (
       <Container>
         <Grid columns={3} celled padded style={{ height: "90vh" }}>
           <Grid.Row style={{ height: "33%" }}>
             <Grid.Column />
-            <Grid.Column onClick={() => this.controlClick("up")} className="up-control">
-            </Grid.Column>
+            {createControl('up')}
             <Grid.Column />
           </Grid.Row>
           <Grid.Row style={{ height: "33%" }}>
-            <Grid.Column  className="left-control" onClick={() => this.controlClick("left")}>
-            </Grid.Column>
-            <Grid.Column  className="stop-control" onClick={() => this.controlClick("stop")}>
-            </Grid.Column>
-            <Grid.Column className="right-control" onClick={() => this.controlClick("right")}>
-            </Grid.Column>
+            {createControl('left')}
+            {createControl('stop')}
+            {createControl('right')}
           </Grid.Row>
           <Grid.Row style={{ height: "33%" }}>
             <Grid.Column />
-            <Grid.Column className="down-control" onClick={() => this.controlClick("down")}>
-            </Grid.Column>
+            {createControl('down')}
             <Grid.Column />
           </Grid.Row>
         </Grid>
@@ -75,13 +89,29 @@ class ManualControl extends React.Component<IProps, IManualState> {
           {/* <Grid.Row columns={1}>
             <Grid.Column>Last command: {this.state.lastCommand}</Grid.Column>
           </Grid.Row> */}
-          <Grid.Row columns={1}>
+          <Grid.Row columns={2}>
+            <Grid.Column>
+              <Button primary={this.state.mode === 'A'}
+                      secondary={this.state.mode !== 'A'} 
+                      onClick={() => this.setState({ mode: 'A' })}>
+                Click Mode
+              </Button>
+              </Grid.Column>
+              <Grid.Column>
+              <Button primary={this.state.mode === 'B'}
+                      secondary={this.state.mode !== 'B'} 
+                      onClick={() => this.setState({ mode: 'B' })}>
+                Arcade Mode
+              </Button>
+            </Grid.Column>
+          </Grid.Row>
+          {/* <Grid.Row columns={1}>
             <Grid.Column>
               <Button secondary onClick={this.props.boost.changeLed.bind(this.props.boost)}>
                 Change led color
               </Button>
             </Grid.Column>
-          </Grid.Row>
+          </Grid.Row> */}
           <Grid.Row columns={1}>
             <Grid.Column>
               <BoostControlInfo {...controlProps} />
