@@ -1,6 +1,6 @@
 import LegoBoost from "lego-boost-browser";
 import * as React from "react";
-import { Container, Grid, Image, Button } from "semantic-ui-react";
+import { Container, Grid, Image, Button, Dropdown } from "semantic-ui-react";
 
 import BoostControlInfo from "./BoostControlInfo";
 
@@ -11,15 +11,31 @@ interface IProps {
 
 interface IManualState {
   lastCommand: string;
-  mode: string
+  mode: string,
+  ledColor: string
 }
+
+const LED_COLORS = [ 
+  { key: 'off', value: 'off', text: 'Off' },
+  { key: 'pink', value: 'pink', text: 'Pink' },
+  { key: 'purple', value: 'purple', text: 'Purple' },
+  { key: 'blue', value: 'blue', text: 'Blue' },
+  { key: 'lightblue', value: 'lightblue', text: 'Lightblue' },
+  { key: 'cyan', value: 'cyan', text: 'Cyan' },
+  { key: 'green', value: 'green', text: 'Green' },
+  { key: 'yellow', value: 'yellow', text: 'Yellow' },
+  { key: 'orange', value: 'orange', text: 'Orange' },
+  { key: 'red', value: 'red', text: 'Red' },
+  { key: 'white', value: 'white', text: 'White' }
+]
 
 class ManualControl extends React.Component<IProps, IManualState> {
   constructor(props) {
     super(props);
     this.state = {
       lastCommand: '',
-      mode: 'A'
+      mode: 'B',
+      ledColor: 'off'
     };
   }
 
@@ -54,6 +70,8 @@ class ManualControl extends React.Component<IProps, IManualState> {
         break;
     }
   };
+
+  handleLedChange = (e, { value }) => this.setState({ ledColor: value })
 
   render() {
     const controlProps = { ...this.props };
@@ -90,14 +108,14 @@ class ManualControl extends React.Component<IProps, IManualState> {
             <Grid.Column>Last command: {this.state.lastCommand}</Grid.Column>
           </Grid.Row> */}
           <Grid.Row columns={2}>
-            <Grid.Column>
+            <Grid.Column textAlign="right">
               <Button primary={this.state.mode === 'A'}
                       secondary={this.state.mode !== 'A'} 
                       onClick={() => this.setState({ mode: 'A' })}>
                 Click Mode
               </Button>
               </Grid.Column>
-              <Grid.Column>
+              <Grid.Column textAlign="left">
               <Button primary={this.state.mode === 'B'}
                       secondary={this.state.mode !== 'B'} 
                       onClick={() => this.setState({ mode: 'B' })}>
@@ -105,13 +123,16 @@ class ManualControl extends React.Component<IProps, IManualState> {
               </Button>
             </Grid.Column>
           </Grid.Row>
-          {/* <Grid.Row columns={1}>
-            <Grid.Column>
-              <Button secondary onClick={this.props.boost.changeLed.bind(this.props.boost)}>
+          <Grid.Row columns={2}>
+            <Grid.Column  textAlign="right">
+              <Dropdown options={LED_COLORS} value={this.state.ledColor} onChange={this.handleLedChange}/>
+            </Grid.Column>
+            <Grid.Column textAlign="left">
+              <Button secondary onClick={async () => await this.props.boost.ledAsync(this.state.ledColor)}>
                 Change led color
               </Button>
             </Grid.Column>
-          </Grid.Row> */}
+          </Grid.Row>
           <Grid.Row columns={1}>
             <Grid.Column>
               <BoostControlInfo {...controlProps} />

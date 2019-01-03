@@ -148,7 +148,7 @@ class CodeControl extends React.Component<IProps, IState> {
             <Button primary name="execute" onClick={this.handleItemClick}>Execute</Button>
           </Grid.Row>
           <Grid.Row>
-            {this.state.executionError !== '' ? (<Message negative>{this.state.executionError}</Message>): ''}
+            {this.state.executionError !== '' ? (<Message negative>{this.state.executionError}</Message>): (null)}
           </Grid.Row>
         </Grid>
 

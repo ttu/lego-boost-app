@@ -23,7 +23,7 @@ class MessageBlock extends React.Component<IMessageContent> {
       )
     }
 
-    return '';
+    return (null);
   }
 }
 
