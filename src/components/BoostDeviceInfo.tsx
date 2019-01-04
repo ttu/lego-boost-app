@@ -152,9 +152,11 @@ class BoostDeviceInfo extends React.Component<IProps, IDeviceInfoAccordion> {
           </Table>
           <Table>
             <Table.Header>
-              <Table.HeaderCell>Motor</Table.HeaderCell>
-              <Table.HeaderCell>Action</Table.HeaderCell>
-              <Table.HeaderCell>Angle</Table.HeaderCell>
+              <Table.Row>
+                <Table.HeaderCell>Motor</Table.HeaderCell>
+                <Table.HeaderCell>Action</Table.HeaderCell>
+                <Table.HeaderCell>Angle</Table.HeaderCell>
+              </Table.Row>
             </Table.Header>
             <Table.Body>
               {Object.keys(this.state.ports).map(element => (
