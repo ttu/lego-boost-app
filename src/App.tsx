@@ -23,6 +23,7 @@ interface IApplicationState {
   aiInfoVisible: boolean;
   mainInfoVisible: boolean;
   codeInfoVisible: boolean;
+  motorInfoVisible: boolean;
   code: string;
 }
 
@@ -35,6 +36,7 @@ class App extends React.Component<{}, IApplicationState> {
       aiInfoVisible: true,
       mainInfoVisible: true,
       codeInfoVisible: true,
+      motorInfoVisible: true,
       code: ''
     }
   }
@@ -45,6 +47,10 @@ class App extends React.Component<{}, IApplicationState> {
 
   onMainInfoClose = () => {
     this.setState({ mainInfoVisible: false });
+  }
+
+  onMotorInfoClose = () => {
+    this.setState({ motorInfoVisible: false });
   }
 
   onCodeInfoClose = () => {
@@ -61,6 +67,7 @@ class App extends React.Component<{}, IApplicationState> {
     const CreateBoostMain = () => <BoostMain {...boostProps} infoVisible={this.state.mainInfoVisible} onInfoClose={this.onMainInfoClose} />;
     const CreateManualControl = () => <ManualControl {...boostProps} />;
     const CreateAiControl = () => <AiControl {...boostProps} infoVisible={this.state.aiInfoVisible} onInfoClose={this.onAiInfoClose} />;
+    const CreateMotorControl = () => <MotorControl {...boostProps} infoVisible={this.state.aiInfoVisible} onInfoClose={this.onMotorInfoClose} />;
     const CreateCodeControl = () => <CodeControl {...boostProps} code={this.state.code} updateCode={this.updateCode} infoVisible={this.state.codeInfoVisible} onInfoClose={this.onCodeInfoClose} />;
     const CreateInfoComponent = () => (
       <Info version={APP_VERSION} date={APP_BUILD_TIME} />
@@ -74,6 +81,7 @@ class App extends React.Component<{}, IApplicationState> {
             <Grid.Row>
               <Route exact path="/" component={CreateBoostMain} />
               <Route path="/manual" component={CreateManualControl} />
+              <Route path="/motor" component={CreateMotorControl} />
               <Route path="/ai" component={CreateAiControl} />
               <Route path="/code" component={CreateCodeControl} />
               <Route path="/info" component={CreateInfoComponent} />
