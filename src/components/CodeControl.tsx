@@ -8,6 +8,8 @@ interface IProps {
   boost: LegoBoost;
   infoVisible: boolean;
   onInfoClose: Function;
+  code: string,
+  updateCode: Function
 }
 
 interface IState {
@@ -106,7 +108,7 @@ class CodeControl extends React.Component<IProps, IState> {
   constructor(props) {
     super(props);
     this.state = {
-      codeToRun: TITLE + CODE_EXAMPLES[0].code,
+      codeToRun: this.props.code || CODE_EXAMPLES[0].code,
       executionError: '',
       activeIndex: 0
     };
@@ -120,6 +122,10 @@ class CodeControl extends React.Component<IProps, IState> {
     };
   }
 
+  componentWillUnmount = () => {
+    this.props.updateCode(this.state.codeToRun);
+  }
+
   handleItemClick = (e, { name }) => {
     this.setState({ executionError: '' });
     // eval evaluates a string as a JavaScript expression within the current execution scope and can access local variables
@@ -128,10 +134,6 @@ class CodeControl extends React.Component<IProps, IState> {
     const functionToExecute = `(async () => {${this.state.codeToRun}})()`;
     eval(functionToExecute); 
     // new Function(`return async function() {${this.state.codeToRun}}`)()();
-  };
-
-  updateCode = (e, data: TextAreaProps) => {
-    this.setState({ codeToRun: data.value.toString() });
   };
 
   updateMonacoCode = (newValue, e) => {

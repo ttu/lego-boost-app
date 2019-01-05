@@ -13,6 +13,7 @@ import ManualControl from "./components/ManualControl";
 import AiControl from "./components/AiControl";
 import CodeControl from "./components/CodeControl";
 import Info from "./components/Info";
+import MotorControl from "./components/MotorControl";
 
 const APP_BUILD_TIME = process.env.REACT_APP_BUILD_TIME || "not defined";
 const APP_VERSION = process.env.REACT_APP_VERSION || "not defined";
@@ -22,6 +23,7 @@ interface IApplicationState {
   aiInfoVisible: boolean;
   mainInfoVisible: boolean;
   codeInfoVisible: boolean;
+  code: string;
 }
 
 class App extends React.Component<{}, IApplicationState> {
@@ -32,7 +34,8 @@ class App extends React.Component<{}, IApplicationState> {
     this.state = { 
       aiInfoVisible: true,
       mainInfoVisible: true,
-      codeInfoVisible: true
+      codeInfoVisible: true,
+      code: ''
     }
   }
 
@@ -48,13 +51,17 @@ class App extends React.Component<{}, IApplicationState> {
     this.setState({ codeInfoVisible: false });
   }
 
+  updateCode = (code) => {
+    this.setState({ code: code });
+  }
+
   public render() {
     const boostProps = { boost: this.boost };
 
     const CreateBoostMain = () => <BoostMain {...boostProps} infoVisible={this.state.mainInfoVisible} onInfoClose={this.onMainInfoClose} />;
     const CreateManualControl = () => <ManualControl {...boostProps} />;
     const CreateAiControl = () => <AiControl {...boostProps} infoVisible={this.state.aiInfoVisible} onInfoClose={this.onAiInfoClose} />;
-    const CreateCodeControl = () => <CodeControl {...boostProps} infoVisible={this.state.codeInfoVisible} onInfoClose={this.onCodeInfoClose} />;
+    const CreateCodeControl = () => <CodeControl {...boostProps} code={this.state.code} updateCode={this.updateCode} infoVisible={this.state.codeInfoVisible} onInfoClose={this.onCodeInfoClose} />;
     const CreateInfoComponent = () => (
       <Info version={APP_VERSION} date={APP_BUILD_TIME} />
     );
