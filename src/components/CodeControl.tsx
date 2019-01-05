@@ -1,5 +1,6 @@
 import LegoBoost from "lego-boost-browser";
 import * as React from "react";
+import MonacoEditor from 'react-monaco-editor';
 import { Grid, TextArea, Button, TextAreaProps, Header, Container, Accordion, Icon, Divider, Message } from "semantic-ui-react";
 import MessageBlock from "./MessageBlock";
 
@@ -14,6 +15,16 @@ interface IState {
   activeIndex: number;
   executionError: string
 }
+
+const TITLE = `/* Control Lego Boost by executing javascript code.
+* Insert your own code under this comment or remove this comment
+* Press the Execute button to run the code
+*
+* 1) If site is loaded anywhere else than the Main-tab, code hightlight will not work
+* 2) Syntax highlight will show errors on working code
+*/
+
+`;
 
 const CODE_EXAMPLES = [
   {
@@ -86,12 +97,16 @@ await boost.drive(distanceToDrive);`
   }
 ];
 
+const MONACO_OPTIONS = {
+  selectOnLineNumbers: true,
+  language: 'typescript'
+};
 
 class CodeControl extends React.Component<IProps, IState> {
   constructor(props) {
     super(props);
     this.state = {
-      codeToRun: CODE_EXAMPLES[0].code,
+      codeToRun: TITLE + CODE_EXAMPLES[0].code,
       executionError: '',
       activeIndex: 0
     };
@@ -119,6 +134,10 @@ class CodeControl extends React.Component<IProps, IState> {
     this.setState({ codeToRun: data.value.toString() });
   };
 
+  updateMonacoCode = (newValue, e) => {
+    this.setState({ codeToRun: newValue });
+  };
+
   handleAccordionClick = (e, titleProps) => {
     const { index } = titleProps;
     const { activeIndex } = this.state;
@@ -127,23 +146,53 @@ class CodeControl extends React.Component<IProps, IState> {
     this.setState({ activeIndex: newIndex });
   };
 
+  editorWillMount = (monaco) => {
+    // TODO: Eject CRA, so can use plugins and defined used languages
+    // https://github.com/superRaytin/react-monaco-editor
+    // Or figure out how to do with this: https://medium.com/@haugboelle/short-guide-to-using-monaco-with-create-react-app-26a1acad8ebe
+    // monaco.languages.onLanguage('typescript', () => {
+    //   monaco.languages.typescript.javascriptDefaults.addExtraLib(`
+    //     import * as ts from './typescript';
+    //     export = ts;
+    //     export as namespace typescript;
+    //   `, 'global.d.ts');
+
+    //   monaco.languages.typescript.javascriptDefaults.addExtraLib(`
+    //     import LegoBoost from 'lego-boost-browser';
+    //     boost = new LegoBoost();
+    //     export = boost;
+    //     export as boost;
+    //   `, 'boost.d.ts');
+    // });
+  }
+
+  editorDidMount = (editor, monaco) => {
+    console.log(monaco.languages.getLanguages());
+
+    editor.focus();
+  }
+
   render() {
     return (
       <Container>
         <MessageBlock visible={this.props.infoVisible} onClose={this.props.onInfoClose} content="Control Lego Boost by executing javascript code." />
-        
-        <Grid centered columns="equal">
-          <Grid.Row>
-            <Header as="h3">Execute Code Control</Header>
-          </Grid.Row>
-          <Grid.Row>
-            <TextArea
-            placeholder="Execute code"
+
+        <Container textAlign="left">
+          <MonacoEditor 
+            language="typescript"
             value={this.state.codeToRun}
-            onChange={this.updateCode}
-            style={{ minHeight: 200, width: '90%' }}
+            options={MONACO_OPTIONS}
+            width="100%"
+            height="400"
+            onChange={this.updateMonacoCode}
+            editorWillMount={this.editorWillMount}
+            editorDidMount={this.editorDidMount}
           />
-          </Grid.Row>
+        </Container>
+
+        <br/>
+
+        <Grid centered columns="equal">
           <Grid.Row>
             <Button primary name="execute" onClick={this.handleItemClick}>Execute</Button>
           </Grid.Row>

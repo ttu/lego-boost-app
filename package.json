@@ -3,14 +3,16 @@
   "version": "0.1.0",
   "scripts": {
     "start": "react-scripts-ts start",
-    "build": "SET REACT_APP_BUILD_TIME=1.1.2018 && SET REACT_APP_VERSION=0.1.0 && react-scripts-ts build",
+    "build": "SET REACT_APP_BUILD_TIME=5.1.2018 && SET REACT_APP_VERSION=0.2.0 && react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject"
   },
   "dependencies": {
     "lego-boost-browser": "git+https://github.com/ttu/lego-boost-browser.git",
+    "monaco-editor-webpack-plugin": "^1.7.0",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
+    "react-monaco-editor": "^0.22.0",
     "react-router-dom": "^4.3.1",
     "react-scripts-ts": "^4.0.8",
     "semantic-ui-react": "^0.83.0"
