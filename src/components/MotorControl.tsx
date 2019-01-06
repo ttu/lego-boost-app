@@ -40,19 +40,19 @@ class MotorControl extends React.Component<IProps, IState> {
     const createColumn = (port) => {
       return (<Grid.Column width={16}>
         <Segment>
-         <Header as="h1">{port} : {this.state[port]}</Header>
-            <Slider color="red" inverted={false}
-              settings={{
-              start: this.state[port],
-              min:-100,
-              max:100,
-              step:1,
-              onChange: (value) => {
-                // @ts-ignore
-                this.setState({ [port]: value });
-                this.props.boost.motorAngle(port, 3600, value);
-              }
-            }}/>
+          <Header as="h1">{port} : {this.state[port]}</Header>
+          <Slider color="red" inverted={false}
+            settings={{
+            start: this.state[port],
+            min:-100,
+            max:100,
+            step:1,
+            onChange: (value) => {
+              // @ts-ignore
+              this.setState({ [port]: value });
+              this.props.boost.motorAngle(port, 3600, value);
+            }
+          }}/>
         </Segment>
       </Grid.Column>);
     };
