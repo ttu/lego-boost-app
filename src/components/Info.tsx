@@ -90,6 +90,11 @@ const Info = ({ version, date }: AboutProps) => (
 
     <Container textAlign="left">
       <List bulleted>
+        <List.Item>Unreleased
+          <List.List>
+            <List.Item>Individual motor control</List.Item>
+          </List.List>
+        </List.Item>
         <List.Item>0.2.0 (7.1.2019)
           <List.List>
             <List.Item>Click and Arcade manual modes</List.Item>

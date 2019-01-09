@@ -81,7 +81,7 @@ class App extends React.Component<{}, IApplicationState> {
             <Grid.Row>
               <Route exact path="/" component={CreateBoostMain} />
               <Route path="/manual" component={CreateManualControl} />
-              {/* <Route path="/motors" component={CreateMotorControl} /> */}
+              <Route path="/motors" component={CreateMotorControl} />
               <Route path="/ai" component={CreateAiControl} />
               <Route path="/code" component={CreateCodeControl} />
               <Route path="/info" component={CreateInfoComponent} />

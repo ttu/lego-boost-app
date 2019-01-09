@@ -11,9 +11,9 @@ const MainMenu = ({ location }) => (
     <Menu.Item active={location.pathname === '/manual'}>
       <Link to="/manual">Manual</Link>
     </Menu.Item>
-    {/* <Menu.Item active={location.pathname === '/motors'}>
+    <Menu.Item active={location.pathname === '/motors'}>
       <Link to="/motors">Motors</Link>
-    </Menu.Item> */}
+    </Menu.Item>
     <Menu.Item active={location.pathname === '/ai'}>
       <Link to="/ai">AI</Link>
     </Menu.Item>
