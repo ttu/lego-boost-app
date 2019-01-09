@@ -75,17 +75,48 @@ const Info = ({ version, date }: AboutProps) => (
       </a>
     </Container>
 
-    <Table>
-      <Table.Body>
-        <Table.Row>
-          <Table.Cell>Version</Table.Cell>
-          <Table.Cell>{version}</Table.Cell>
-        </Table.Row>
-        <Table.Cell>Build date</Table.Cell>
-        <Table.Cell>{date}</Table.Cell>
-        <Table.Row />
-      </Table.Body>
-    </Table>
+    <Divider />
+
+    <Header as="h3">Version info</Header>
+
+    <Container textAlign="left">
+      <Container>Version: {version}</Container>
+      <Container>Build date: {date}</Container>
+    </Container>
+
+    <Divider />
+
+    <Header as="h3">Changelog</Header>
+
+    <Container textAlign="left">
+      <List bulleted>
+        <List.Item>0.2.0 (7.1.2019)
+          <List.List>
+            <List.Item>Click and Arcade manual modes</List.Item>
+            <List.Item>Change led color button</List.Item>
+            <List.Item>Show execution error in code control</List.Item>
+            <List.Item>Use Monaco code editor in code control</List.Item>
+          </List.List>
+        </List.Item>
+        <List.Item>0.1.0 (1.1.2019)
+          <List.List>
+            <List.Item>Manual control</List.Item>
+            <List.Item>AI mode</List.Item>
+            <List.Item>Code execution control</List.Item>
+          </List.List>
+        </List.Item>
+      </List>
+
+      <Divider />
+
+      <Container>
+        Development version with possible unreleased features and fixes: <a href="https://legoboostdev.azurewebsites.net">https://legoboostdev.azurewebsites.net</a>
+      </Container>
+      <Container>This version may not work all the time as it is the active development version.</Container>
+
+      <Divider />
+
+    </Container>
 
   </Container>
 );

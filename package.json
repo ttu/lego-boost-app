@@ -1,9 +1,10 @@
 {
   "name": "lego-boost-app",
-  "version": "0.1.0",
+  "version": "0.2.0",
+  "homepage" : "https://legoboost.azurewebsites.net/",
   "scripts": {
     "start": "react-scripts-ts start",
-    "build": "SET REACT_APP_BUILD_TIME=6.1.2018 && SET REACT_APP_VERSION=0.2.0 && react-scripts-ts build",
+    "build": "SET REACT_APP_BUILD_TIME=7.1.2018 && SET REACT_APP_VERSION=0.2.0 && react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject"
   },

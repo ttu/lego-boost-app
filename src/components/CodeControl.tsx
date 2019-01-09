@@ -169,8 +169,6 @@ class CodeControl extends React.Component<IProps, IState> {
   }
 
   editorDidMount = (editor, monaco) => {
-    console.log(monaco.languages.getLanguages());
-
     editor.focus();
   }
 
