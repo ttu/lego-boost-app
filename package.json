@@ -1,31 +1,31 @@
 {
   "name": "lego-boost-app",
   "version": "0.3.0",
-  "homepage" : "https://legoboost.azurewebsites.net/",
+  "homepage": "https://legoboost.azurewebsites.net/",
   "scripts": {
-    "start": "react-scripts-ts start",
-    "build": "SET REACT_APP_BUILD_TIME=13.1.2018 && SET REACT_APP_VERSION=0.3.0 && react-scripts-ts build",
-    "test": "react-scripts-ts test --env=jsdom",
-    "eject": "react-scripts-ts eject"
+    "start": "react-scripts start",
+    "build": "SET REACT_APP_BUILD_TIME=20.1.2018 && SET REACT_APP_VERSION=0.3.0 && react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
   },
   "dependencies": {
     "lego-boost-browser": "git+https://github.com/ttu/lego-boost-browser.git",
     "monaco-editor-webpack-plugin": "^1.7.0",
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
     "react-monaco-editor": "^0.22.0",
     "react-router-dom": "^4.3.1",
-    "react-scripts-ts": "^4.0.8",
+    "react-scripts": "2.1.3",
     "react-semantic-ui-range": "^0.6.2",
     "semantic-ui-react": "^0.83.0"
   },
   "devDependencies": {
-    "@types/jest": "^23.3.10",
-    "@types/node": "^10.12.12",
-    "@types/react": "^16.7.13",
-    "@types/react-dom": "^16.0.11",
+    "@types/jest": "23.3.13",
+    "@types/node": "10.12.18",
+    "@types/react": "16.7.20",
+    "@types/react-dom": "16.0.11",
     "@types/react-router-dom": "^4.3.1",
-    "typescript": "^3.2.2"
+    "typescript": "3.2.4"
   },
   "browserslist": [
     ">0.2%",
