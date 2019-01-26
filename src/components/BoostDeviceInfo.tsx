@@ -1,7 +1,7 @@
-import * as React from "react";
-import { Table, Accordion, Icon, Header } from "semantic-ui-react";
-import { IDeviceInfo } from "../Models";
-import LegoBoost from "lego-boost-browser";
+import * as React from 'react';
+import { Table, Accordion, Icon, Header } from 'semantic-ui-react';
+import { IDeviceInfo } from '../Models';
+import LegoBoost from 'lego-boost-browser';
 
 interface IProps {
   boost: LegoBoost;
@@ -20,18 +20,18 @@ class BoostDeviceInfo extends React.Component<IProps, IDeviceInfoAccordion> {
     super(props);
     this.boost = this.props.boost;
     this.state = {
-      color: "",
+      color: '',
       connected: false,
       distance: 0,
-      error: "",
+      error: '',
       rssi: 0,
       ports: {
-        A: { action: "", angle: 0 },
-        B: { action: "", angle: 0 },
-        AB: { action: "", angle: 0 },
-        C: { action: "", angle: 0 },
-        D: { action: "", angle: 0 },
-        LED: { action: "", angle: 0 }
+        A: { action: '', angle: 0 },
+        B: { action: '', angle: 0 },
+        AB: { action: '', angle: 0 },
+        C: { action: '', angle: 0 },
+        D: { action: '', angle: 0 },
+        LED: { action: '', angle: 0 }
       },
       activeIndex: 0
     };
@@ -99,7 +99,7 @@ class BoostDeviceInfo extends React.Component<IProps, IDeviceInfoAccordion> {
           index={0}
           onClick={this.handleAccordionClick}
         >
-          <Header as='h3'><Icon name="dropdown" />Lego Boost Info</Header>
+          <Header as="h3"><Icon name="dropdown" />Lego Boost Info</Header>
         </Accordion.Title>
         <Accordion.Content active={this.state.activeIndex === 0}>
           <Table definition>
@@ -116,7 +116,7 @@ class BoostDeviceInfo extends React.Component<IProps, IDeviceInfoAccordion> {
                   positive={this.state.connected}
                   negative={!this.state.connected}
                 >
-                  {this.state.connected ? "Yes" : "No"}
+                  {this.state.connected ? 'Yes' : 'No'}
                 </Table.Cell>
               </Table.Row>
               <Table.Row>

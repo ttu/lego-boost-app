@@ -1,5 +1,5 @@
-import * as React from "react";
-import { Container, Table, List, Header, Divider } from "semantic-ui-react";
+import * as React from 'react';
+import { Container, Table, List, Header, Divider } from 'semantic-ui-react';
 
 type AboutProps = {
   version?: string;

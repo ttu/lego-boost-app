@@ -1,8 +1,7 @@
-import LegoBoost from "lego-boost-browser";
-import * as React from "react";
-import { IControlData } from "../Models";
-import { Grid, Button, Container } from "semantic-ui-react";
-import MessageBlock from "./MessageBlock";
+import LegoBoost from 'lego-boost-browser';
+import * as React from 'react';
+import { Grid, Button, Container } from 'semantic-ui-react';
+import MessageBlock from './MessageBlock';
 
 interface IProps {
   boost: LegoBoost;

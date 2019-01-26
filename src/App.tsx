@@ -1,22 +1,22 @@
-import "./App.css";
+import './App.css';
 // import logo from "./lego_logo.svg";
 
-import LegoBoost from "lego-boost-browser";
-import * as React from "react";
-import { BrowserRouter, Route } from "react-router-dom";
-import { Container, Grid } from "semantic-ui-react";
+import LegoBoost from 'lego-boost-browser';
+import * as React from 'react';
+import { BrowserRouter, Route } from 'react-router-dom';
+import { Container, Grid } from 'semantic-ui-react';
 
-import BoostDeviceInfo from "./components/BoostDeviceInfo";
-import BoostMain from "./components/BoostMain";
-import MainMenu from "./MainMenu";
-import ManualControl from "./components/ManualControl";
-import AiControl from "./components/AiControl";
-import CodeControl from "./components/CodeControl";
-import Info from "./components/Info";
-import MotorControl from "./components/MotorControl";
+import BoostDeviceInfo from './components/BoostDeviceInfo';
+import BoostMain from './components/BoostMain';
+import MainMenu from './MainMenu';
+import ManualControl from './components/ManualControl';
+import AiControl from './components/AiControl';
+import CodeControl from './components/CodeControl';
+import Info from './components/Info';
+import MotorControl from './components/MotorControl';
 
-const APP_BUILD_TIME = process.env.REACT_APP_BUILD_TIME || "not defined";
-const APP_VERSION = process.env.REACT_APP_VERSION || "not defined";
+const APP_BUILD_TIME = process.env.REACT_APP_BUILD_TIME || 'not defined';
+const APP_VERSION = process.env.REACT_APP_VERSION || 'not defined';
 
 
 interface IApplicationState {

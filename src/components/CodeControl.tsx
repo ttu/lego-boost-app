@@ -1,8 +1,8 @@
-import LegoBoost from "lego-boost-browser";
-import * as React from "react";
+import LegoBoost from 'lego-boost-browser';
+import * as React from 'react';
 import MonacoEditor from 'react-monaco-editor';
-import { Grid, TextArea, Button, TextAreaProps, Header, Container, Accordion, Icon, Divider, Message } from "semantic-ui-react";
-import MessageBlock from "./MessageBlock";
+import { Grid, TextArea, Button, TextAreaProps, Header, Container, Accordion, Icon, Divider, Message } from 'semantic-ui-react';
+import MessageBlock from './MessageBlock';
 
 interface IProps {
   boost: LegoBoost;
@@ -206,7 +206,7 @@ class CodeControl extends React.Component<IProps, IState> {
         <Container>
           <Accordion>
             <Accordion.Title active={this.state.activeIndex === 0} index={0} onClick={this.handleAccordionClick}>
-              <Header as='h3'><Icon name="dropdown" />Example code</Header>
+              <Header as="h3"><Icon name="dropdown" />Example code</Header>
             </Accordion.Title>
             <Accordion.Content active={this.state.activeIndex === 0}>
               <Header as="h5">Copy/paste the code from example to the execution text area and press execute</Header>

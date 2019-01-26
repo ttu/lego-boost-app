@@ -1,7 +1,7 @@
-import * as React from "react";
-import { Table } from "semantic-ui-react";
-import { IControlData } from "../Models";
-import LegoBoost from "lego-boost-browser";
+import * as React from 'react';
+import { Table } from 'semantic-ui-react';
+import { IControlData } from '../Models';
+import LegoBoost from 'lego-boost-browser';
 
 interface IProps {
   boost: LegoBoost;

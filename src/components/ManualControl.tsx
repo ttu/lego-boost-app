@@ -1,8 +1,8 @@
-import LegoBoost from "lego-boost-browser";
-import * as React from "react";
-import { Container, Grid, Image, Button, Dropdown } from "semantic-ui-react";
+import LegoBoost from 'lego-boost-browser';
+import * as React from 'react';
+import { Container, Grid, Button, Dropdown } from 'semantic-ui-react';
 
-import BoostControlInfo from "./BoostControlInfo";
+import BoostControlInfo from './BoostControlInfo';
 
 
 interface IProps {
@@ -91,7 +91,7 @@ class ManualControl extends React.Component<IProps, IManualState> {
     const controlProps = { ...this.props };
 
     const createControl = (command: Command) => {
-      return (<Grid.Column className={command + "-control"} 
+      return (<Grid.Column className={command + '-control'} 
                     onMouseDown={() => this.controlClick(command)}
                     onMouseUp={() => this.controlRelease(command)}
                     onTouchStart={() => this.controlClick(command)}
@@ -100,18 +100,18 @@ class ManualControl extends React.Component<IProps, IManualState> {
 
     return (
       <Container>
-        <Grid columns={3} celled padded style={{ height: "90vh" }}>
-          <Grid.Row style={{ height: "33%" }}>
+        <Grid columns={3} celled padded style={{ height: '90vh' }}>
+          <Grid.Row style={{ height: '33%' }}>
             <Grid.Column />
             {createControl(Command.Up)}
             <Grid.Column />
           </Grid.Row>
-          <Grid.Row style={{ height: "33%" }}>
+          <Grid.Row style={{ height: '33%' }}>
             {createControl(Command.Left)}
             {createControl(Command.Stop)}
             {createControl(Command.Right)}
           </Grid.Row>
-          <Grid.Row style={{ height: "33%" }}>
+          <Grid.Row style={{ height: '33%' }}>
             <Grid.Column />
             {createControl(Command.Down)}
             <Grid.Column />
