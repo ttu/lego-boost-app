@@ -105,7 +105,7 @@ class BoostDeviceInfo extends React.Component<IProps, IDeviceInfoAccordion> {
           <Table definition>
             <Table.Header>
               <Table.Row>
-                <Table.HeaderCell></Table.HeaderCell>
+                <Table.HeaderCell />
                 <Table.HeaderCell>Status</Table.HeaderCell>
               </Table.Row>
             </Table.Header>

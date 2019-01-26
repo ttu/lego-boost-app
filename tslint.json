@@ -1,13 +1,20 @@
 {
-  "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
-  "exctends": [],
+  "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier" ],
   "defaultSeverity": "warning",
-  "quotemark": [true, "single", "jsx-double"],
-  "object-literal-sort-keys": false,
-  "ordered-imports": false,
-  "member-access": false,
+  "rules": {
+    "object-literal-sort-keys": false,
+    "ordered-imports": false,
+    "member-access": false,
+    "jsx-boolean-value": false,
+    "jsx-no-lambda": false,
+    "ban-types": false,
+    "no-eval": false,
+    "interface-over-type-literal": false,
+    "forin": false
+  },
   "linterOptions": {
     "exclude": [
+      "src/serviceWorker.ts",
       "config/**/*.js",
       "node_modules/**/*.ts",
       "coverage/lcov-report/*.js"

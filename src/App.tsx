@@ -4,7 +4,7 @@ import "./App.css";
 import LegoBoost from "lego-boost-browser";
 import * as React from "react";
 import { BrowserRouter, Route } from "react-router-dom";
-import { Container, Accordion, Grid } from "semantic-ui-react";
+import { Container, Grid } from "semantic-ui-react";
 
 import BoostDeviceInfo from "./components/BoostDeviceInfo";
 import BoostMain from "./components/BoostMain";
@@ -58,7 +58,7 @@ class App extends React.Component<{}, IApplicationState> {
   }
 
   updateCode = (code) => {
-    this.setState({ code: code });
+    this.setState({ code });
   }
 
   public render() {
