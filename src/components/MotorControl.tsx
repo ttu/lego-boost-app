@@ -7,7 +7,7 @@ import MessageBlock from './MessageBlock';
 interface IProps {
   boost: LegoBoost;
   infoVisible: boolean;
-  onInfoClose: Function;
+  onInfoClose: () => void;
 }
 
 interface IState {
@@ -30,20 +30,21 @@ class MotorControl extends React.Component<IProps, IState> {
     }
   }
 
-  componentWillUnmount = () => this.stopMotors();
-
-  stopMotors = () => {
-    for(const port in this.state) {
-      this.props.boost.motorAngle(port, 0, 0);
-    }
-
-    // TODO: How to reset Sliders?
-    this.setState({
+  componentWillUnmount = () => {
+    this.stopMotors();
+     // TODO: How to reset Sliders?
+     this.setState({
       A: 0,
       B: 0,
       AB: 0,
       C: 0,
       D: 0 });
+  }
+
+  stopMotors = () => {
+    for(const port of ['A', 'B', 'AB', 'C', 'D']) {
+      this.props.boost.motorAngle(port, 0, 0);
+    }
   }
 
   render() {
@@ -69,9 +70,7 @@ class MotorControl extends React.Component<IProps, IState> {
       </Grid.Column>);
     };
 
-    for(const port in this.state) {
-      this.props.boost.motorAngle(port, 0, 0);
-    }
+   this.stopMotors();
 
     return (
       <Container>

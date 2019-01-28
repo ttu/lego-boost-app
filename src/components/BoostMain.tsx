@@ -6,7 +6,7 @@ import MessageBlock from './MessageBlock';
 interface IProps {
   boost: LegoBoost;
   infoVisible: boolean;
-  onInfoClose: Function
+  onInfoClose: () => void;
 }
 
 class BoostMain extends React.Component<IProps> {

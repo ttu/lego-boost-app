@@ -11,8 +11,8 @@ interface IProps {
 
 interface IManualState {
   lastCommand: string;
-  mode: ControlMode,
-  ledColor: string
+  mode: ControlMode;
+  ledColor: string;
 }
 
 enum ControlMode {

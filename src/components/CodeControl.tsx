@@ -7,9 +7,9 @@ import MessageBlock from './MessageBlock';
 interface IProps {
   boost: LegoBoost;
   infoVisible: boolean;
-  onInfoClose: Function;
-  code: string,
-  updateCode: Function
+  onInfoClose: () => void;
+  code: string;
+  updateCode: (code: string) => void;
 }
 
 interface IState {

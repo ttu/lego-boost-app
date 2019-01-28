@@ -8,10 +8,7 @@
     "member-access": false,
     "jsx-boolean-value": false,
     "jsx-no-lambda": false,
-    "ban-types": false,
-    "no-eval": false,
-    "interface-over-type-literal": false,
-    "forin": false
+    "no-eval": false
   },
   "linterOptions": {
     "exclude": [

@@ -2,10 +2,10 @@ import * as React from 'react'
 import { Message } from 'semantic-ui-react'
 
 interface IMessageContent {
-    visible: boolean,
-    onClose: Function,
-    header?: string,
-    content: string
+    visible: boolean;
+    onClose: () => void;
+    header?: string;
+    content: string;
 }
 class MessageBlock extends React.Component<IMessageContent> {
   handleDismiss = () => {

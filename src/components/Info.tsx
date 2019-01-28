@@ -1,13 +1,15 @@
 import * as React from 'react';
-import { Container, Table, List, Header, Divider } from 'semantic-ui-react';
+import { Container, List, Header, Divider } from 'semantic-ui-react';
 
-type AboutProps = {
+
+interface IAboutProps {
   version?: string;
   date?: string;
 };
 
+
 // const About: React.FunctionComponent<AboutProps> = ({  version, date  }) =>
-const Info = ({ version, date }: AboutProps) => (
+const Info = ({ version, date }: IAboutProps) => (
   <Container>
 
     <Container textAlign="left">
