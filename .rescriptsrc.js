@@ -5,7 +5,7 @@ module.exports = [
     config.plugins.push(
         new MonacoWebpackPlugin({
           // available options are documented at https://github.com/Microsoft/monaco-editor-webpack-plugin#options
-          languages: ['json', 'typescript']
+          languages: ['typescript']
         })
     );
     return config;

@@ -1,8 +1,10 @@
 import LegoBoost from 'lego-boost-browser';
 import * as React from 'react';
 import MonacoEditor from 'react-monaco-editor';
-import { Grid, TextArea, Button, TextAreaProps, Header, Container, Accordion, Icon, Divider, Message } from 'semantic-ui-react';
+import { Grid, TextArea, Button, Header, Container, Accordion, Icon, Divider, Message } from 'semantic-ui-react';
 import MessageBlock from './MessageBlock';
+import { legoBoostTypes } from './data/BoostTypes';
+import * as monacoEditor from 'monaco-editor/esm/vs/editor/editor.api';
 
 interface IProps {
   boost: LegoBoost;
@@ -18,23 +20,26 @@ interface IState {
   executionError: string
 }
 
-const TITLE = `/* Control Lego Boost by executing javascript code.
-* Insert your own code under this comment or remove this comment
-* Press the Execute button to run the code
-*
-* 1) If site is loaded anywhere else than the Main-tab, code hightlight will not work
-* 2) Syntax highlight will show errors on working code
-*/
+const INFO_TEXT = `// Insert the code inside the async function.
+// Press the Execute button to run the code.`;
 
-`;
+const TEMPLATE = `${INFO_TEXT}
+
+import LegoBoost from 'lego-boost-browser';
+
+const boost = new LegoBoost();
+
+async () => {
+%CODE%
+}`;
 
 const CODE_EXAMPLES = [
   {
     header: 'Change the color of the led',
     description: 'Change the color from red to green. Supported colors: off, pink, purple, blue, lightblue, cyan, green, yellow, orange, red, white',
-    code: `await boost.ledAsync('red');
-await boost.ledAsync('yellow');
-await boost.ledAsync('green');`
+    code: `   await boost.ledAsync('red');
+   await boost.ledAsync('yellow');
+   await boost.ledAsync('green');`
   },
   {
     header: 'Drive and back',
@@ -99,9 +104,10 @@ await boost.drive(distanceToDrive);`
   }
 ];
 
-const MONACO_OPTIONS = {
+const MONACO_OPTIONS: monacoEditor.editor.IEditorConstructionOptions = {
   selectOnLineNumbers: true,
-  language: 'typescript'
+  language: 'typescript',
+  formatOnPaste: true
 };
 
 class CodeControl extends React.Component<IProps, IState> {
@@ -132,12 +138,14 @@ class CodeControl extends React.Component<IProps, IState> {
     // Typescript eval doesn't create closures on their creation context. They are always created on global scope. Maybe like new Function()?
     // Wrap executble code to a function
     const functionToExecute = `(async () => {${this.state.codeToRun}})()`;
-    eval(functionToExecute); 
+    eval(functionToExecute);
     // new Function(`return async function() {${this.state.codeToRun}}`)()();
   };
 
-  updateMonacoCode = (newValue, e) => {
-    this.setState({ codeToRun: newValue });
+  updateMonacoCode = (newValue: string, ev: monacoEditor.editor.IModelContentChangedEvent) => {
+    let codeToRun = newValue.substr(newValue.indexOf('async () => {') + 14);
+    codeToRun = codeToRun.substr(0, codeToRun.length - 2);
+    this.setState({ codeToRun });
   };
 
   handleAccordionClick = (e, titleProps) => {
@@ -148,39 +156,30 @@ class CodeControl extends React.Component<IProps, IState> {
     this.setState({ activeIndex: newIndex });
   };
 
-  editorWillMount = (monaco) => {
-    // TODO: Eject CRA, so can use plugins and defined used languages
-    // https://github.com/superRaytin/react-monaco-editor
-    // Or figure out how to do with this: https://medium.com/@haugboelle/short-guide-to-using-monaco-with-create-react-app-26a1acad8ebe
-    // monaco.languages.onLanguage('typescript', () => {
-    //   monaco.languages.typescript.javascriptDefaults.addExtraLib(`
-    //     import * as ts from './typescript';
-    //     export = ts;
-    //     export as namespace typescript;
-    //   `, 'global.d.ts');
-
-    //   monaco.languages.typescript.javascriptDefaults.addExtraLib(`
-    //     import LegoBoost from 'lego-boost-browser';
-    //     boost = new LegoBoost();
-    //     export = boost;
-    //     export as boost;
-    //   `, 'boost.d.ts');
-    // });
+  editorWillMount = (monaco: typeof monacoEditor) => {
+    monaco.languages.onLanguage('typescript', () => {
+        monaco.languages.typescript.typescriptDefaults.addExtraLib(legoBoostTypes, 'lego-boost-browser.d.ts');
+    });
   }
 
-  editorDidMount = (editor, monaco) => {
+  editorDidMount = (editor: monacoEditor.editor.IStandaloneCodeEditor, monaco) => {
     editor.focus();
+    editor.onDidChangeCursorSelection(l => {
+      const readOnly = (l.selection.startLineNumber <= 8);
+      editor.updateOptions({ readOnly });
+    });
   }
 
   render() {
     return (
       <Container>
-        <MessageBlock visible={this.props.infoVisible} onClose={this.props.onInfoClose} content="Control Lego Boost by executing javascript code." />
+        {/* TODO: Figue out why closing this trigger componentWillUnmount multiple times */}
+        {/* <MessageBlock visible={this.props.infoVisible} onClose={this.props.onInfoClose} content={INFO_TEXT} /> */}
 
         <Container textAlign="left">
           <MonacoEditor 
             language="typescript"
-            value={this.state.codeToRun}
+            value={TEMPLATE.replace('%CODE%', this.state.codeToRun)}
             options={MONACO_OPTIONS}
             width="100%"
             height="400"

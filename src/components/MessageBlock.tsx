@@ -7,6 +7,7 @@ interface IMessageContent {
     header?: string;
     content: string;
 }
+
 class MessageBlock extends React.Component<IMessageContent> {
   handleDismiss = () => {
     this.props.onClose();

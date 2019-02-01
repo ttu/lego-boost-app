@@ -57,7 +57,7 @@ class App extends React.Component<{}, IApplicationState> {
     this.setState({ codeInfoVisible: false });
   }
 
-  updateCode = (code) => {
+  updateCode = (code: string) => {
     this.setState({ code });
   }
 
