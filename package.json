@@ -1,10 +1,10 @@
 {
   "name": "lego-boost-app",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "homepage": "https://legoboost.azurewebsites.net/",
   "scripts": {
     "start": "rescripts start",
-    "build": "SET REACT_APP_BUILD_TIME=20.1.2018 && SET REACT_APP_VERSION=0.3.0 && rescripts build",
+    "build": "SET REACT_APP_BUILD_TIME=5.2.2018 && SET REACT_APP_VERSION=0.4.0 && rescripts build",
     "test": "rescripts test --env=jsdom",
     "eject": "rescripts eject",
     "lint": "tslint --project ./tsconfig.json"

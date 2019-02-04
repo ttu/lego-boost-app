@@ -2,7 +2,10 @@
 
 ### [Unreleased]
 * 
- 
+
+### [0.4.0] - 2019-02-05
+* CHANGED: Improved code editor. Syntax highlight, intellisense etc.
+
 ### [0.3.0] - 2019-01-13
 * ADDED: Individual motor controls
 
