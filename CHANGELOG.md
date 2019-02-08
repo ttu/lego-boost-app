@@ -1,9 +1,11 @@
 # Changelog
 
 ### [Unreleased]
-* 
+* CHANGED: Updated LegoBoost intellisense information
 
 ### [0.4.0] - 2019-02-05
+* CHANGED: Migrate to React App 2.1 and configure tslint
+* ADDED: Load Monaco Webpack plugin with rescripts
 * CHANGED: Improved code editor. Syntax highlight, intellisense etc.
 
 ### [0.3.0] - 2019-01-13
