@@ -164,9 +164,14 @@ class CodeControl extends React.Component<IProps, IState> {
 
   editorDidMount = (editor: monacoEditor.editor.IStandaloneCodeEditor, monaco) => {
     editor.focus();
-    editor.onDidChangeCursorSelection(l => {
-      const readOnly = (l.selection.startLineNumber <= 8);
+    editor.onDidChangeCursorSelection(e => {
+      const readOnly = (e.selection.startLineNumber <= 8);
       editor.updateOptions({ readOnly });
+    });
+    editor.onKeyDown(e => {
+      if (e.keyCode === monacoEditor.KeyCode.Enter) {
+        editor.updateOptions({ readOnly: false });
+      }
     });
   }
 
