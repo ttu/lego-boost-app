@@ -33,14 +33,14 @@ class BoostConfiguration extends React.Component<IProps> {
         <Grid centered columns="equal">
           <Grid.Row centered>
             <Grid.Column textAlign="right">
-              <Button secondary onClick={this.setCarMode}>Car</Button>
-            </Grid.Column>
-            <Grid.Column textAlign="center">
-              <Button secondary onClick={this.setVernieMode}>Car reverse</Button>
-            </Grid.Column> 
-            <Grid.Column textAlign="left">
               <Button secondary onClick={this.setVernieMode}>Vernie</Button>
             </Grid.Column>
+            <Grid.Column textAlign="right">
+              <Button secondary onClick={this.setCarMode}>Car</Button>
+            </Grid.Column>
+            <Grid.Column textAlign="left">
+              <Button secondary onClick={this.setVernieMode}>Car reverse</Button>
+            </Grid.Column> 
           </Grid.Row>
           <Grid.Row>
             <section>
