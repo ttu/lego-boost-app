@@ -31,7 +31,7 @@ const Info = ({ version, date }: IAboutProps) => (
         <List.Item>Lego Boost's distance sensor doesn't work: Remove the sensor from the Lego Boost and attach it again</List.Item>
         <List.Item>Manual control won't work: Refresh the page and reconnect</List.Item>
         <List.Item>In case of any unknown problem: Refresh the page and reconnect</List.Item>
-        <List.Item>Page shows no connection, but Boost's led shows it is connected: Remove batteries from the Lego Boost and try again</List.Item>
+        <List.Item>Page shows no connection, but Boost's led shows it is connected: Press power button ~10sec to reset Boost's connection.</List.Item>
       </List>
     </Container>
 
