@@ -25,6 +25,6 @@ export interface IDeviceInfo {
 }
 
 export interface IBoostConfig extends IConfiguration {
-  driveModifier?: number;
-  turnModifier?: number;
+  driveFinetune?: number;
+  turnFinetune?: number;
 }

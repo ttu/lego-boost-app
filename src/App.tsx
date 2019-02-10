@@ -22,6 +22,8 @@ const APP_BUILD_TIME = process.env.REACT_APP_BUILD_TIME || 'not defined';
 const APP_VERSION = process.env.REACT_APP_VERSION || 'not defined';
 const CONFIG_STORAGE_KEY = 'boost-configuration';
 
+const DEFAULT_BOOST_CONFIG: IBoostConfig = { driveFinetune: 1.0, turnFinetune: 1.0, leftMotor: 'A', rightMotor: 'B' };
+
 interface IApplicationState {
   aiInfoVisible: boolean;
   mainInfoVisible: boolean;
@@ -44,7 +46,7 @@ class App extends React.Component<{}, IApplicationState> {
       configInfoVisible: true,
       motorInfoVisible: true,
       code: '',
-      configuration: localStorage.get(CONFIG_STORAGE_KEY) || { distanceModifier: 1.0, turnModifier: 1.0 }
+      configuration: localStorage.get(CONFIG_STORAGE_KEY) || DEFAULT_BOOST_CONFIG
     }
   }
 
@@ -76,8 +78,8 @@ class App extends React.Component<{}, IApplicationState> {
     this.setState((prevState) => {
       const prevConfig = prevState.configuration;
       const newConfig = {
-        driveSpeed: prevConfig.distanceModifier ? DEFAULT_CONFIG.DRIVE_SPEED * prevConfig.distanceModifier : DEFAULT_CONFIG.DRIVE_SPEED,
-        turnSpeed: prevConfig.turnModifier ? DEFAULT_CONFIG.TURN_SPEED * prevConfig.turnModifier : DEFAULT_CONFIG.TURN_SPEED,
+        driveSpeed: prevConfig.driveFinetune ? DEFAULT_CONFIG.DRIVE_SPEED * prevConfig.driveFinetune : DEFAULT_CONFIG.DRIVE_SPEED,
+        turnSpeed: prevConfig.turnFinetune ? DEFAULT_CONFIG.TURN_SPEED * prevConfig.turnFinetune : DEFAULT_CONFIG.TURN_SPEED,
         ...prevConfig,
         ...c
       };
@@ -86,13 +88,18 @@ class App extends React.Component<{}, IApplicationState> {
     });
   }
 
+  resetConfig = () => {
+    localStorage.set(CONFIG_STORAGE_KEY, DEFAULT_BOOST_CONFIG);
+    this.setState({ configuration: DEFAULT_BOOST_CONFIG });
+  }
+
   public render() {
     const boostProps = { boost: this.boost };
 
     const CreateBoostMain = () => <BoostMain {...boostProps} infoVisible={this.state.mainInfoVisible} onInfoClose={this.onMainInfoClose} configuration={this.state.configuration} />;
     const CreateManualControl = () => <ManualControl {...boostProps} />;
     const CreateAiControl = () => <AiControl {...boostProps} infoVisible={this.state.aiInfoVisible} onInfoClose={this.onAiInfoClose} />;
-    const CreateConfigurationControl = () => <BoostConfiguration {...boostProps} infoVisible={this.state.configInfoVisible} onInfoClose={this.onConfigInfoClose} updataConfig={this.updateConfig} configuration={this.state.configuration} />;
+    const CreateConfigurationControl = () => <BoostConfiguration {...boostProps} infoVisible={this.state.configInfoVisible} onInfoClose={this.onConfigInfoClose} updataConfig={this.updateConfig} resetConfig={this.resetConfig} configuration={this.state.configuration} />;
     const CreateMotorControl = () => <MotorControl {...boostProps} infoVisible={this.state.aiInfoVisible} onInfoClose={this.onMotorInfoClose} />;
     const CreateCodeControl = () => <CodeControl {...boostProps} code={this.state.code} updateCode={this.updateCode} infoVisible={this.state.codeInfoVisible} onInfoClose={this.onCodeInfoClose} />;
     const CreateInfoComponent = () => <Info version={APP_VERSION} date={APP_BUILD_TIME} />;

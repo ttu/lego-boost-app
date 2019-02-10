@@ -33,7 +33,7 @@ class BoostMain extends React.Component<IProps> {
           <Grid.Row columns={1}>
             <Grid.Column>
               <Button primary onClick={this.props.boost.connect.bind(this.props.boost, this.props.configuration)}>Connect</Button>
-              <Button secondary onClick={this.props.boost.disconnect.bind(this.props.boost)}>Disconnect</Button>
+              {/* <Button secondary onClick={this.props.boost.disconnect.bind(this.props.boost)}>Disconnect</Button> */}
             </Grid.Column>
           </Grid.Row>
         </Grid>
