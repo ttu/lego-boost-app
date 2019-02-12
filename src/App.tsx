@@ -78,8 +78,8 @@ class App extends React.Component<{}, IApplicationState> {
     this.setState((prevState) => {
       const prevConfig = prevState.configuration;
       const newConfig = {
-        driveSpeed: prevConfig.driveFinetune ? DEFAULT_CONFIG.DRIVE_SPEED * prevConfig.driveFinetune : DEFAULT_CONFIG.DRIVE_SPEED,
-        turnSpeed: prevConfig.turnFinetune ? DEFAULT_CONFIG.TURN_SPEED * prevConfig.turnFinetune : DEFAULT_CONFIG.TURN_SPEED,
+        distanceModifier: prevConfig.driveFinetune ? DEFAULT_CONFIG.METRIC_MODIFIER * prevConfig.driveFinetune : DEFAULT_CONFIG.METRIC_MODIFIER,
+        turnModifier: prevConfig.turnFinetune ? DEFAULT_CONFIG.TURN_MODIFIER * prevConfig.turnFinetune : DEFAULT_CONFIG.TURN_MODIFIER,
         ...prevConfig,
         ...c
       };
