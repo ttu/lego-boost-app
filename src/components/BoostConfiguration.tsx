@@ -17,8 +17,8 @@ class BoostConfiguration extends React.Component<IProps> {
   stateOptions = [ 
     { key: 'A', value: 'A', text: 'A' },
     { key: 'B', value: 'B', text: 'B' },
-    { key: 'C', value: 'C', text: 'C' },
-    { key: 'D', value: 'D', text: 'D' }
+    // { key: 'C', value: 'C', text: 'C' },
+    // { key: 'D', value: 'D', text: 'D' }
   ]
   
   constructor(props) {
