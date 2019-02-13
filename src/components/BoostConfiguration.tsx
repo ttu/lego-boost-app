@@ -62,7 +62,7 @@ class BoostConfiguration extends React.Component<IProps> {
   render() {
     return (
       <Container>
-        <MessageBlock visible={this.props.infoVisible} onClose={this.props.onInfoClose} content="Reconnect the Lego Boost after configuration changes. Configuration is saved to browsers storage." />
+        <MessageBlock visible={this.props.infoVisible} onClose={this.props.onInfoClose} content="Reconnect the Lego Boost after configuration changes. Configuration is saved to browser's storage." />
         <Grid centered columns="equal">
           <Grid.Row>
             Motor modes
