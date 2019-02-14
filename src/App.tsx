@@ -84,12 +84,14 @@ class App extends React.Component<{}, IApplicationState> {
         ...c
       };
       localStorage.set(CONFIG_STORAGE_KEY, newConfig);
+      this.boost.updateConfiguration(newConfig);
       return { configuration: newConfig };
     });
   }
 
   resetConfig = () => {
     localStorage.set(CONFIG_STORAGE_KEY, DEFAULT_BOOST_CONFIG);
+    this.boost.updateConfiguration(DEFAULT_BOOST_CONFIG);
     this.setState({ configuration: DEFAULT_BOOST_CONFIG });
   }
 
