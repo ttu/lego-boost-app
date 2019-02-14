@@ -95,7 +95,7 @@ const Info = ({ version, date }: IAboutProps) => (
       <List.Item>Unreleased
           <List.List>
             <List.Item>Add LegoBoost type information for code editor</List.Item>
-            <List.Item>Add configuration to save motor directions</List.Item>
+            <List.Item>Add configuration page to change driving directions</List.Item>
           </List.List>
         </List.Item>
         <List.Item>0.4.0 (5.2.2019)
