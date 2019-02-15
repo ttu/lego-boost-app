@@ -92,7 +92,7 @@ const Info = ({ version, date }: IAboutProps) => (
 
     <Container textAlign="left">
       <List bulleted>
-      <List.Item>Unreleased
+      <List.Item>0.5.0 (15.2.2019)
           <List.List>
             <List.Item>Add LegoBoost type information for code editor</List.Item>
             <List.Item>Add configuration page to change driving directions</List.Item>

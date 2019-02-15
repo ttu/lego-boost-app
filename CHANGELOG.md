@@ -1,7 +1,10 @@
 # Changelog
 
 ### [Unreleased]
-* CHANGED: Updated LegoBoost intellisense information
+
+### [0.5.0] - 2019-02-15
+* CHANGED: Updated LegoBoost type information for intellisense
+* ADDED: Lego Boost motor configuration
 
 ### [0.4.0] - 2019-02-05
 * CHANGED: Migrate to React App 2.1 and configure tslint
