@@ -4,6 +4,7 @@ declare module 'lego-boost-browser' {
         private hub;
         private hubControl;
         private color;
+        private updateTimer;
         /**
          * Information from Lego Boost motos and sensors
          * @property LegoBoost#deviceInfo
@@ -63,7 +64,7 @@ declare module 'lego-boost-browser' {
         /**
          * Drive forward until wall is reaced or drive backwards 100meters
          * @method LegoBoost#connect
-         * @param {IConfiguration} configuration Motor configuration
+         * @param {IConfiguration} [configuration={}] Lego boost motor and control configuration
          * @returns {Promise}
          */
         connect(configuration?: IConfiguration): Promise<void>;
@@ -88,8 +89,7 @@ declare module 'lego-boost-browser' {
         disconnect(): Promise<boolean>;
         /**
          * Start AI mode
-         * @method LegoBoost#stop
-         * @returns {Promise}
+         * @method LegoBoost#ai
          */
         ai(): void;
         /**
@@ -98,6 +98,12 @@ declare module 'lego-boost-browser' {
          * @returns {Promise}
          */
         stop(): Promise<{}>;
+        /**
+         * Update Boost motor and control configuration
+         * @method LegoBoost#updateConfiguration
+         * @param {IConfiguration} configuration Boost motor and control configuration
+         */
+        updateConfiguration(configuration: IConfiguration): void;
         /**
          * Control the LED on the Move Hub
          * @method LegoBoost#led

@@ -20,6 +20,9 @@ const MainMenu = ({ location }) => (
     <Menu.Item active={location.pathname === '/code'}>
       <Link to="/code">Code</Link>
     </Menu.Item>
+    <Menu.Item active={location.pathname === '/config'}>
+      <Link to="/config">Config</Link>
+    </Menu.Item>
     <Menu.Item active={location.pathname === '/info'}>
       <Link to="/info">Info</Link>
     </Menu.Item>

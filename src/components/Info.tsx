@@ -31,7 +31,7 @@ const Info = ({ version, date }: IAboutProps) => (
         <List.Item>Lego Boost's distance sensor doesn't work: Remove the sensor from the Lego Boost and attach it again</List.Item>
         <List.Item>Manual control won't work: Refresh the page and reconnect</List.Item>
         <List.Item>In case of any unknown problem: Refresh the page and reconnect</List.Item>
-        <List.Item>Page shows no connection, but Boost's led shows it is connected: Remove batteries from the Lego Boost and try again</List.Item>
+        <List.Item>Page shows no connection, but Boost's led shows it is connected: Press power button ~10sec to reset Boost's connection.</List.Item>
       </List>
     </Container>
 
@@ -92,9 +92,15 @@ const Info = ({ version, date }: IAboutProps) => (
 
     <Container textAlign="left">
       <List bulleted>
+      <List.Item>Unreleased
+          <List.List>
+            <List.Item>Add LegoBoost type information for code editor</List.Item>
+            <List.Item>Add configuration page to change driving directions</List.Item>
+          </List.List>
+        </List.Item>
         <List.Item>0.4.0 (5.2.2019)
           <List.List>
-            <List.Item>Improve code editor</List.Item>
+            <List.Item>Improve code editor (syntax highlight, intellisense etc.)</List.Item>
           </List.List>
         </List.Item>
         <List.Item>0.3.0 (13.1.2019)

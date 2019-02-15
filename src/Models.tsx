@@ -1,3 +1,5 @@
+import { IConfiguration } from 'lego-boost-browser/dist/hub/hubAsync';
+
 export interface IControlData {
   speed: number;
   turnAngle: number;
@@ -20,4 +22,9 @@ export interface IDeviceInfo {
     D: { action: string; angle: number };
     LED: { action: string; angle: number };
   };
+}
+
+export interface IBoostConfig extends IConfiguration {
+  driveFinetune?: number;
+  turnFinetune?: number;
 }
