@@ -4,7 +4,7 @@
   "homepage": "https://legoboost.azurewebsites.net/",
   "scripts": {
     "start": "rescripts start",
-    "build": "SET REACT_APP_BUILD_TIME=10.2.2018 && SET REACT_APP_VERSION=0.4.0 && rescripts build",
+    "build": "SET REACT_APP_BUILD_TIME=15.2.2018 && SET REACT_APP_VERSION=0.4.0 && rescripts build",
     "test": "rescripts test --env=jsdom",
     "eject": "rescripts eject",
     "lint": "tslint --project ./tsconfig.json"
@@ -25,11 +25,11 @@
     "@rescripts/cli": "^0.0.10",
     "@rescripts/rescript-env": "^0.0.5",
     "@rescripts/utilities": "^0.0.5",
-    "@types/jest": "^24.0.3",
+    "@types/jest": "^24.0.4",
     "@types/local-storage": "^1.4.0",
     "@types/node": "^11.9.3",
-    "@types/react": "^16.8.2",
-    "@types/react-dom": "^16.8.0",
+    "@types/react": "^16.8.3",
+    "@types/react-dom": "^16.8.1",
     "@types/react-monaco-editor": "^0.16.0",
     "@types/react-router-dom": "^4.3.1",
     "prettier": "^1.16.4",
