@@ -50,24 +50,9 @@ class App extends React.Component<{}, IApplicationState> {
     }
   }
 
-  onAiInfoClose = () => {
-    this.setState({ aiInfoVisible: false });
-  }
-
-  onMainInfoClose = () => {
-    this.setState({ mainInfoVisible: false });
-  }
-
-  onMotorInfoClose = () => {
-    this.setState({ motorInfoVisible: false });
-  }
-
-  onCodeInfoClose = () => {
-    this.setState({ codeInfoVisible: false });
-  }
-
-  onConfigInfoClose = () => {
-    this.setState({ configInfoVisible: false });
+  onInfoClose = (propName: string) => {
+    // @ts-ignore
+    this.setState({ [propName]: false });
   }
 
   updateCode = (code: string) => {
@@ -98,12 +83,12 @@ class App extends React.Component<{}, IApplicationState> {
   public render() {
     const boostProps = { boost: this.boost };
 
-    const CreateBoostMain = () => <BoostMain {...boostProps} infoVisible={this.state.mainInfoVisible} onInfoClose={this.onMainInfoClose} configuration={this.state.configuration} />;
+    const CreateBoostMain = () => <BoostMain {...boostProps} infoVisible={this.state.mainInfoVisible} onInfoClose={this.onInfoClose.bind(this, 'mainInfoVisible')} configuration={this.state.configuration} />;
     const CreateManualControl = () => <ManualControl {...boostProps} />;
-    const CreateAiControl = () => <AiControl {...boostProps} infoVisible={this.state.aiInfoVisible} onInfoClose={this.onAiInfoClose} />;
-    const CreateConfigurationControl = () => <BoostConfiguration {...boostProps} infoVisible={this.state.configInfoVisible} onInfoClose={this.onConfigInfoClose} updataConfig={this.updateConfig} resetConfig={this.resetConfig} configuration={this.state.configuration} />;
-    const CreateMotorControl = () => <MotorControl {...boostProps} infoVisible={this.state.aiInfoVisible} onInfoClose={this.onMotorInfoClose} />;
-    const CreateCodeControl = () => <CodeControl {...boostProps} code={this.state.code} updateCode={this.updateCode} infoVisible={this.state.codeInfoVisible} onInfoClose={this.onCodeInfoClose} />;
+    const CreateAiControl = () => <AiControl {...boostProps} infoVisible={this.state.aiInfoVisible} onInfoClose={this.onInfoClose.bind(this, 'aiInfoVisible')} />;
+    const CreateConfigurationControl = () => <BoostConfiguration {...boostProps} infoVisible={this.state.configInfoVisible} onInfoClose={this.onInfoClose.bind(this, 'configInfoVisible')} updataConfig={this.updateConfig} resetConfig={this.resetConfig} configuration={this.state.configuration} />;
+    const CreateMotorControl = () => <MotorControl {...boostProps} infoVisible={this.state.motorInfoVisible} onInfoClose={this.onInfoClose.bind(this, 'motorInfoVisible')} />;
+    const CreateCodeControl = () => <CodeControl {...boostProps} code={this.state.code} updateCode={this.updateCode} infoVisible={this.state.codeInfoVisible} onInfoClose={this.onInfoClose.bind(this, 'codeInfoVisible')} />;
     const CreateInfoComponent = () => <Info version={APP_VERSION} date={APP_BUILD_TIME} />;
 
     return (
