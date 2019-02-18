@@ -43,19 +43,15 @@ class BoostConfiguration extends React.Component<IProps> {
     this.props.updataConfig({ turnFinetune: original + value });
   }
 
-  setLeftMotor= (ev, data)  => this.setMotor(data.value, 'leftMotor');
-
-  setRightMotor= (ev, data) => this.setMotor(data.value, 'rightMotor');
-
-  setMotor = (value, side) => {
-    const other = side === 'leftMotor' ? 'rightMotor' : 'leftMotor';
+  setMotor = (ev, { name, value }) => {
+    const other = name === 'leftMotor' ? 'rightMotor' : 'leftMotor';
     let otherValue = this.props.configuration[other];
     
     if (value === otherValue) {
       otherValue = value === 'A' ? 'B' : 'A';
     }
 
-    this.props.updataConfig({ [side]: value, [other]: otherValue });
+    this.props.updataConfig({ [name]: value, [other]: otherValue });
   }
 
 
@@ -80,10 +76,10 @@ class BoostConfiguration extends React.Component<IProps> {
           </Grid.Row>
           <Grid.Row>
             <Grid.Column textAlign="right"> 
-              Left: <Dropdown search selection options={this.stateOptions} value={this.props.configuration.leftMotor} onChange={this.setLeftMotor} />
+              Left: <Dropdown search selection options={this.stateOptions} name="leftMotor" value={this.props.configuration.leftMotor} onChange={this.setMotor} />
             </Grid.Column> 
             <Grid.Column textAlign="left"> 
-              Right: <Dropdown search selection options={this.stateOptions} value={this.props.configuration.rightMotor} onChange={this.setRightMotor} />
+              Right: <Dropdown search selection options={this.stateOptions} name="rightMotor" value={this.props.configuration.rightMotor} onChange={this.setMotor} />
             </Grid.Column> 
           </Grid.Row>
           <Grid.Row>
