@@ -19,7 +19,7 @@ interface IProps {
 interface IState {
   codeToRun: string;
   activeIndex: number;
-  executionError: string
+  executionError: string;
 }
 
 const INFO_TEXT = `// Insert the code inside the async function.
@@ -38,7 +38,7 @@ async () => {
 const MONACO_OPTIONS: monacoEditor.editor.IEditorConstructionOptions = {
   selectOnLineNumbers: true,
   language: 'typescript',
-  formatOnPaste: true
+  formatOnPaste: true,
 };
 
 class CodeControl extends React.Component<IProps, IState> {
@@ -47,21 +47,21 @@ class CodeControl extends React.Component<IProps, IState> {
     this.state = {
       codeToRun: this.props.code || CODE_EXAMPLES[0].code,
       executionError: '',
-      activeIndex: 0
+      activeIndex: 0,
     };
 
     // Need to set this at the constructor as can't set before eval and remove after that as using async function, it is not known when eval is ready
     (window as any).boost = this.props.boost;
 
     // Execute will throw Unhandled Rejection (ReferenceError)
-    window.onunhandledrejection = (e) => {
+    window.onunhandledrejection = e => {
       this.setState({ executionError: e.reason.message || 'Unknown error' });
     };
   }
 
   componentWillUnmount = () => {
     this.props.updateCode(this.state.codeToRun);
-  }
+  };
 
   handleItemClick = (e, { name }) => {
     this.setState({ executionError: '' });
@@ -89,14 +89,14 @@ class CodeControl extends React.Component<IProps, IState> {
 
   editorWillMount = (monaco: typeof monacoEditor) => {
     monaco.languages.onLanguage('typescript', () => {
-        monaco.languages.typescript.typescriptDefaults.addExtraLib(legoBoostTypes, 'lego-boost-browser.d.ts');
+      monaco.languages.typescript.typescriptDefaults.addExtraLib(legoBoostTypes, 'lego-boost-browser.d.ts');
     });
-  }
+  };
 
   editorDidMount = (editor: monacoEditor.editor.IStandaloneCodeEditor, monaco) => {
     editor.focus();
     editor.onDidChangeCursorSelection(e => {
-      const readOnly = (e.selection.startLineNumber <= 8);
+      const readOnly = e.selection.startLineNumber <= 8;
       editor.updateOptions({ readOnly });
     });
     editor.onKeyDown(e => {
@@ -104,7 +104,7 @@ class CodeControl extends React.Component<IProps, IState> {
         editor.updateOptions({ readOnly: false });
       }
     });
-  }
+  };
 
   render() {
     return (
@@ -113,7 +113,7 @@ class CodeControl extends React.Component<IProps, IState> {
         {/* <MessageBlock visible={this.props.infoVisible} onClose={this.props.onInfoClose} content={INFO_TEXT} /> */}
 
         <Container textAlign="left">
-          <MonacoEditor 
+          <MonacoEditor
             language="typescript"
             value={TEMPLATE.replace('%CODE%', this.state.codeToRun)}
             options={MONACO_OPTIONS}
@@ -125,57 +125,76 @@ class CodeControl extends React.Component<IProps, IState> {
           />
         </Container>
 
-        <br/>
+        <br />
 
         <Grid centered columns="equal">
           <Grid.Row>
-            <Button primary name="execute" onClick={this.handleItemClick}>Execute</Button>
+            <Button primary name="execute" onClick={this.handleItemClick}>
+              Execute
+            </Button>
           </Grid.Row>
           <Grid.Row>
-            {this.state.executionError !== '' ? (<Message negative>{this.state.executionError}</Message>): (null)}
+            {this.state.executionError !== '' ? <Message negative>{this.state.executionError}</Message> : null}
           </Grid.Row>
         </Grid>
 
         <Divider />
-        
+
         <Container>
           <Accordion>
             <Accordion.Title active={this.state.activeIndex === 0} index={0} onClick={this.handleAccordionClick}>
-              <Header as="h3"><Icon name="dropdown" />Example code</Header>
+              <Header as="h3">
+                <Icon name="dropdown" />
+                Example code
+              </Header>
             </Accordion.Title>
             <Accordion.Content active={this.state.activeIndex === 0}>
               <Header as="h5">Copy/paste the code from example to the execution text area and press execute</Header>
 
               <Container textAlign="center" fluid>
-              {CODE_EXAMPLES.map(example => (
-                <Container key={example.header}>
-                  <Header as="h4">{example.header}</Header>
-                  <Container>{example.description}</Container>
-                  <TextArea value={example.code} readOnly autoHeight style={{ minWidth: 400, maxWidth: 500 }} />
-                  <Divider />
-                </Container>
-              ))}
+                {CODE_EXAMPLES.map(example => (
+                  <Container key={example.header}>
+                    <Header as="h4">{example.header}</Header>
+                    <Container>{example.description}</Container>
+                    <TextArea value={example.code} readOnly autoHeight style={{ minWidth: 400, maxWidth: 500 }} />
+                    <Divider />
+                  </Container>
+                ))}
               </Container>
 
               <pre style={{ textAlign: 'left', maxWidth: 350, margin: '0 auto' }}>
                 <h4>Supported functions</h4>
-                Check documentation from:<br/>
-                <a href="https://github.com/ttu/node-movehub-async#hub">node-movehub-async</a><br/>
-                <a href="https://github.com/hobbyquaker/node-movehub#hub">node-movehub</a><br/>
-                <br/>
-                boost is the class with Lego Boost control functionality.<br/>
-                <br/>
-                boost.drive(distance)<br/>
-                boost.turn(degrees)<br/>
-                boost.motorTimeAsync(motorPort, seconds, dutyCycle)<br/>
-                boost.motorTimeMultiAsync(seconds, powerA, powerB)<br/>
-                boost.motorAngleAsync(motorPort, angle, power)<br/>
-                boost.motorAngleMultiAsync(angle, powerA, powerB)<br/>
-                boost.ledAsync(color)<br/>
-                boost.changeLed()<br/>
-                boost.deviceInfo.distance<br/>
-                <br/>
-                await in the front of the function means, that the execution will wait that the sent command is finished<br/>
+                Check documentation from:
+                <br />
+                <a href="https://github.com/ttu/node-movehub-async#hub">node-movehub-async</a>
+                <br />
+                <a href="https://github.com/hobbyquaker/node-movehub#hub">node-movehub</a>
+                <br />
+                <br />
+                boost is the class with Lego Boost control functionality.
+                <br />
+                <br />
+                boost.drive(distance)
+                <br />
+                boost.turn(degrees)
+                <br />
+                boost.motorTimeAsync(motorPort, seconds, dutyCycle)
+                <br />
+                boost.motorTimeMultiAsync(seconds, powerA, powerB)
+                <br />
+                boost.motorAngleAsync(motorPort, angle, power)
+                <br />
+                boost.motorAngleMultiAsync(angle, powerA, powerB)
+                <br />
+                boost.ledAsync(color)
+                <br />
+                boost.changeLed()
+                <br />
+                boost.deviceInfo.distance
+                <br />
+                <br />
+                await in the front of the function means, that the execution will wait that the sent command is finished
+                <br />
               </pre>
             </Accordion.Content>
           </Accordion>

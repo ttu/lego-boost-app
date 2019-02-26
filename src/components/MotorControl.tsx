@@ -11,77 +11,87 @@ interface IProps {
 }
 
 interface IState {
-  A: number,
-  B: number,
-  AB: number,
-  C: number,
-  D: number
+  A: number;
+  B: number;
+  AB: number;
+  C: number;
+  D: number;
 }
 
 class MotorControl extends React.Component<IProps, IState> {
   constructor(props) {
     super(props);
-    this.state= {
+    this.state = {
       A: 0,
       B: 0,
       AB: 0,
       C: 0,
-      D: 0
-    }
+      D: 0,
+    };
   }
 
   componentWillUnmount = () => {
     this.stopMotors();
-     // TODO: How to reset Sliders?
-     this.setState({
+    // TODO: How to reset Sliders?
+    this.setState({
       A: 0,
       B: 0,
       AB: 0,
       C: 0,
-      D: 0 });
-  }
+      D: 0,
+    });
+  };
 
   stopMotors = () => {
-    for(const port of ['A', 'B', 'AB', 'C', 'D']) {
+    for (const port of ['A', 'B', 'AB', 'C', 'D']) {
       this.props.boost.motorAngle(port, 0, 0);
     }
-  }
+  };
 
   render() {
-
-    const createColumn = (port) => {
-      return (<Grid.Column width={16}>
-        <Segment>
-          <Header as="h1">{port} : {this.state[port]}</Header>
-          <Slider color="red" inverted={false}
-            settings={{
-            start: this.state[port],
-            min:-100,
-            max:100,
-            step:1,
-            onChange: (value) => {
-              // @ts-ignore
-              this.setState({ [port]: value });
-              this.props.boost.motorAngle(port, 3600, value);
-              // this.props.boost.motorTime(port, 3600, value);
-            }
-          }}/>
-        </Segment>
-      </Grid.Column>);
+    const createColumn = port => {
+      return (
+        <Grid.Column width={16}>
+          <Segment>
+            <Header as="h1">
+              {port} : {this.state[port]}
+            </Header>
+            <Slider
+              color="red"
+              inverted={false}
+              settings={{
+                start: this.state[port],
+                min: -100,
+                max: 100,
+                step: 1,
+                onChange: value => {
+                  // @ts-ignore
+                  this.setState({ [port]: value });
+                  this.props.boost.motorAngle(port, 3600, value);
+                  // this.props.boost.motorTime(port, 3600, value);
+                },
+              }}
+            />
+          </Segment>
+        </Grid.Column>
+      );
     };
 
-   this.stopMotors();
+    this.stopMotors();
 
     return (
       <Container>
-        <MessageBlock 
-          visible={this.props.infoVisible} 
-          onClose={this.props.onInfoClose} 
-          content="Control individial motors. Motors will stop automatically when user exits the view." />
+        <MessageBlock
+          visible={this.props.infoVisible}
+          onClose={this.props.onInfoClose}
+          content="Control individial motors. Motors will stop automatically when user exits the view."
+        />
         <Grid padded>
-        <Grid.Column width={16}>
-          <Button primary onClick={this.stopMotors}>Stop</Button>
-        </Grid.Column>
+          <Grid.Column width={16}>
+            <Button primary onClick={this.stopMotors}>
+              Stop
+            </Button>
+          </Grid.Column>
           {/* {Object.keys(this.state).map(port => createColumn(port))} */}
           {createColumn('A')}
           {createColumn('B')}

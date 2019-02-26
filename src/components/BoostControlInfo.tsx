@@ -25,7 +25,7 @@ class BoostControlInfo extends React.Component<IProps, IControlData> {
         input: this.boost.controlData.input,
         speed: this.boost.controlData.speed,
         turnAngle: this.boost.controlData.turnAngle,
-        updateInputMode: this.boost.controlData.updateInputMode
+        updateInputMode: this.boost.controlData.updateInputMode,
       });
     }, this.stateUpdateInterval);
   };
@@ -33,7 +33,7 @@ class BoostControlInfo extends React.Component<IProps, IControlData> {
   componentWillUnmount() {
     clearInterval(this.stateUpdaterId);
   }
-  
+
   shouldComponentUpdate = (nextProps, nextState) => {
     return true;
   };

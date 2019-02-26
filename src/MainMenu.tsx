@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import { Menu } from 'semantic-ui-react'
-
+import { Menu } from 'semantic-ui-react';
 
 const MainMenu = ({ location }) => (
   <Menu pointing secondary>
@@ -29,4 +28,4 @@ const MainMenu = ({ location }) => (
   </Menu>
 );
 
-export default withRouter(MainMenu)
+export default withRouter(MainMenu);

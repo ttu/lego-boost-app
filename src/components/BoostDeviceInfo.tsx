@@ -31,9 +31,9 @@ class BoostDeviceInfo extends React.Component<IProps, IDeviceInfoAccordion> {
         AB: { action: '', angle: 0 },
         C: { action: '', angle: 0 },
         D: { action: '', angle: 0 },
-        LED: { action: '', angle: 0 }
+        LED: { action: '', angle: 0 },
       },
-      activeIndex: 0
+      activeIndex: 0,
     };
   }
 
@@ -56,29 +56,29 @@ class BoostDeviceInfo extends React.Component<IProps, IDeviceInfoAccordion> {
         ports: {
           A: {
             action: this.boost.deviceInfo.ports.A.action,
-            angle: this.boost.deviceInfo.ports.A.angle
+            angle: this.boost.deviceInfo.ports.A.angle,
           },
           B: {
             action: this.boost.deviceInfo.ports.B.action,
-            angle: this.boost.deviceInfo.ports.B.angle
+            angle: this.boost.deviceInfo.ports.B.angle,
           },
           AB: {
             action: this.boost.deviceInfo.ports.AB.action,
-            angle: this.boost.deviceInfo.ports.AB.angle
+            angle: this.boost.deviceInfo.ports.AB.angle,
           },
           C: {
             action: this.boost.deviceInfo.ports.C.action,
-            angle: this.boost.deviceInfo.ports.C.angle
+            angle: this.boost.deviceInfo.ports.C.angle,
           },
           D: {
             action: this.boost.deviceInfo.ports.D.action,
-            angle: this.boost.deviceInfo.ports.D.angle
+            angle: this.boost.deviceInfo.ports.D.angle,
           },
           LED: {
             action: this.boost.deviceInfo.ports.LED.action,
-            angle: this.boost.deviceInfo.ports.LED.angle
-          }
-        }
+            angle: this.boost.deviceInfo.ports.LED.angle,
+          },
+        },
       });
     }, this.stateUpdateInterval);
   };
@@ -94,12 +94,11 @@ class BoostDeviceInfo extends React.Component<IProps, IDeviceInfoAccordion> {
   render() {
     return (
       <Accordion fluid>
-        <Accordion.Title
-          active={this.state.activeIndex === 0}
-          index={0}
-          onClick={this.handleAccordionClick}
-        >
-          <Header as="h3"><Icon name="dropdown" />Lego Boost Info</Header>
+        <Accordion.Title active={this.state.activeIndex === 0} index={0} onClick={this.handleAccordionClick}>
+          <Header as="h3">
+            <Icon name="dropdown" />
+            Lego Boost Info
+          </Header>
         </Accordion.Title>
         <Accordion.Content active={this.state.activeIndex === 0}>
           <Table definition>
@@ -112,10 +111,7 @@ class BoostDeviceInfo extends React.Component<IProps, IDeviceInfoAccordion> {
             <Table.Body>
               <Table.Row>
                 <Table.Cell>Connected</Table.Cell>
-                <Table.Cell
-                  positive={this.state.connected}
-                  negative={!this.state.connected}
-                >
+                <Table.Cell positive={this.state.connected} negative={!this.state.connected}>
                   {this.state.connected ? 'Yes' : 'No'}
                 </Table.Cell>
               </Table.Row>
@@ -126,22 +122,12 @@ class BoostDeviceInfo extends React.Component<IProps, IDeviceInfoAccordion> {
               <Table.Row>
                 <Table.Cell>Distance</Table.Cell>
                 <Table.Cell>
-                  {this.state.distance === Number.MAX_SAFE_INTEGER ? (
-                    <Icon name="close" />
-                  ) : (
-                    this.state.distance
-                  )}
+                  {this.state.distance === Number.MAX_SAFE_INTEGER ? <Icon name="close" /> : this.state.distance}
                 </Table.Cell>
               </Table.Row>
               <Table.Row>
                 <Table.Cell>RSSI</Table.Cell>
-                <Table.Cell>
-                  {this.state.rssi === 0 ? (
-                    <Icon name="close" />
-                  ) : (
-                    this.state.rssi
-                  )}
-                </Table.Cell>
+                <Table.Cell>{this.state.rssi === 0 ? <Icon name="close" /> : this.state.rssi}</Table.Cell>
               </Table.Row>
               <Table.Row>
                 <Table.Cell>Error message</Table.Cell>

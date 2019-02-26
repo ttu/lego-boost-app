@@ -4,7 +4,6 @@ import { Container, Grid, Button, Dropdown } from 'semantic-ui-react';
 
 import BoostControlInfo from './BoostControlInfo';
 
-
 interface IProps {
   boost: LegoBoost;
 }
@@ -17,7 +16,7 @@ interface IManualState {
 
 enum ControlMode {
   Click,
-  Arcade
+  Arcade,
 }
 
 enum Command {
@@ -26,10 +25,10 @@ enum Command {
   Down = 'down',
   Left = 'left',
   Right = 'right',
-  Stop = 'stop'
+  Stop = 'stop',
 }
 
-const LED_COLORS = [ 
+const LED_COLORS = [
   { key: 'off', value: 'off', text: 'Off' },
   { key: 'pink', value: 'pink', text: 'Pink' },
   { key: 'purple', value: 'purple', text: 'Purple' },
@@ -40,8 +39,8 @@ const LED_COLORS = [
   { key: 'yellow', value: 'yellow', text: 'Yellow' },
   { key: 'orange', value: 'orange', text: 'Orange' },
   { key: 'red', value: 'red', text: 'Red' },
-  { key: 'white', value: 'white', text: 'White' }
-]
+  { key: 'white', value: 'white', text: 'White' },
+];
 
 class ManualControl extends React.Component<IProps, IManualState> {
   constructor(props) {
@@ -49,7 +48,7 @@ class ManualControl extends React.Component<IProps, IManualState> {
     this.state = {
       lastCommand: '',
       mode: ControlMode.Click,
-      ledColor: 'off'
+      ledColor: 'off',
     };
   }
 
@@ -63,7 +62,7 @@ class ManualControl extends React.Component<IProps, IManualState> {
       await this.props.boost.stop();
       this.setState({ lastCommand: `stop ${command}` });
     }
-  }
+  };
 
   handleCommand = async (command: Command) => {
     switch (command) {
@@ -85,17 +84,21 @@ class ManualControl extends React.Component<IProps, IManualState> {
     }
   };
 
-  handleLedChange = (e, { value }) => this.setState({ ledColor: value })
+  handleLedChange = (e, { value }) => this.setState({ ledColor: value });
 
   render() {
     const controlProps = { ...this.props };
 
     const createControl = (command: Command) => {
-      return (<Grid.Column className={command + '-control'} 
-                    onMouseDown={() => this.controlClick(command)}
-                    onMouseUp={() => this.controlRelease(command)}
-                    onTouchStart={() => this.controlClick(command)}
-                    onTouchEnd={() => this.controlRelease(command)}/>);
+      return (
+        <Grid.Column
+          className={command + '-control'}
+          onMouseDown={() => this.controlClick(command)}
+          onMouseUp={() => this.controlRelease(command)}
+          onTouchStart={() => this.controlClick(command)}
+          onTouchEnd={() => this.controlRelease(command)}
+        />
+      );
     };
 
     return (
@@ -124,23 +127,27 @@ class ManualControl extends React.Component<IProps, IManualState> {
           </Grid.Row> */}
           <Grid.Row columns={2}>
             <Grid.Column textAlign="right">
-              <Button primary={this.state.mode === ControlMode.Click}
-                      secondary={this.state.mode !== ControlMode.Click} 
-                      onClick={() => this.setState({ mode: ControlMode.Click })}>
+              <Button
+                primary={this.state.mode === ControlMode.Click}
+                secondary={this.state.mode !== ControlMode.Click}
+                onClick={() => this.setState({ mode: ControlMode.Click })}
+              >
                 Click Mode
               </Button>
             </Grid.Column>
             <Grid.Column textAlign="left">
-              <Button primary={this.state.mode === ControlMode.Arcade}
-                      secondary={this.state.mode !== ControlMode.Arcade} 
-                      onClick={() => this.setState({ mode: ControlMode.Arcade })}>
+              <Button
+                primary={this.state.mode === ControlMode.Arcade}
+                secondary={this.state.mode !== ControlMode.Arcade}
+                onClick={() => this.setState({ mode: ControlMode.Arcade })}
+              >
                 Arcade Mode
               </Button>
             </Grid.Column>
           </Grid.Row>
           <Grid.Row columns={2}>
             <Grid.Column textAlign="right">
-              <Dropdown options={LED_COLORS} value={this.state.ledColor} onChange={this.handleLedChange}/>
+              <Dropdown options={LED_COLORS} value={this.state.ledColor} onChange={this.handleLedChange} />
             </Grid.Column>
             <Grid.Column textAlign="left">
               <Button secondary onClick={async () => await this.props.boost.ledAsync(this.state.ledColor)}>
