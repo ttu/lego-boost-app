@@ -3,7 +3,7 @@ import './App.css';
 import LegoBoost from 'lego-boost-browser';
 import { DEFAULT_CONFIG } from 'lego-boost-browser/dist/hub/hubAsync';
 import * as React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import { Container, Grid } from 'semantic-ui-react';
 import localStorage from 'local-storage';
 
@@ -137,13 +137,16 @@ class App extends React.Component<{}, IApplicationState> {
           <MainMenu />
           <Grid centered>
             <Grid.Row>
-              <Route exact path="/" component={CreateBoostMain} />
-              <Route path="/manual" component={CreateManualControl} />
-              <Route path="/motors" component={CreateMotorControl} />
-              <Route path="/ai" component={CreateAiControl} />
-              <Route path="/code" component={CreateCodeControl} />
-              <Route path="/config" component={CreateConfigurationControl} />
-              <Route path="/info" component={CreateInfoComponent} />
+              <Switch>
+                <Route exact path="/" component={CreateBoostMain} />
+                <Route path="/manual" component={CreateManualControl} />
+                <Route path="/motors" component={CreateMotorControl} />
+                <Route path="/ai" component={CreateAiControl} />
+                <Route path="/code" component={CreateCodeControl} />
+                <Route path="/config" component={CreateConfigurationControl} />
+                <Route path="/info" component={CreateInfoComponent} />
+                <Route render={() => <Redirect to="/" />} />
+              </Switch>
             </Grid.Row>
             <Grid.Row>
               <BoostDeviceInfo {...boostProps} />
