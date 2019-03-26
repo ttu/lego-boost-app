@@ -17,6 +17,7 @@ import Info from './components/Info';
 import MotorControl from './components/MotorControl';
 import BoostConfiguration from './components/BoostConfiguration';
 import { IBoostConfig } from './Models';
+import SideBarMenu from './SideBarMenu';
 
 const APP_BUILD_TIME = process.env.REACT_APP_BUILD_TIME || 'not defined';
 const APP_VERSION = process.env.REACT_APP_VERSION || 'not defined';
@@ -133,26 +134,26 @@ class App extends React.Component<{}, IApplicationState> {
 
     return (
       <BrowserRouter>
-        <Container>
-          <MainMenu />
-          <Grid centered>
-            <Grid.Row>
-              <Switch>
-                <Route exact path="/" component={CreateBoostMain} />
-                <Route path="/manual" component={CreateManualControl} />
-                <Route path="/motors" component={CreateMotorControl} />
-                <Route path="/ai" component={CreateAiControl} />
-                <Route path="/code" component={CreateCodeControl} />
-                <Route path="/config" component={CreateConfigurationControl} />
-                <Route path="/info" component={CreateInfoComponent} />
-                <Route render={() => <Redirect to="/" />} />
-              </Switch>
-            </Grid.Row>
-            <Grid.Row>
-              <BoostDeviceInfo {...boostProps} />
-            </Grid.Row>
-          </Grid>
-        </Container>
+          {/* <MainMenu /> */}
+          <SideBarMenu>
+            <Grid centered>
+              <Grid.Row>
+                <Switch>
+                  <Route exact path="/" component={CreateBoostMain} />
+                  <Route path="/manual" component={CreateManualControl} />
+                  <Route path="/motors" component={CreateMotorControl} />
+                  <Route path="/ai" component={CreateAiControl} />
+                  <Route path="/code" component={CreateCodeControl} />
+                  <Route path="/config" component={CreateConfigurationControl} />
+                  <Route path="/info" component={CreateInfoComponent} />
+                  <Route render={() => <Redirect to="/" />} />
+                </Switch>
+              </Grid.Row>
+              <Grid.Row>
+                <BoostDeviceInfo {...boostProps} />
+              </Grid.Row>
+            </Grid>
+          </SideBarMenu>
       </BrowserRouter>
     );
   }

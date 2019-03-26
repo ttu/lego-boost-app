@@ -56,3 +56,12 @@
   background-size: cover;
   background-position: center;
 }
+
+.mainmenu {
+  background-color:rgb(27, 28, 29);
+}
+
+.mainmenu button {
+  /* background: #767676; */
+  color: black;
+}
