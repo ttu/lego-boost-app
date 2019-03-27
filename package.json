@@ -4,7 +4,7 @@
   "homepage": "https://legoboost.azurewebsites.net/",
   "scripts": {
     "start": "rescripts start",
-    "build": "SET REACT_APP_BUILD_TIME=15.2.2018 && SET REACT_APP_VERSION=0.5.0 && rescripts build",
+    "build": "SET REACT_APP_BUILD_TIME=26.3.2018 && SET REACT_APP_VERSION=0.5.0 && rescripts build",
     "test": "rescripts test --env=jsdom",
     "eject": "rescripts eject",
     "lint": "tslint --project ./tsconfig.json"

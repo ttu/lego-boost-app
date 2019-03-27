@@ -30,26 +30,26 @@ class SideBarMenu extends React.Component<{}, IBarState> {
             visible={visible}
             width="wide"
           >
-            <Menu.Item active={location.pathname === '/'}>
-              <Link to="/">Main</Link>
+            <Menu.Item active={location.pathname === '/'} as={Link} to="/">
+              <Icon name="home" />Home
             </Menu.Item>
-            <Menu.Item active={location.pathname === '/manual'}>
-              <Link to="/manual">Manual</Link>
+            <Menu.Item active={location.pathname === '/manual'} as={Link} to="/manual">
+              <Icon name="gamepad" />Manual
             </Menu.Item>
-            <Menu.Item active={location.pathname === '/motors'}>
-              <Link to="/motors">Motors</Link>
+            <Menu.Item active={location.pathname === '/motors'} as={Link} to="/motors">
+              <Icon name="server" />Motors
             </Menu.Item>
-            <Menu.Item active={location.pathname === '/ai'}>
-              <Link to="/ai">AI</Link>
+            <Menu.Item active={location.pathname === '/ai'} as={Link} to="/ai">
+              <Icon name="wechat" />AI
             </Menu.Item>
-            <Menu.Item active={location.pathname === '/code'}>
-              <Link to="/code">Code</Link>
+            <Menu.Item active={location.pathname === '/code'} as={Link} to="/code">
+              <Icon name="file code outline" />Code editor
             </Menu.Item>
-            <Menu.Item active={location.pathname === '/config'}>
-              <Link to="/config">Config</Link>
+            <Menu.Item active={location.pathname === '/config'} as={Link} to="/config">
+              <Icon name="dashboard" />Configure
             </Menu.Item>
-            <Menu.Item active={location.pathname === '/info'}>
-              <Link to="/info">Info</Link>
+            <Menu.Item active={location.pathname === '/info'} as={Link} to="/info">
+              <Icon name="info circle" />Info
             </Menu.Item>
           </Sidebar>
           <div className="mainmenu">
