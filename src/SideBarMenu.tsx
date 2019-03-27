@@ -31,34 +31,49 @@ class SideBarMenu extends React.Component<{}, IBarState> {
             width="wide"
           >
             <Menu.Item active={location.pathname === '/'} as={Link} to="/">
-              <Icon name="home" />Home
+              <Icon name="home" />
+              Home
             </Menu.Item>
             <Menu.Item active={location.pathname === '/manual'} as={Link} to="/manual">
-              <Icon name="gamepad" />Manual
+              <Icon name="gamepad" />
+              Manual
             </Menu.Item>
             <Menu.Item active={location.pathname === '/motors'} as={Link} to="/motors">
-              <Icon name="server" />Motors
+              <Icon name="server" />
+              Motors
             </Menu.Item>
             <Menu.Item active={location.pathname === '/ai'} as={Link} to="/ai">
-              <Icon name="wechat" />AI
+              <Icon name="wechat" />
+              AI
             </Menu.Item>
             <Menu.Item active={location.pathname === '/code'} as={Link} to="/code">
-              <Icon name="file code outline" />Code editor
+              <Icon name="file code outline" />
+              Code editor
             </Menu.Item>
             <Menu.Item active={location.pathname === '/config'} as={Link} to="/config">
-              <Icon name="dashboard" />Configure
+              <Icon name="dashboard" />
+              Configure
             </Menu.Item>
             <Menu.Item active={location.pathname === '/info'} as={Link} to="/info">
-              <Icon name="info circle" />Info
+              <Icon name="info circle" />
+              Info
             </Menu.Item>
           </Sidebar>
-          <div className="mainmenu">
+          <Menu fixed="top" inverted>
+            <Menu.Item onClick={this.handleShowClick}>
+              <Icon name="sidebar" />Menu
+            </Menu.Item>
+            <Menu.Item position="right">
+              Lego Boost
+            </Menu.Item>
+          </Menu>
+          {/* <div className="mainmenu">
             <Button onClick={this.handleShowClick}>
               <Icon name="sidebar" /> Menu
             </Button>
-          </div>
-          <Sidebar.Pusher dimmed={visible}>
-            <Segment className="content full height">{this.props.children}</Segment>
+          </div> */}
+          <Sidebar.Pusher className="main" dimmed={visible}>
+            <Segment>{this.props.children}</Segment>
           </Sidebar.Pusher>
         </Sidebar.Pushable>
       </div>

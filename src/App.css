@@ -57,6 +57,10 @@
   background-position: center;
 }
 
+.main {
+  padding-top: 40px;
+}
+
 .mainmenu {
   background-color:rgb(27, 28, 29);
 }
