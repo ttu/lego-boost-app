@@ -34,11 +34,11 @@ class SideBarMenu extends React.Component<{}, IBarState> {
               <Icon name="home" />
               Home
             </Menu.Item>
-            <Menu.Item active={location.pathname === '/code'} as={Link} to="/code">
+            <Menu.Item active={location.pathname === '/code'} as={Link} to="/code" onClick={this.handleSidebarHide}>
               <Icon name="file code outline" />
               Code Editor Control
             </Menu.Item>
-            <Menu.Item active={location.pathname === '/ai'} as={Link} to="/ai">
+            <Menu.Item active={location.pathname === '/ai'} as={Link} to="/ai" onClick={this.handleSidebarHide}>
               <Icon name="wechat" />
               Artificial Intelligence
             </Menu.Item>
@@ -46,15 +46,15 @@ class SideBarMenu extends React.Component<{}, IBarState> {
               <Icon name="gamepad" />
               Manual Control
             </Menu.Item>
-            <Menu.Item active={location.pathname === '/motors'} as={Link} to="/motors">
+            <Menu.Item active={location.pathname === '/motors'} as={Link} to="/motors" onClick={this.handleSidebarHide}>
               <Icon name="server" />
               Individual Motors
             </Menu.Item>
-            <Menu.Item active={location.pathname === '/config'} as={Link} to="/config">
+            <Menu.Item active={location.pathname === '/config'} as={Link} to="/config" onClick={this.handleSidebarHide}>
               <Icon name="dashboard" />
               Configure
             </Menu.Item>
-            <Menu.Item active={location.pathname === '/info'} as={Link} to="/info">
+            <Menu.Item active={location.pathname === '/info'} as={Link} to="/info" onClick={this.handleSidebarHide}>
               <Icon name="info circle" />
               Info
             </Menu.Item>
