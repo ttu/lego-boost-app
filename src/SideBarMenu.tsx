@@ -64,7 +64,7 @@ class SideBarMenu extends React.Component<{}, IBarState> {
               <Icon name="sidebar" />Menu
             </Menu.Item>
             <Menu.Item position="right">
-              Lego Boost
+              Lego Boost Control
             </Menu.Item>
           </Menu>
           {/* <div className="mainmenu">
