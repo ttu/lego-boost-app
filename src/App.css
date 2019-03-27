@@ -57,15 +57,19 @@
   background-position: center;
 }
 
+#root {
+  min-height: 100%;
+}
+
+.all-content {
+  min-height: 100%;
+}
+
 .main {
   padding-top: 40px;
+  min-height: 100%;
 }
 
-.mainmenu {
-  background-color:rgb(27, 28, 29);
-}
-
-.mainmenu button {
-  /* background: #767676; */
-  color: black;
+.main-content {
+  min-height: 100%;
 }
