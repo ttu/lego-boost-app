@@ -30,25 +30,25 @@ class SideBarMenu extends React.Component<{}, IBarState> {
             visible={visible}
             width="wide"
           >
-            <Menu.Item active={location.pathname === '/'} as={Link} to="/">
+            <Menu.Item active={location.pathname === '/'} as={Link} to="/" onClick={this.handleSidebarHide}>
               <Icon name="home" />
               Home
             </Menu.Item>
-            <Menu.Item active={location.pathname === '/manual'} as={Link} to="/manual">
-              <Icon name="gamepad" />
-              Manual
-            </Menu.Item>
-            <Menu.Item active={location.pathname === '/motors'} as={Link} to="/motors">
-              <Icon name="server" />
-              Motors
+            <Menu.Item active={location.pathname === '/code'} as={Link} to="/code">
+              <Icon name="file code outline" />
+              Code Editor Control
             </Menu.Item>
             <Menu.Item active={location.pathname === '/ai'} as={Link} to="/ai">
               <Icon name="wechat" />
-              AI
+              Artificial Intelligence
             </Menu.Item>
-            <Menu.Item active={location.pathname === '/code'} as={Link} to="/code">
-              <Icon name="file code outline" />
-              Code editor
+            <Menu.Item active={location.pathname === '/manual'} as={Link} to="/manual" onClick={this.handleSidebarHide}>
+              <Icon name="gamepad" />
+              Manual Control
+            </Menu.Item>
+            <Menu.Item active={location.pathname === '/motors'} as={Link} to="/motors">
+              <Icon name="server" />
+              Individual Motors
             </Menu.Item>
             <Menu.Item active={location.pathname === '/config'} as={Link} to="/config">
               <Icon name="dashboard" />
