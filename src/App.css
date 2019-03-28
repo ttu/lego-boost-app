@@ -56,3 +56,15 @@
   background-size: cover;
   background-position: center;
 }
+
+#root {
+  min-height: 100%;
+}
+
+.all-content {
+  min-height: 100vh;
+}
+
+.main {
+  padding-top: 40px;
+}

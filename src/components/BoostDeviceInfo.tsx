@@ -5,6 +5,7 @@ import LegoBoost from 'lego-boost-browser';
 
 interface IProps {
   boost: LegoBoost;
+  connectedChanged: (isConnected: boolean) => void;
 }
 
 interface IDeviceInfoAccordion extends IDeviceInfo {
@@ -47,6 +48,10 @@ class BoostDeviceInfo extends React.Component<IProps, IDeviceInfoAccordion> {
 
   componentDidMount = () => {
     this.stateUpdaterId = setInterval(() => {
+      if (this.state.connected !== this.boost.deviceInfo.connected) {
+        this.props.connectedChanged(this.boost.deviceInfo.connected);
+      }
+
       this.setState({
         color: this.boost.deviceInfo.color,
         connected: this.boost.deviceInfo.connected,

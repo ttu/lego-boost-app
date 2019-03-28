@@ -4,12 +4,11 @@ import LegoBoost from 'lego-boost-browser';
 import { DEFAULT_CONFIG } from 'lego-boost-browser/dist/hub/hubAsync';
 import * as React from 'react';
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
-import { Container, Grid } from 'semantic-ui-react';
+import { Grid } from 'semantic-ui-react';
 import localStorage from 'local-storage';
 
 import BoostDeviceInfo from './components/BoostDeviceInfo';
 import BoostMain from './components/BoostMain';
-import MainMenu from './MainMenu';
 import ManualControl from './components/ManualControl';
 import AiControl from './components/AiControl';
 import CodeControl from './components/CodeControl';
@@ -17,6 +16,7 @@ import Info from './components/Info';
 import MotorControl from './components/MotorControl';
 import BoostConfiguration from './components/BoostConfiguration';
 import { IBoostConfig } from './Models';
+import SideBarMenu from './SideBarMenu';
 
 const APP_BUILD_TIME = process.env.REACT_APP_BUILD_TIME || 'not defined';
 const APP_VERSION = process.env.REACT_APP_VERSION || 'not defined';
@@ -32,6 +32,7 @@ interface IApplicationState {
   motorInfoVisible: boolean;
   code: string;
   configuration: IBoostConfig;
+  isConnected: boolean;
 }
 
 class App extends React.Component<{}, IApplicationState> {
@@ -47,6 +48,7 @@ class App extends React.Component<{}, IApplicationState> {
       motorInfoVisible: true,
       code: '',
       configuration: localStorage.get(CONFIG_STORAGE_KEY) || DEFAULT_BOOST_CONFIG,
+      isConnected: false,
     };
   }
 
@@ -77,6 +79,8 @@ class App extends React.Component<{}, IApplicationState> {
       return { configuration: newConfig };
     });
   };
+
+  updateIsConnected = (isConnected: boolean) => this.setState({ isConnected });
 
   resetConfig = () => {
     localStorage.set(CONFIG_STORAGE_KEY, DEFAULT_BOOST_CONFIG);
@@ -133,8 +137,7 @@ class App extends React.Component<{}, IApplicationState> {
 
     return (
       <BrowserRouter>
-        <Container>
-          <MainMenu />
+        <SideBarMenu connected={this.state.isConnected}>
           <Grid centered>
             <Grid.Row>
               <Switch>
@@ -149,10 +152,10 @@ class App extends React.Component<{}, IApplicationState> {
               </Switch>
             </Grid.Row>
             <Grid.Row>
-              <BoostDeviceInfo {...boostProps} />
+              <BoostDeviceInfo {...boostProps} connectedChanged={this.updateIsConnected} />
             </Grid.Row>
           </Grid>
-        </Container>
+        </SideBarMenu>
       </BrowserRouter>
     );
   }
