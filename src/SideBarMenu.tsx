@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Link, withRouter } from 'react-router-dom';
-import { Menu, Sidebar, Segment, Button, Icon, Container } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
+import { Menu, Sidebar, Segment, Icon } from 'semantic-ui-react';
 
 interface IBarProps {
   connected: boolean;
@@ -9,7 +9,6 @@ interface IBarProps {
 interface IBarState {
   visible: boolean;
 }
-
 
 class SideBarMenu extends React.Component<IBarProps, IBarState> {
   constructor(props) {
@@ -20,9 +19,18 @@ class SideBarMenu extends React.Component<IBarProps, IBarState> {
   handleShowClick = () => this.setState(prevState => ({ visible: !prevState.visible }));
   handleSidebarHide = () => this.setState({ visible: false });
 
-  getConnectedItem = () => (this.props.connected 
-              ? <div><Icon name="circle" color="green" />Connected</div>
-              : <div><Icon name="circle" color="red" />Not connected</div>)
+  getConnectedItem = () =>
+    this.props.connected ? (
+      <div>
+        <Icon name="circle" color="green" />
+        Connected
+      </div>
+    ) : (
+      <div>
+        <Icon name="circle" color="red" />
+        Not connected
+      </div>
+    );
 
   render() {
     const { visible } = this.state;
@@ -73,9 +81,7 @@ class SideBarMenu extends React.Component<IBarProps, IBarState> {
             <Icon name="sidebar" />
             Menu
           </Menu.Item>
-          <Menu.Item>
-            {this.getConnectedItem()}
-          </Menu.Item>
+          <Menu.Item>{this.getConnectedItem()}</Menu.Item>
           <Menu.Item position="right">Lego Boost Control</Menu.Item>
         </Menu>
         <Sidebar.Pusher className="main">

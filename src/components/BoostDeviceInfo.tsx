@@ -5,7 +5,7 @@ import LegoBoost from 'lego-boost-browser';
 
 interface IProps {
   boost: LegoBoost;
-  connectedChanged: (isConnected:boolean) => void
+  connectedChanged: (isConnected: boolean) => void;
 }
 
 interface IDeviceInfoAccordion extends IDeviceInfo {

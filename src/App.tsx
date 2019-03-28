@@ -4,12 +4,11 @@ import LegoBoost from 'lego-boost-browser';
 import { DEFAULT_CONFIG } from 'lego-boost-browser/dist/hub/hubAsync';
 import * as React from 'react';
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
-import { Container, Grid } from 'semantic-ui-react';
+import { Grid } from 'semantic-ui-react';
 import localStorage from 'local-storage';
 
 import BoostDeviceInfo from './components/BoostDeviceInfo';
 import BoostMain from './components/BoostMain';
-import MainMenu from './MainMenu';
 import ManualControl from './components/ManualControl';
 import AiControl from './components/AiControl';
 import CodeControl from './components/CodeControl';
@@ -49,7 +48,7 @@ class App extends React.Component<{}, IApplicationState> {
       motorInfoVisible: true,
       code: '',
       configuration: localStorage.get(CONFIG_STORAGE_KEY) || DEFAULT_BOOST_CONFIG,
-      isConnected: false
+      isConnected: false,
     };
   }
 
@@ -138,26 +137,25 @@ class App extends React.Component<{}, IApplicationState> {
 
     return (
       <BrowserRouter>
-          {/* <MainMenu /> */}
-          <SideBarMenu connected={this.state.isConnected}>
-            <Grid centered>
-              <Grid.Row>
-                <Switch>
-                  <Route exact path="/" component={CreateBoostMain} />
-                  <Route path="/manual" component={CreateManualControl} />
-                  <Route path="/motors" component={CreateMotorControl} />
-                  <Route path="/ai" component={CreateAiControl} />
-                  <Route path="/code" component={CreateCodeControl} />
-                  <Route path="/config" component={CreateConfigurationControl} />
-                  <Route path="/info" component={CreateInfoComponent} />
-                  <Route render={() => <Redirect to="/" />} />
-                </Switch>
-              </Grid.Row>
-              <Grid.Row>
-                <BoostDeviceInfo {...boostProps} connectedChanged={this.updateIsConnected} />
-              </Grid.Row>
-            </Grid>
-          </SideBarMenu>
+        <SideBarMenu connected={this.state.isConnected}>
+          <Grid centered>
+            <Grid.Row>
+              <Switch>
+                <Route exact path="/" component={CreateBoostMain} />
+                <Route path="/manual" component={CreateManualControl} />
+                <Route path="/motors" component={CreateMotorControl} />
+                <Route path="/ai" component={CreateAiControl} />
+                <Route path="/code" component={CreateCodeControl} />
+                <Route path="/config" component={CreateConfigurationControl} />
+                <Route path="/info" component={CreateInfoComponent} />
+                <Route render={() => <Redirect to="/" />} />
+              </Switch>
+            </Grid.Row>
+            <Grid.Row>
+              <BoostDeviceInfo {...boostProps} connectedChanged={this.updateIsConnected} />
+            </Grid.Row>
+          </Grid>
+        </SideBarMenu>
       </BrowserRouter>
     );
   }
