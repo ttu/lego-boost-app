@@ -82,6 +82,8 @@ class App extends React.Component<{}, IApplicationState> {
 
   updateIsConnected = (isConnected: boolean) => this.setState({ isConnected });
 
+  connect = () => !this.state.isConnected ? this.boost.connect(this.state.configuration) : {};
+
   resetConfig = () => {
     localStorage.set(CONFIG_STORAGE_KEY, DEFAULT_BOOST_CONFIG);
     this.boost.updateConfiguration(DEFAULT_BOOST_CONFIG);
@@ -137,7 +139,7 @@ class App extends React.Component<{}, IApplicationState> {
 
     return (
       <BrowserRouter>
-        <SideBarMenu connected={this.state.isConnected}>
+        <SideBarMenu connected={this.state.isConnected} connect={this.connect}>
           <Grid centered>
             <Grid.Row>
               <Switch>

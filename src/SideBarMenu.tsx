@@ -4,6 +4,7 @@ import { Menu, Sidebar, Segment, Icon } from 'semantic-ui-react';
 
 interface IBarProps {
   connected: boolean;
+  connect: () => void;
 }
 
 interface IBarState {
@@ -21,12 +22,12 @@ class SideBarMenu extends React.Component<IBarProps, IBarState> {
 
   getConnectedItem = () =>
     this.props.connected ? (
-      <div>
+      <div onClick={_ => this.props.connect()}>
         <Icon name="circle" color="green" />
         Connected
       </div>
     ) : (
-      <div>
+      <div onClick={_ => this.props.connect()}>
         <Icon name="circle" color="red" />
         Not connected
       </div>
