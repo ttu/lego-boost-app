@@ -33,6 +33,7 @@ interface IApplicationState {
   motorInfoVisible: boolean;
   code: string;
   configuration: IBoostConfig;
+  isConnected: boolean;
 }
 
 class App extends React.Component<{}, IApplicationState> {
@@ -48,6 +49,7 @@ class App extends React.Component<{}, IApplicationState> {
       motorInfoVisible: true,
       code: '',
       configuration: localStorage.get(CONFIG_STORAGE_KEY) || DEFAULT_BOOST_CONFIG,
+      isConnected: false
     };
   }
 
@@ -78,6 +80,8 @@ class App extends React.Component<{}, IApplicationState> {
       return { configuration: newConfig };
     });
   };
+
+  updateIsConnected = (isConnected: boolean) => this.setState({ isConnected });
 
   resetConfig = () => {
     localStorage.set(CONFIG_STORAGE_KEY, DEFAULT_BOOST_CONFIG);
@@ -135,7 +139,7 @@ class App extends React.Component<{}, IApplicationState> {
     return (
       <BrowserRouter>
           {/* <MainMenu /> */}
-          <SideBarMenu>
+          <SideBarMenu connected={this.state.isConnected}>
             <Grid centered>
               <Grid.Row>
                 <Switch>
@@ -150,7 +154,7 @@ class App extends React.Component<{}, IApplicationState> {
                 </Switch>
               </Grid.Row>
               <Grid.Row>
-                <BoostDeviceInfo {...boostProps} />
+                <BoostDeviceInfo {...boostProps} connectedChanged={this.updateIsConnected} />
               </Grid.Row>
             </Grid>
           </SideBarMenu>

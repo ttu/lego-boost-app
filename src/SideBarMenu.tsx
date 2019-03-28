@@ -2,10 +2,16 @@ import * as React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { Menu, Sidebar, Segment, Button, Icon, Container } from 'semantic-ui-react';
 
+interface IBarProps {
+  connected: boolean;
+}
+
 interface IBarState {
   visible: boolean;
 }
-class SideBarMenu extends React.Component<{}, IBarState> {
+
+
+class SideBarMenu extends React.Component<IBarProps, IBarState> {
   constructor(props) {
     super(props);
     this.state = { visible: false };
@@ -13,6 +19,10 @@ class SideBarMenu extends React.Component<{}, IBarState> {
 
   handleShowClick = () => this.setState(prevState => ({ visible: !prevState.visible }));
   handleSidebarHide = () => this.setState({ visible: false });
+
+  getConnectedItem = () => (this.props.connected 
+              ? <div><Icon name="circle" color="green" />Connected</div>
+              : <div><Icon name="circle" color="red" />Not connected</div>)
 
   render() {
     const { visible } = this.state;
@@ -31,15 +41,15 @@ class SideBarMenu extends React.Component<{}, IBarState> {
         >
           <Menu.Item active={location.pathname === '/'} as={Link} to="/" onClick={this.handleSidebarHide}>
             <Icon name="home" />
-            Home
+            Main
           </Menu.Item>
           <Menu.Item active={location.pathname === '/code'} as={Link} to="/code" onClick={this.handleSidebarHide}>
             <Icon name="file code outline" />
-            Code Editor Control
+            Code Editor
           </Menu.Item>
           <Menu.Item active={location.pathname === '/ai'} as={Link} to="/ai" onClick={this.handleSidebarHide}>
             <Icon name="wechat" />
-            Artificial Intelligence
+            AI Mode
           </Menu.Item>
           <Menu.Item active={location.pathname === '/manual'} as={Link} to="/manual" onClick={this.handleSidebarHide}>
             <Icon name="gamepad" />
@@ -63,9 +73,12 @@ class SideBarMenu extends React.Component<{}, IBarState> {
             <Icon name="sidebar" />
             Menu
           </Menu.Item>
+          <Menu.Item>
+            {this.getConnectedItem()}
+          </Menu.Item>
           <Menu.Item position="right">Lego Boost Control</Menu.Item>
         </Menu>
-        <Sidebar.Pusher className="main" dimmed={visible}>
+        <Sidebar.Pusher className="main">
           <Segment className="main-content">{this.props.children}</Segment>
         </Sidebar.Pusher>
       </Sidebar.Pushable>
