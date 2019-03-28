@@ -2,6 +2,7 @@
 
 ### [Unreleased]
 
+- CHANGED: Updated menu and header style
 - CHANGED: Configure prettier
 
 ### [0.5.0] - 2019-02-15
