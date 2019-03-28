@@ -112,7 +112,7 @@ const Info = ({ version, date }: IAboutProps) => (
       < List.Item>
           Unreleased
           <List.List>
-            <List.Item>Update menu styling</List.Item>
+            <List.Item>Update menu and header styling</List.Item>
           </List.List>
         </List.Item>
         <List.Item>
