@@ -70,5 +70,7 @@
 }
 
 .dismissed-info {
-  float: right;
+  position: absolute;
+  left: 95%;
+  z-index: 1000;
 }
