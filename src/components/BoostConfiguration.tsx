@@ -7,7 +7,7 @@ import { IBoostConfig } from '../Models';
 interface IProps {
   boost: LegoBoost;
   infoVisible: boolean;
-  onInfoClose: () => void;
+  infoToggle: () => void;
   configuration: IBoostConfig;
   updataConfig: (c: IBoostConfig) => void;
   resetConfig: () => void;
@@ -59,7 +59,7 @@ class BoostConfiguration extends React.Component<IProps> {
       <Container>
         <MessageBlock
           visible={this.props.infoVisible}
-          onClose={this.props.onInfoClose}
+          infoToggle={this.props.infoToggle}
           content="Configuration is saved to browser's storage."
         />
         <Grid centered columns="equal">

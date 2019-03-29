@@ -6,7 +6,7 @@ import MessageBlock from './MessageBlock';
 interface IProps {
   boost: LegoBoost;
   infoVisible: boolean;
-  onInfoClose: () => void;
+  infoToggle: () => void;
 }
 
 class AiControl extends React.Component<IProps> {
@@ -19,7 +19,7 @@ class AiControl extends React.Component<IProps> {
       <Container>
         <MessageBlock
           visible={this.props.infoVisible}
-          onClose={this.props.onInfoClose}
+          infoToggle={this.props.infoToggle}
           content="AI-mode controls Lego Boost automatically. When sensor notices an object, the robot will try to turn away from the object and continue driving. If it notices the object too late, the robot will back away and turn to a new direction."
         />
         <Grid centered columns="equal">

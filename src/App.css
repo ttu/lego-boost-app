@@ -68,3 +68,7 @@
 .main {
   padding-top: 40px;
 }
+
+.dismissed-info {
+  float: right;
+}

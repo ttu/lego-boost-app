@@ -7,7 +7,7 @@ import { IConfiguration } from 'lego-boost-browser/dist/hub/hubAsync';
 interface IProps {
   boost: LegoBoost;
   infoVisible: boolean;
-  onInfoClose: () => void;
+  infoToggle: () => void;
   configuration?: IConfiguration;
 }
 
@@ -29,7 +29,7 @@ class BoostMain extends React.Component<IProps> {
       <Container>
         <MessageBlock
           visible={this.props.infoVisible}
-          onClose={this.props.onInfoClose}
+          infoToggle={this.props.infoToggle}
           content="Click Connect and pair with LEGO Move Hub. Go to Manual, AI or Code page and start controlling your Lego Boost. Note! For now only works with Vernie setup. Lego Boost might show up as a Unknown or unsupported device or as a LEGO Move Hub in the connection dialog."
         />
         <Grid>

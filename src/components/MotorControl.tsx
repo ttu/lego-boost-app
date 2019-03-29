@@ -7,7 +7,7 @@ import MessageBlock from './MessageBlock';
 interface IProps {
   boost: LegoBoost;
   infoVisible: boolean;
-  onInfoClose: () => void;
+  infoToggle: () => void;
 }
 
 interface IState {
@@ -83,7 +83,7 @@ class MotorControl extends React.Component<IProps, IState> {
       <Container>
         <MessageBlock
           visible={this.props.infoVisible}
-          onClose={this.props.onInfoClose}
+          infoToggle={this.props.infoToggle}
           content="Control individial motors. Motors will stop automatically when user exits the view."
         />
         <Grid padded>

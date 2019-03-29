@@ -1,25 +1,19 @@
 import * as React from 'react';
-import { Message } from 'semantic-ui-react';
+import { Message, Icon } from 'semantic-ui-react';
 
 interface IMessageContent {
   visible: boolean;
-  onClose: () => void;
   header?: string;
   content: string;
+  infoToggle: () => void;
 }
 
-class MessageBlock extends React.Component<IMessageContent> {
-  handleDismiss = () => {
-    this.props.onClose();
-  };
-
-  render() {
-    if (this.props.visible) {
-      return <Message onDismiss={this.handleDismiss} header={this.props.header} content={this.props.content} />;
-    }
-
-    return null;
-  }
-}
+const MessageBlock = ({ visible, header, content, infoToggle }: IMessageContent) => {
+  return visible ? (
+    <Message onDismiss={infoToggle} header={header} content={content} />
+  ) : (
+    <Icon className="dismissed-info" name="info circle" onClick={infoToggle} />
+  );
+};
 
 export default MessageBlock;

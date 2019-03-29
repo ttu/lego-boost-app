@@ -11,7 +11,7 @@ import { CODE_EXAMPLES } from './data/CodeExamples';
 interface IProps {
   boost: LegoBoost;
   infoVisible: boolean;
-  onInfoClose: () => void;
+  infoToggle: () => void;
   code: string;
   updateCode: (code: string) => void;
 }

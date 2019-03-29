@@ -25,11 +25,7 @@ const CONFIG_STORAGE_KEY = 'boost-configuration';
 const DEFAULT_BOOST_CONFIG: IBoostConfig = { driveFinetune: 1.0, turnFinetune: 1.0, leftMotor: 'A', rightMotor: 'B' };
 
 interface IApplicationState {
-  aiInfoVisible: boolean;
-  mainInfoVisible: boolean;
-  codeInfoVisible: boolean;
-  configInfoVisible: boolean;
-  motorInfoVisible: boolean;
+  infosVisible: boolean;
   code: string;
   configuration: IBoostConfig;
   isConnected: boolean;
@@ -41,20 +37,17 @@ class App extends React.Component<{}, IApplicationState> {
   constructor(props) {
     super(props);
     this.state = {
-      aiInfoVisible: true,
-      mainInfoVisible: true,
-      codeInfoVisible: true,
-      configInfoVisible: true,
-      motorInfoVisible: true,
+      infosVisible: true,
       code: '',
       configuration: localStorage.get(CONFIG_STORAGE_KEY) || DEFAULT_BOOST_CONFIG,
       isConnected: false,
     };
   }
 
-  onInfoClose = (propName: string) => {
-    // @ts-ignore
-    this.setState({ [propName]: false });
+  onInfoToggle = () => {
+    this.setState({
+      infosVisible: !this.state.infosVisible
+    });
   };
 
   updateCode = (code: string) => {
@@ -82,7 +75,7 @@ class App extends React.Component<{}, IApplicationState> {
 
   updateIsConnected = (isConnected: boolean) => this.setState({ isConnected });
 
-  connect = () => !this.state.isConnected ? this.boost.connect(this.state.configuration) : {};
+  connect = () => (!this.state.isConnected ? this.boost.connect(this.state.configuration) : {});
 
   resetConfig = () => {
     localStorage.set(CONFIG_STORAGE_KEY, DEFAULT_BOOST_CONFIG);
@@ -96,8 +89,8 @@ class App extends React.Component<{}, IApplicationState> {
     const CreateBoostMain = () => (
       <BoostMain
         {...boostProps}
-        infoVisible={this.state.mainInfoVisible}
-        onInfoClose={this.onInfoClose.bind(this, 'mainInfoVisible')}
+        infoVisible={this.state.infosVisible}
+        infoToggle={this.onInfoToggle}
         configuration={this.state.configuration}
       />
     );
@@ -105,15 +98,15 @@ class App extends React.Component<{}, IApplicationState> {
     const CreateAiControl = () => (
       <AiControl
         {...boostProps}
-        infoVisible={this.state.aiInfoVisible}
-        onInfoClose={this.onInfoClose.bind(this, 'aiInfoVisible')}
+        infoVisible={this.state.infosVisible}
+        infoToggle={this.onInfoToggle}
       />
     );
     const CreateConfigurationControl = () => (
       <BoostConfiguration
         {...boostProps}
-        infoVisible={this.state.configInfoVisible}
-        onInfoClose={this.onInfoClose.bind(this, 'configInfoVisible')}
+        infoVisible={this.state.infosVisible}
+        infoToggle={this.onInfoToggle}
         updataConfig={this.updateConfig}
         resetConfig={this.resetConfig}
         configuration={this.state.configuration}
@@ -122,8 +115,8 @@ class App extends React.Component<{}, IApplicationState> {
     const CreateMotorControl = () => (
       <MotorControl
         {...boostProps}
-        infoVisible={this.state.motorInfoVisible}
-        onInfoClose={this.onInfoClose.bind(this, 'motorInfoVisible')}
+        infoVisible={this.state.infosVisible}
+        infoToggle={this.onInfoToggle}
       />
     );
     const CreateCodeControl = () => (
@@ -131,15 +124,15 @@ class App extends React.Component<{}, IApplicationState> {
         {...boostProps}
         code={this.state.code}
         updateCode={this.updateCode}
-        infoVisible={this.state.codeInfoVisible}
-        onInfoClose={this.onInfoClose.bind(this, 'codeInfoVisible')}
+        infoVisible={this.state.infosVisible}
+        infoToggle={this.onInfoToggle}
       />
     );
     const CreateInfoComponent = () => <Info version={APP_VERSION} date={APP_BUILD_TIME} />;
 
     return (
       <BrowserRouter>
-        <SideBarMenu connected={this.state.isConnected} connect={this.connect}>
+        <SideBarMenu connected={this.state.isConnected} connect={this.connect} >
           <Grid centered>
             <Grid.Row>
               <Switch>
