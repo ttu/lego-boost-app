@@ -21,8 +21,10 @@ import SideBarMenu from './SideBarMenu';
 const APP_BUILD_TIME = process.env.REACT_APP_BUILD_TIME || 'not defined';
 const APP_VERSION = process.env.REACT_APP_VERSION || 'not defined';
 const CONFIG_STORAGE_KEY = 'boost-configuration';
+const LOCAL_STATE_STORAGE_KEY = 'local-state';
 
 const DEFAULT_BOOST_CONFIG: IBoostConfig = { driveFinetune: 1.0, turnFinetune: 1.0, leftMotor: 'A', rightMotor: 'B' };
+const DEFAULT_LOCAL_STATE = { infosVisible: true, code: '' };
 
 interface IApplicationState {
   infosVisible: boolean;
@@ -36,22 +38,25 @@ class App extends React.Component<{}, IApplicationState> {
 
   constructor(props) {
     super(props);
+    const savedState = localStorage.get(LOCAL_STATE_STORAGE_KEY);
     this.state = {
-      infosVisible: true,
-      code: '',
+      infosVisible: savedState ? savedState.infosVisible : DEFAULT_LOCAL_STATE.infosVisible,
+      code: savedState ? savedState.code : DEFAULT_LOCAL_STATE.code,
       configuration: localStorage.get(CONFIG_STORAGE_KEY) || DEFAULT_BOOST_CONFIG,
       isConnected: false,
     };
   }
 
   onInfoToggle = () => {
-    this.setState({
-      infosVisible: !this.state.infosVisible
-    });
+    const newLocalState = { infosVisible: !this.state.infosVisible, code: this.state.code };
+    this.setState({ infosVisible: newLocalState.infosVisible });
+    localStorage.set(LOCAL_STATE_STORAGE_KEY, newLocalState);
   };
 
   updateCode = (code: string) => {
+    const newLocalState = { infosVisible: this.state.infosVisible, code };
     this.setState({ code });
+    localStorage.set(LOCAL_STATE_STORAGE_KEY, newLocalState);
   };
 
   updateConfig = (c: IBoostConfig) => {
@@ -96,11 +101,7 @@ class App extends React.Component<{}, IApplicationState> {
     );
     const CreateManualControl = () => <ManualControl {...boostProps} />;
     const CreateAiControl = () => (
-      <AiControl
-        {...boostProps}
-        infoVisible={this.state.infosVisible}
-        infoToggle={this.onInfoToggle}
-      />
+      <AiControl {...boostProps} infoVisible={this.state.infosVisible} infoToggle={this.onInfoToggle} />
     );
     const CreateConfigurationControl = () => (
       <BoostConfiguration
@@ -113,11 +114,7 @@ class App extends React.Component<{}, IApplicationState> {
       />
     );
     const CreateMotorControl = () => (
-      <MotorControl
-        {...boostProps}
-        infoVisible={this.state.infosVisible}
-        infoToggle={this.onInfoToggle}
-      />
+      <MotorControl {...boostProps} infoVisible={this.state.infosVisible} infoToggle={this.onInfoToggle} />
     );
     const CreateCodeControl = () => (
       <CodeControl
@@ -132,7 +129,7 @@ class App extends React.Component<{}, IApplicationState> {
 
     return (
       <BrowserRouter>
-        <SideBarMenu connected={this.state.isConnected} connect={this.connect} >
+        <SideBarMenu connected={this.state.isConnected} connect={this.connect}>
           <Grid centered>
             <Grid.Row>
               <Switch>
