@@ -1,6 +1,6 @@
 import LegoBoost from 'lego-boost-browser';
 import * as React from 'react';
-import { Grid, Button, Container, Segment, Header } from 'semantic-ui-react';
+import { Grid, Button, Container, Segment, Header, Icon } from 'semantic-ui-react';
 import { Slider } from 'react-semantic-ui-range';
 import MessageBlock from './MessageBlock';
 
@@ -88,7 +88,8 @@ class MotorControl extends React.Component<IProps, IState> {
         />
         <Grid padded>
           <Grid.Column width={16}>
-            <Button primary onClick={this.stopMotors}>
+            <Button color="red" onClick={this.stopMotors}>
+              <Icon name="stop circle" />
               Stop
             </Button>
           </Grid.Column>

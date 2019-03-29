@@ -129,7 +129,8 @@ class CodeControl extends React.Component<IProps, IState> {
 
         <Grid centered columns="equal">
           <Grid.Row>
-            <Button primary name="execute" onClick={this.handleItemClick}>
+            <Button color="green" name="execute" onClick={this.handleItemClick}>
+              <Icon name="code" />
               Execute
             </Button>
           </Grid.Row>

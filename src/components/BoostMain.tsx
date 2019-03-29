@@ -1,6 +1,6 @@
 import LegoBoost from 'lego-boost-browser';
 import * as React from 'react';
-import { Button, Grid, Container } from 'semantic-ui-react';
+import { Button, Grid, Container, Icon } from 'semantic-ui-react';
 import MessageBlock from './MessageBlock';
 import { IConfiguration } from 'lego-boost-browser/dist/hub/hubAsync';
 
@@ -35,7 +35,8 @@ class BoostMain extends React.Component<IProps> {
         <Grid>
           <Grid.Row columns={1}>
             <Grid.Column>
-              <Button primary onClick={this.props.boost.connect.bind(this.props.boost, this.props.configuration)}>
+              <Button color="green" onClick={this.props.boost.connect.bind(this.props.boost, this.props.configuration)}>
+                <Icon name="bluetooth b" />
                 Connect
               </Button>
               {/* <Button secondary onClick={this.props.boost.disconnect.bind(this.props.boost)}>Disconnect</Button> */}

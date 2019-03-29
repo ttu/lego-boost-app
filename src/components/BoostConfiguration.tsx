@@ -1,6 +1,6 @@
 import LegoBoost from 'lego-boost-browser';
 import * as React from 'react';
-import { Grid, Button, Container, Dropdown } from 'semantic-ui-react';
+import { Grid, Button, Container, Dropdown, Icon } from 'semantic-ui-react';
 import MessageBlock from './MessageBlock';
 import { IBoostConfig } from '../Models';
 
@@ -124,7 +124,8 @@ class BoostConfiguration extends React.Component<IProps> {
           </Grid.Row>
           <Grid.Row centered>
             <Grid.Column textAlign="center">
-              <Button secondary onClick={this.props.resetConfig}>
+              <Button color="red" onClick={this.props.resetConfig}>
+                <Icon name="sync" />
                 Reset config
               </Button>
             </Grid.Column>

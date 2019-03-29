@@ -1,6 +1,6 @@
 import LegoBoost from 'lego-boost-browser';
 import * as React from 'react';
-import { Container, Grid, Button, Dropdown } from 'semantic-ui-react';
+import { Container, Grid, Button, Dropdown, Icon } from 'semantic-ui-react';
 
 import BoostControlInfo from './BoostControlInfo';
 
@@ -122,14 +122,10 @@ class ManualControl extends React.Component<IProps, IManualState> {
         </Grid>
 
         <Grid>
-          {/* <Grid.Row columns={1}>
-            <Grid.Column>Last command: {this.state.lastCommand}</Grid.Column>
-          </Grid.Row> */}
           <Grid.Row columns={2}>
             <Grid.Column textAlign="right">
               <Button
-                primary={this.state.mode === ControlMode.Click}
-                secondary={this.state.mode !== ControlMode.Click}
+                color={this.state.mode === ControlMode.Click ? 'red' : 'grey'}
                 onClick={() => this.setState({ mode: ControlMode.Click })}
               >
                 Click Mode
@@ -137,8 +133,7 @@ class ManualControl extends React.Component<IProps, IManualState> {
             </Grid.Column>
             <Grid.Column textAlign="left">
               <Button
-                primary={this.state.mode === ControlMode.Arcade}
-                secondary={this.state.mode !== ControlMode.Arcade}
+                color={this.state.mode === ControlMode.Arcade ? 'red' : 'grey'}
                 onClick={() => this.setState({ mode: ControlMode.Arcade })}
               >
                 Arcade Mode
@@ -150,8 +145,9 @@ class ManualControl extends React.Component<IProps, IManualState> {
               <Dropdown options={LED_COLORS} value={this.state.ledColor} onChange={this.handleLedChange} />
             </Grid.Column>
             <Grid.Column textAlign="left">
-              <Button secondary onClick={async () => await this.props.boost.ledAsync(this.state.ledColor)}>
-                Change led color
+              <Button primary onClick={async () => await this.props.boost.ledAsync(this.state.ledColor)}>
+                <Icon name="lightbulb outline" />
+                Set Led Color
               </Button>
             </Grid.Column>
           </Grid.Row>
