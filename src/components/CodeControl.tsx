@@ -104,7 +104,10 @@ class CodeControl extends React.Component<IProps, IState> {
         editor.updateOptions({ readOnly: false });
       }
     });
+    editor.getAction('editor.action.formatDocument').run();
   };
+
+  copyCode = id => this.setState({ codeToRun: CODE_EXAMPLES[id].code });
 
   render() {
     return (
@@ -153,11 +156,19 @@ class CodeControl extends React.Component<IProps, IState> {
               <Header as="h5">Copy/paste the code from example to the execution text area and press execute</Header>
 
               <Container textAlign="center" fluid>
-                {CODE_EXAMPLES.map(example => (
+                {CODE_EXAMPLES.map((example, index) => (
                   <Container key={example.header}>
                     <Header as="h4">{example.header}</Header>
                     <Container>{example.description}</Container>
                     <TextArea value={example.code} readOnly autoHeight style={{ minWidth: 400, maxWidth: 500 }} />
+                    <Button
+                      circular
+                      className="code-copy"
+                      color="blue"
+                      size="mini"
+                      icon="paste"
+                      onClick={this.copyCode.bind(this, index)}
+                    />
                     <Divider />
                   </Container>
                 ))}

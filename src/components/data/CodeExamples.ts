@@ -2,9 +2,9 @@ const CODE_EXAMPLES = [
   {
     header: 'Change the color of the led',
     description: 'Change the color from red to green. Supported colors: off, pink, purple, blue, lightblue, cyan, green, yellow, orange, red, white',
-    code: `  await boost.ledAsync('red');
-  await boost.ledAsync('yellow');
-  await boost.ledAsync('green');`
+    code: `await boost.ledAsync('red');
+await boost.ledAsync('yellow');
+await boost.ledAsync('green');`
   },
   {
     header: 'Drive and back',

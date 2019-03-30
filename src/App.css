@@ -74,3 +74,8 @@
   left: 95%;
   z-index: 1000;
 }
+
+button.code-copy {
+  margin-left: 15px !important;
+  /* float: right; */
+}
