@@ -30,7 +30,7 @@ class BoostMain extends React.Component<IProps> {
         <MessageBlock
           visible={this.props.infoVisible}
           infoToggle={this.props.infoToggle}
-          content="Click Connect and pair with LEGO Move Hub. Go to Manual, AI or Code page and start controlling your Lego Boost. Note! For now only works with Vernie setup. Lego Boost might show up as a Unknown or unsupported device or as a LEGO Move Hub in the connection dialog."
+          content="Click Connect and pair with LEGO Move Hub. Go to Manual, AI or Code page and start controlling your Lego Boost. Note! Lego Boost might show up as a Unknown or unsupported device or as a LEGO Move Hub in the connection dialog."
         />
         <Grid>
           <Grid.Row columns={1}>
