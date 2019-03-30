@@ -25,9 +25,9 @@ class AiControl extends React.Component<IProps> {
         <Grid centered columns="equal">
           <Grid.Row centered>
             <Button.Group>
-              <Button positive onClick={this.props.boost.ai.bind(this.props.boost)}>Start AI</Button>
-              <Button.Or text=""/>
-              <Button negative onClick={this.props.boost.stop.bind(this.props.boost)}>Stop AI</Button>
+              <Button positive size="huge" onClick={this.props.boost.ai.bind(this.props.boost)}>Start</Button>
+              <Button.Or text="AI"/>
+              <Button negative size="huge" onClick={this.props.boost.stop.bind(this.props.boost)}>Stop</Button>
             </Button.Group>
           </Grid.Row>
         </Grid>
