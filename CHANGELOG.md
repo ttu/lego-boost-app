@@ -2,6 +2,9 @@
 
 ### [Unreleased]
 
+
+### [0.6.1] - 2019-03-31
+
 - CHANGED: Button styles
 - CHANGED: Info boxes to toggle
 - ADDED: Save show info boxes and code state to local storage

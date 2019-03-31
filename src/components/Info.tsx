@@ -110,6 +110,16 @@ const Info = ({ version, date }: IAboutProps) => (
     <Container textAlign="left">
       <List bulleted>
         <List.Item>
+          0.6.1 (31.3.2019)
+          <List.List>
+            <List.Item>Update button styles</List.Item>
+            <List.Item>Change info boxes to toggle</List.Item>
+            <List.Item>Save show info boxes and code state to local storage</List.Item>
+            <List.Item>Change code editor theme to dark</List.Item>
+            <List.Item>Fix code editor intellisense window</List.Item>
+          </List.List>
+        </List.Item>
+        <List.Item>
           0.6.0 (28.3.2019)
           <List.List>
             <List.Item>Update menu and header style</List.Item>
