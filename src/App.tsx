@@ -49,13 +49,18 @@ class App extends React.Component<{}, IApplicationState> {
 
   onInfoToggle = () => {
     const newLocalState = { infosVisible: !this.state.infosVisible, code: this.state.code };
-    this.setState({ infosVisible: newLocalState.infosVisible });
     localStorage.set(LOCAL_STATE_STORAGE_KEY, newLocalState);
+    this.setState({ infosVisible: newLocalState.infosVisible });
   };
 
   updateCode = (code: string) => {
     const newLocalState = { infosVisible: this.state.infosVisible, code };
+    localStorage.set(LOCAL_STATE_STORAGE_KEY, newLocalState);
     this.setState({ code });
+  };
+
+  saveCodeToStorage = (code: string) => {
+    const newLocalState = { infosVisible: this.state.infosVisible, code };
     localStorage.set(LOCAL_STATE_STORAGE_KEY, newLocalState);
   };
 
@@ -121,6 +126,7 @@ class App extends React.Component<{}, IApplicationState> {
         {...boostProps}
         code={this.state.code}
         updateCode={this.updateCode}
+        saveCodeToStorage={this.saveCodeToStorage}
         infoVisible={this.state.infosVisible}
         infoToggle={this.onInfoToggle}
       />

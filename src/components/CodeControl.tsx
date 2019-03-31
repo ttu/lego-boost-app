@@ -14,6 +14,7 @@ interface IProps {
   infoToggle: () => void;
   code: string;
   updateCode: (code: string) => void;
+  saveCodeToStorage: (code: string) => void;
 }
 
 interface IState {
@@ -38,6 +39,7 @@ async () => {
 const MONACO_OPTIONS: monacoEditor.editor.IEditorConstructionOptions = {
   selectOnLineNumbers: true,
   language: 'typescript',
+  theme: 'vs-dark',
   formatOnPaste: true,
 };
 
@@ -77,6 +79,8 @@ class CodeControl extends React.Component<IProps, IState> {
     let codeToRun = newValue.substr(newValue.indexOf('async () => {') + 14);
     codeToRun = codeToRun.substr(0, codeToRun.length - 2);
     this.setState({ codeToRun });
+    // TODO: Fix updateCode so it won't render on every update
+    this.props.saveCodeToStorage(codeToRun);
   };
 
   handleAccordionClick = (e, titleProps) => {
