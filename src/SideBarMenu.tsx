@@ -85,8 +85,8 @@ class SideBarMenu extends React.Component<IBarProps, IBarState> {
           <Menu.Item>{this.getConnectedItem()}</Menu.Item>
           <Menu.Item position="right">Lego Boost Control</Menu.Item>
         </Menu>
-        <Sidebar.Pusher className="main">
-          <Segment className="main-content">{this.props.children}</Segment>
+        <Sidebar.Pusher className="main-content">
+          <Segment>{this.props.children}</Segment>
         </Sidebar.Pusher>
       </Sidebar.Pushable>
     );

@@ -2,6 +2,11 @@
 
 ### [Unreleased]
 
+- CHANGED: Button styles
+- CHANGED: Info boxes to toggle
+- ADDED: Save show info boxes and code state to local storage
+- CHANGED: Code editor theme to dark
+- FIXED: Code editor intellisense window
 
 ### [0.6.0] - 2019-03-28
 
