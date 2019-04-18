@@ -2,6 +2,7 @@
 
 ### [Unreleased]
 
+- ADDED: Splash screen
 
 ### [0.6.1] - 2019-03-31
 
