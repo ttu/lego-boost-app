@@ -23,7 +23,7 @@ interface IState {
   executionError: string;
 }
 
-const INFO_TEXT = `// Insert the code inside the async function.
+const INFO_TEXT = `// Insert the code inside the async function (starting from line 9).
 // Press the Execute button to run the code.`;
 
 const TEMPLATE = `${INFO_TEXT}
@@ -157,7 +157,7 @@ class CodeControl extends React.Component<IProps, IState> {
               </Header>
             </Accordion.Title>
             <Accordion.Content active={this.state.activeIndex === 0}>
-              <Header as="h5">Copy/paste the code from example to the execution text area and press execute</Header>
+              <Header as="h5">Click copy button to copy the code to the code editor and press execute</Header>
 
               <Container textAlign="center" fluid>
                 {CODE_EXAMPLES.map((example, index) => (

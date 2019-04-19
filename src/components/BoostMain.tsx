@@ -35,7 +35,7 @@ class BoostMain extends React.Component<IProps> {
         <Grid>
           <Grid.Row columns={1}>
             <Grid.Column>
-              <Button color="green" onClick={this.props.boost.connect.bind(this.props.boost, this.props.configuration)}>
+              <Button color="blue" onClick={this.props.boost.connect.bind(this.props.boost, this.props.configuration)}>
                 <Icon name="bluetooth b" />
                 Connect
               </Button>

@@ -3,6 +3,7 @@
 ### [Unreleased]
 
 - ADDED: Splash screen
+- ADDED: PWA icon images
 
 ### [0.6.1] - 2019-03-31
 
