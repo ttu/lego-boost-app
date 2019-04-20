@@ -4,10 +4,30 @@ Control Lego Boost from the browser without any installations.
 
 Deployed to: https://legoboost.azurewebsites.net/
 
-* Features
-  * Code editor to execute JavaScript code
-  * Arcade control
+## Features
+  * Code control
+    * Control Boost with JavaScript code
+  * Manual control
+    * Control Boost with arrow controls
+  * AI control
+    * Boost drives automatically and evades obstacles
   * Individual motor control
+    * Control each motor individually
+
+### Manual control
+![Manual Control](docs/manual_control.jpg "Boost Icon")
+
+<br/>
+
+### Code control
+![Code Control](docs/code_control.jpg "Boost Icon")
+
+
+## Progressive Web Application
+
+Application asks permission to add a link to mobile phone's home screen. Application will then open as an application instead of a web site.
+
+![Boost Icon](docs/pwa_icon.png "Boost Icon")
 
 ## Web Bluetooth API
 
@@ -24,21 +44,22 @@ Uses [lego-boost-browser](https://github.com/ttu/lego-boost-browser) package for
 ### Known problems
 
 * Doesn't work with __iOS__ (iPhone and iPad)
+  * Apple doesn't support Web Bluetooth API on iOS
 * Known bluetooth problems with laptop models:
   * Microsoft Surface Book 2
 
 If connection doesn't work, test connection to Lego Boost with [Google's sample tester](https://googlechrome.github.io/samples/web-bluetooth/read-characteristic-value-changed.html).
 
-### Run locally
+## Run locally
 
 ```sh
 $ npm install
 $ npm start
 ```
 
-### Docker
+## Docker
 
-TODO: lego-boost-browser is installed from github. Docker will work after package is released to npm.
+NOTE: lego-boost-browser package is installed from GitHub. Docker will work after package is released to npm.
 
 ## Contributing
 
