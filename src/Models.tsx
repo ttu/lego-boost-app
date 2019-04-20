@@ -14,6 +14,7 @@ export interface IDeviceInfo {
   color: string;
   error: string;
   rssi: number;
+  tilt: { roll: number; pitch: number };
   ports: {
     A: { action: string; angle: number };
     B: { action: string; angle: number };

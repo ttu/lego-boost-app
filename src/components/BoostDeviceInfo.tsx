@@ -35,6 +35,7 @@ class BoostDeviceInfo extends React.Component<IProps, IDeviceInfoAccordion> {
         LED: { action: '', angle: 0 },
       },
       activeIndex: 0,
+      tilt: { roll: 0, pitch: 0 },
     };
   }
 
@@ -58,6 +59,7 @@ class BoostDeviceInfo extends React.Component<IProps, IDeviceInfoAccordion> {
         distance: this.boost.deviceInfo.distance,
         error: this.boost.deviceInfo.error,
         rssi: this.boost.deviceInfo.rssi,
+        tilt: this.boost.deviceInfo.tilt,
         ports: {
           A: {
             action: this.boost.deviceInfo.ports.A.action,
@@ -146,6 +148,16 @@ class BoostDeviceInfo extends React.Component<IProps, IDeviceInfoAccordion> {
                   {this.state.distance === Number.MAX_SAFE_INTEGER ? <Icon name="close" /> : this.state.distance}
                 </div>
               </Grid.Column>
+              <Grid.Column className="info-item">
+                <div className="info-item-heder">
+                  <Icon name="server" />
+                  Sensor
+                </div>
+                <div>Tilt</div>
+                <div>
+                  {this.state.connected ? `${this.state.tilt.roll} | ${this.state.tilt.pitch}` : <Icon name="close" />}
+                </div>
+              </Grid.Column>
             </Grid.Row>
             {/* <Grid.Row className="info-header">
               <h3>Port data</h3>
@@ -167,8 +179,10 @@ class BoostDeviceInfo extends React.Component<IProps, IDeviceInfoAccordion> {
               ))}
             </Grid.Row>
             <Grid.Row>
-            <Icon name="envelope" />
-              {this.state.error === '' ? 'No messages from communication library' : `Communication library message:${this.state.error}`}
+              <Icon name="envelope" />
+              {this.state.error === ''
+                ? 'No messages from communication library'
+                : `Communication library message:${this.state.error}`}
             </Grid.Row>
           </Grid>
         </Accordion.Content>
