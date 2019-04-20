@@ -15,12 +15,12 @@ Deployed to: https://legoboost.azurewebsites.net/
     * Control each motor individually
 
 ### Manual control
-![Manual Control](docs/manual_control.jpg "Boost Icon")
+![Manual Control](docs/manual_control.JPG "Boost Icon")
 
 <br/>
 
 ### Code control
-![Code Control](docs/code_control.jpg "Boost Icon")
+![Code Control](docs/code_control.JPG "Boost Icon")
 
 
 ## Progressive Web Application

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Table, Accordion, Icon, Header } from 'semantic-ui-react';
+import { Table, Accordion, Icon, Header, Grid, Container, Label } from 'semantic-ui-react';
 import { IDeviceInfo } from '../Models';
 import LegoBoost from 'lego-boost-browser';
 
@@ -102,63 +102,75 @@ class BoostDeviceInfo extends React.Component<IProps, IDeviceInfoAccordion> {
         <Accordion.Title active={this.state.activeIndex === 0} index={0} onClick={this.handleAccordionClick}>
           <Header as="h3">
             <Icon name="dropdown" />
-            Lego Boost Info
+            Boost information
           </Header>
         </Accordion.Title>
         <Accordion.Content active={this.state.activeIndex === 0}>
-          <Table definition>
-            <Table.Header>
-              <Table.Row>
-                <Table.HeaderCell />
-                <Table.HeaderCell>Status</Table.HeaderCell>
-              </Table.Row>
-            </Table.Header>
-            <Table.Body>
-              <Table.Row>
-                <Table.Cell>Connected</Table.Cell>
-                <Table.Cell positive={this.state.connected} negative={!this.state.connected}>
-                  {this.state.connected ? 'Yes' : 'No'}
-                </Table.Cell>
-              </Table.Row>
-              <Table.Row>
-                <Table.Cell>Sensor color</Table.Cell>
-                <Table.Cell cellspan="2">{this.state.color}</Table.Cell>
-              </Table.Row>
-              <Table.Row>
-                <Table.Cell>Distance</Table.Cell>
-                <Table.Cell>
+          <Grid centered className="info-items">
+            <Grid.Row>
+              <Grid.Column className="info-item">
+                <Container>
+                  <div className="info-item-heder">
+                    <Icon name="bluetooth b" />
+                    <label>BLE</label>
+                  </div>
+                  <div>Connected</div>
+                  <div>
+                    {this.state.connected ? <Icon name="circle" color="green" /> : <Icon name="circle" color="red" />}
+                  </div>
+                </Container>
+              </Grid.Column>
+              <Grid.Column className="info-item">
+                <div className="info-item-heder">
+                  <Icon name="bluetooth b" />
+                  <label>BLE</label>
+                </div>
+                <div>RSSI</div>
+                <div>{this.state.rssi === 0 ? <Icon name="close" /> : this.state.rssi}</div>
+              </Grid.Column>
+              <Grid.Column className="info-item">
+                <div className="info-item-heder">
+                  <Icon name="camera" />
+                  Sensor
+                </div>
+                <div>Color</div>
+                <div>{this.state.color ? this.state.color : <Icon name="close" />}</div>
+              </Grid.Column>
+              <Grid.Column className="info-item">
+                <div className="info-item-heder">
+                  <Icon name="camera" />
+                  Sensor
+                </div>
+                <div>Distance</div>
+                <div>
                   {this.state.distance === Number.MAX_SAFE_INTEGER ? <Icon name="close" /> : this.state.distance}
-                </Table.Cell>
-              </Table.Row>
-              <Table.Row>
-                <Table.Cell>RSSI</Table.Cell>
-                <Table.Cell>{this.state.rssi === 0 ? <Icon name="close" /> : this.state.rssi}</Table.Cell>
-              </Table.Row>
-              <Table.Row>
-                <Table.Cell>Error message</Table.Cell>
-                <Table.Cell>{this.state.error === '' ? 'No errors from the Boost' : this.state.error}</Table.Cell>
-              </Table.Row>
-              <Table.Row />
-            </Table.Body>
-          </Table>
-          <Table>
-            <Table.Header>
-              <Table.Row>
-                <Table.HeaderCell>Motor</Table.HeaderCell>
-                <Table.HeaderCell>Action</Table.HeaderCell>
-                <Table.HeaderCell>Angle</Table.HeaderCell>
-              </Table.Row>
-            </Table.Header>
-            <Table.Body>
+                </div>
+              </Grid.Column>
+            </Grid.Row>
+            {/* <Grid.Row className="info-header">
+              <h3>Port data</h3>
+            </Grid.Row> */}
+            <Grid.Row>
               {Object.keys(this.state.ports).map(element => (
-                <Table.Row key={element}>
-                  <Table.Cell>{element}</Table.Cell>
-                  <Table.Cell>{this.state.ports[element].action}</Table.Cell>
-                  <Table.Cell>{this.state.ports[element].angle}</Table.Cell>
-                </Table.Row>
+                <Grid.Column className="info-item" key={element}>
+                  <div className="info-item-heder">
+                    <Icon name="cog" />
+                    {element}
+                  </div>
+                  <div>Action</div>
+                  <div>
+                    {this.state.ports[element].action ? this.state.ports[element].action : <Icon name="close" />}
+                  </div>
+                  <div>Angle</div>
+                  <div>{this.state.ports[element].angle}</div>
+                </Grid.Column>
               ))}
-            </Table.Body>
-          </Table>
+            </Grid.Row>
+            <Grid.Row>
+            <Icon name="envelope" />
+              {this.state.error === '' ? 'No messages from communication library' : `Communication library message:${this.state.error}`}
+            </Grid.Row>
+          </Grid>
         </Accordion.Content>
       </Accordion>
     );

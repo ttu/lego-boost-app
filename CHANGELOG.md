@@ -4,6 +4,7 @@
 
 - ADDED: Splash screen
 - ADDED: PWA icon images
+- CHANGED: UI style for Boost sensor information
 
 ### [0.6.1] - 2019-03-31
 

@@ -50,3 +50,27 @@ button.code-copy {
   margin-left: 15px !important;
   /* float: right; */
 }
+
+.info-header {
+  padding: 0px !important;
+}
+.info-items {
+  text-align: center !important;
+}
+
+.info-item {
+  text-align: center !important;
+  margin: 20px !important;
+  padding: 10px;
+  min-width: 100px;
+  background: #f9fafb;
+  box-shadow: 0 2px 25px 0 rgba(34,36,38,.02) inset;
+  border: 1px solid rgba(34,36,38,.15);
+  border-radius: 4pt;
+}
+
+.info-item-heder {
+  font-weight: 700;
+  border-bottom: 1px solid rgba(34,36,38,.15);
+  margin-bottom: 5px;
+}
