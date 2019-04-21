@@ -122,21 +122,21 @@ class BoostDeviceInfo extends React.Component<IProps, IDeviceInfoAccordion> {
                   </div>
                 </Container>
               </Grid.Column>
-              <Grid.Column className="info-item">
+              {/* <Grid.Column className="info-item">
                 <div className="info-item-heder">
                   <Icon name="bluetooth b" />
                   <label>BLE</label>
                 </div>
                 <div>RSSI</div>
                 <div>{this.state.rssi === 0 ? <Icon name="close" /> : this.state.rssi}</div>
-              </Grid.Column>
+              </Grid.Column> */}
               <Grid.Column className="info-item">
                 <div className="info-item-heder">
                   <Icon name="camera" />
                   Sensor
                 </div>
                 <div>Color</div>
-                <div>{this.state.color ? this.state.color : <Icon name="close" />}</div>
+                <div>{this.state.distance === Number.MAX_SAFE_INTEGER ? <Icon name="close" /> : this.state.color}</div>
               </Grid.Column>
               <Grid.Column className="info-item">
                 <div className="info-item-heder">
