@@ -111,16 +111,14 @@ class BoostDeviceInfo extends React.Component<IProps, IDeviceInfoAccordion> {
           <Grid centered className="info-items">
             <Grid.Row>
               <Grid.Column className="info-item">
-                <Container>
-                  <div className="info-item-heder">
-                    <Icon name="bluetooth b" />
-                    <label>BLE</label>
-                  </div>
-                  <div>Connected</div>
-                  <div>
-                    {this.state.connected ? <Icon name="circle" color="green" /> : <Icon name="circle" color="red" />}
-                  </div>
-                </Container>
+                <div className="info-item-heder">
+                  <Icon name="bluetooth b" />
+                  <label>BLE</label>
+                </div>
+                <div>Connected</div>
+                <div>
+                  {this.state.connected ? <Icon name="circle" color="green" /> : <Icon name="circle" color="red" />}
+                </div>
               </Grid.Column>
               {/* <Grid.Column className="info-item">
                 <div className="info-item-heder">
