@@ -110,6 +110,13 @@ const Info = ({ version, date }: IAboutProps) => (
     <Container textAlign="left">
       <List bulleted>
         <List.Item>
+          0.7.0 (24.4.2019)
+          <List.List>
+            <List.Item>Option to add as a standalone application to home screen</List.Item>
+            <List.Item>UI changes to Boost information view</List.Item>
+          </List.List>
+        </List.Item>
+        <List.Item>
           0.6.1 (31.3.2019)
           <List.List>
             <List.Item>Update button styles</List.Item>

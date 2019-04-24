@@ -25,7 +25,7 @@ Deployed to: https://legoboost.azurewebsites.net/
 
 ## Progressive Web Application
 
-Application asks permission to add a link to mobile phone's home screen. Application will then open as an application instead of a web site.
+Application asks permission to add a link to mobile phone's home screen. Application will then open as a standalone application.
 
 ![Boost Icon](docs/pwa_icon.png "Boost Icon")
 

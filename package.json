@@ -1,10 +1,10 @@
 {
   "name": "lego-boost-app",
-  "version": "0.6.1",
+  "version": "0.7.0",
   "homepage": "https://legoboost.azurewebsites.net/",
   "scripts": {
     "start": "rescripts start",
-    "build": "SET REACT_APP_BUILD_TIME=31.3.2018 && SET REACT_APP_VERSION=0.6.1 && rescripts build",
+    "build": "SET REACT_APP_BUILD_TIME=24.4.2019 && SET REACT_APP_VERSION=0.7.0 && rescripts build",
     "test": "rescripts test --env=jsdom",
     "eject": "rescripts eject",
     "lint": "tslint --project ./tsconfig.json"
@@ -27,8 +27,8 @@
     "@rescripts/utilities": "^0.0.5",
     "@types/jest": "^24.0.11",
     "@types/local-storage": "^1.4.0",
-    "@types/node": "^11.13.5",
-    "@types/react": "^16.8.13",
+    "@types/node": "^11.13.6",
+    "@types/react": "^16.8.14",
     "@types/react-dom": "^16.8.4",
     "@types/react-monaco-editor": "^0.16.0",
     "@types/react-router-dom": "^4.3.2",
