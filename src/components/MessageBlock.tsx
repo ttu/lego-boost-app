@@ -10,9 +10,9 @@ interface IMessageContent {
 
 const MessageBlock = ({ visible, header, content, infoToggle }: IMessageContent) => {
   return visible ? (
-    <Message onDismiss={infoToggle} header={header} content={content} />
+    <Message info onDismiss={infoToggle} header={header} content={content} />
   ) : (
-    <Icon className="dismissed-info" name="info circle" onClick={infoToggle} />
+    <Icon color="blue" className="dismissed-info" name="info circle" onClick={infoToggle} />
   );
 };
 

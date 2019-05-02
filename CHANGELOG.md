@@ -3,6 +3,7 @@
 ### [Unreleased]
 
 - ADDED: iOS not supported notification
+- CHANGED: Message boxes and info icons to blue
 
 ### [0.7.0] - 2019-04-24
 
