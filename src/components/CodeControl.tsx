@@ -23,12 +23,9 @@ interface IState {
   executionError: string;
 }
 
-const INFO_TEXT = `// Insert the code inside the async function (starting from line 9).
-// Press the Execute button to run the code.`;
+const INFO_TEXT = `Insert the code inside the async function (starting from line 6). Press the Execute button to run the code.`;
 
-const TEMPLATE = `${INFO_TEXT}
-
-import LegoBoost from 'lego-boost-browser';
+const TEMPLATE = `import LegoBoost from 'lego-boost-browser';
 
 const boost = new LegoBoost();
 
@@ -62,7 +59,9 @@ class CodeControl extends React.Component<IProps, IState> {
   }
 
   componentWillUnmount = () => {
-    this.props.updateCode(this.state.codeToRun);
+    if (this.props.code !== this.state.codeToRun) {
+      this.props.updateCode(this.state.codeToRun);
+    }
   };
 
   handleItemClick = (e, { name }) => {
@@ -100,7 +99,7 @@ class CodeControl extends React.Component<IProps, IState> {
   editorDidMount = (editor: monacoEditor.editor.IStandaloneCodeEditor, monaco) => {
     editor.focus();
     editor.onDidChangeCursorSelection(e => {
-      const readOnly = e.selection.startLineNumber <= 8;
+      const readOnly = e.selection.startLineNumber <= 5;
       editor.updateOptions({ readOnly });
     });
     editor.onKeyDown(e => {
@@ -116,8 +115,9 @@ class CodeControl extends React.Component<IProps, IState> {
   render() {
     return (
       <Container>
-        {/* TODO: Figue out why closing this trigger componentWillUnmount multiple times */}
-        {/* <MessageBlock visible={this.props.infoVisible} onClose={this.props.onInfoClose} content={INFO_TEXT} /> */}
+        <Container style={{'paddingBottom':'20px'}}>
+          <MessageBlock visible={this.props.infoVisible} infoToggle={this.props.infoToggle} content={INFO_TEXT} />
+        </Container>
 
         <Container textAlign="left">
           <MonacoEditor
