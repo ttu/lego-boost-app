@@ -4,7 +4,7 @@
   "homepage": "https://legoboost.azurewebsites.net/",
   "scripts": {
     "start": "rescripts start",
-    "build": "SET REACT_APP_BUILD_TIME=24.4.2019 && SET REACT_APP_VERSION=0.7.0 && rescripts build",
+    "build": "rescripts build",
     "test": "rescripts test --env=jsdom",
     "eject": "rescripts eject",
     "lint": "tslint --project ./tsconfig.json"
@@ -13,6 +13,7 @@
     "lego-boost-browser": "git+https://github.com/ttu/lego-boost-browser.git",
     "local-storage": "^1.4.2",
     "monaco-editor-webpack-plugin": "^1.7.0",
+    "preval.macro": "^3.0.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-monaco-editor": "^0.25.1",

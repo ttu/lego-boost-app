@@ -6,6 +6,7 @@ import * as React from 'react';
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import { Grid } from 'semantic-ui-react';
 import localStorage from 'local-storage';
+import preval from 'preval.macro'
 
 import BoostDeviceInfo from './components/BoostDeviceInfo';
 import BoostMain from './components/BoostMain';
@@ -18,7 +19,7 @@ import BoostConfiguration from './components/BoostConfiguration';
 import { IBoostConfig } from './Models';
 import SideBarMenu from './SideBarMenu';
 
-const APP_BUILD_TIME = process.env.REACT_APP_BUILD_TIME || 'not defined';
+const APP_BUILD_TIME = preval`module.exports = new Date().toLocaleString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });`;
 const APP_VERSION = process.env.REACT_APP_VERSION || 'not defined';
 const CONFIG_STORAGE_KEY = 'boost-configuration';
 const LOCAL_STATE_STORAGE_KEY = 'local-state';
