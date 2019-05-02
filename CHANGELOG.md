@@ -2,6 +2,8 @@
 
 ### [Unreleased]
 
+- ADDED: iOS not supported notification
+
 ### [0.7.0] - 2019-04-24
 
 - ADDED: Splash screen
