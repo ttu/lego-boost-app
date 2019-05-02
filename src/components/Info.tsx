@@ -108,68 +108,11 @@ const Info = ({ version, date }: IAboutProps) => (
     <Header as="h3">Changelog</Header>
 
     <Container textAlign="left">
-      <List bulleted>
-        <List.Item>
-          0.7.0 (24.4.2019)
-          <List.List>
-            <List.Item>Option to add as a standalone application to home screen</List.Item>
-            <List.Item>UI changes to Boost information view</List.Item>
-          </List.List>
-        </List.Item>
-        <List.Item>
-          0.6.1 (31.3.2019)
-          <List.List>
-            <List.Item>Update button styles</List.Item>
-            <List.Item>Change info boxes to toggle</List.Item>
-            <List.Item>Save show info boxes and code state to local storage</List.Item>
-            <List.Item>Change code editor theme to dark</List.Item>
-            <List.Item>Fix code editor intellisense window</List.Item>
-          </List.List>
-        </List.Item>
-        <List.Item>
-          0.6.0 (28.3.2019)
-          <List.List>
-            <List.Item>Update menu and header style</List.Item>
-          </List.List>
-        </List.Item>
-        <List.Item>
-          0.5.0 (15.2.2019)
-          <List.List>
-            <List.Item>Add LegoBoost type information for code editor</List.Item>
-            <List.Item>Add configuration page to change driving directions</List.Item>
-          </List.List>
-        </List.Item>
-        <List.Item>
-          0.4.0 (5.2.2019)
-          <List.List>
-            <List.Item>Improve code editor (syntax highlight, intellisense etc.)</List.Item>
-          </List.List>
-        </List.Item>
-        <List.Item>
-          0.3.0 (13.1.2019)
-          <List.List>
-            <List.Item>Individual motor controls</List.Item>
-          </List.List>
-        </List.Item>
-        <List.Item>
-          0.2.0 (7.1.2019)
-          <List.List>
-            <List.Item>Click and Arcade manual modes</List.Item>
-            <List.Item>Change led color button</List.Item>
-            <List.Item>Show execution error in code control</List.Item>
-            <List.Item>Use Monaco code editor in code control</List.Item>
-          </List.List>
-        </List.Item>
-        <List.Item>
-          0.1.0 (1.1.2019)
-          <List.List>
-            <List.Item>Manual control</List.Item>
-            <List.Item>AI mode</List.Item>
-            <List.Item>Code execution control</List.Item>
-          </List.List>
-        </List.Item>
-      </List>
+      Check changes from GitHub:{' '}
+      <a href="https://github.com/ttu/lego-boost-app/blob/master/CHANGELOG.md">CHANGELOG.md</a>
+    </Container>
 
+    <Container textAlign="left">
       <Divider />
 
       <Container>
