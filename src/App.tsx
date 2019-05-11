@@ -6,7 +6,7 @@ import * as React from 'react';
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import { Grid } from 'semantic-ui-react';
 import localStorage from 'local-storage';
-import preval from 'preval.macro'
+import preval from 'preval.macro';
 
 import BoostDeviceInfo from './components/BoostDeviceInfo';
 import BoostMain from './components/BoostMain';
@@ -25,10 +25,11 @@ const CONFIG_STORAGE_KEY = 'boost-configuration';
 const LOCAL_STATE_STORAGE_KEY = 'local-state';
 
 const DEFAULT_BOOST_CONFIG: IBoostConfig = { driveFinetune: 1.0, turnFinetune: 1.0, leftMotor: 'A', rightMotor: 'B' };
-const DEFAULT_LOCAL_STATE = { infosVisible: true, code: '' };
+const DEFAULT_LOCAL_STATE = { infosVisible: true, extraControlsVisible: true, code: '' };
 
 interface IApplicationState {
   infosVisible: boolean;
+  extraControlsVisible: boolean;
   code: string;
   configuration: IBoostConfig;
   isConnected: boolean;
@@ -42,6 +43,7 @@ class App extends React.Component<{}, IApplicationState> {
     const savedState = localStorage.get(LOCAL_STATE_STORAGE_KEY);
     this.state = {
       infosVisible: savedState ? savedState.infosVisible : DEFAULT_LOCAL_STATE.infosVisible,
+      extraControlsVisible: savedState ? savedState.extraControlsVisible : DEFAULT_LOCAL_STATE.extraControlsVisible,
       code: savedState ? savedState.code : DEFAULT_LOCAL_STATE.code,
       configuration: localStorage.get(CONFIG_STORAGE_KEY) || DEFAULT_BOOST_CONFIG,
       isConnected: false,
@@ -49,19 +51,25 @@ class App extends React.Component<{}, IApplicationState> {
   }
 
   onInfoToggle = () => {
-    const newLocalState = { infosVisible: !this.state.infosVisible, code: this.state.code };
+    const newLocalState = { ...this.state, infosVisible: !this.state.infosVisible };
     localStorage.set(LOCAL_STATE_STORAGE_KEY, newLocalState);
     this.setState({ infosVisible: newLocalState.infosVisible });
   };
 
+  onExtraControlsToggle = () => {
+    const newLocalState = { ...this.state, extraControlsVisible: !this.state.extraControlsVisible };
+    localStorage.set(LOCAL_STATE_STORAGE_KEY, newLocalState);
+    this.setState({ extraControlsVisible: newLocalState.extraControlsVisible });
+  };
+
   updateCode = (code: string) => {
-    const newLocalState = { infosVisible: this.state.infosVisible, code };
+    const newLocalState = { ...this.state, code };
     localStorage.set(LOCAL_STATE_STORAGE_KEY, newLocalState);
     this.setState({ code });
   };
 
   saveCodeToStorage = (code: string) => {
-    const newLocalState = { infosVisible: this.state.infosVisible, code };
+    const newLocalState = { ...this.state, code };
     localStorage.set(LOCAL_STATE_STORAGE_KEY, newLocalState);
   };
 
@@ -105,7 +113,13 @@ class App extends React.Component<{}, IApplicationState> {
         configuration={this.state.configuration}
       />
     );
-    const CreateManualControl = () => <ManualControl {...boostProps} />;
+    const CreateManualControl = () => (
+      <ManualControl
+        {...boostProps}
+        extraControlsVisible={this.state.extraControlsVisible}
+        onExtraControlsToggle={this.onExtraControlsToggle}
+      />
+    );
     const CreateAiControl = () => (
       <AiControl {...boostProps} infoVisible={this.state.infosVisible} infoToggle={this.onInfoToggle} />
     );

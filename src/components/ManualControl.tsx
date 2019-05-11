@@ -1,17 +1,20 @@
 import LegoBoost from 'lego-boost-browser';
 import * as React from 'react';
-import { Container, Grid, Button, Dropdown, Icon } from 'semantic-ui-react';
+import { Container, Grid, Button, Dropdown, Icon, Accordion, Header } from 'semantic-ui-react';
 
 import BoostControlInfo from './BoostControlInfo';
 
 interface IProps {
   boost: LegoBoost;
+  extraControlsVisible: boolean;
+  onExtraControlsToggle: () => void;
 }
 
 interface IManualState {
   lastCommand: string;
   mode: ControlMode;
   ledColor: string;
+  activeIndex: number;
 }
 
 enum ControlMode {
@@ -49,6 +52,7 @@ class ManualControl extends React.Component<IProps, IManualState> {
       lastCommand: '',
       mode: ControlMode.Click,
       ledColor: 'off',
+      activeIndex: props.extraControlsVisible ? 0 : -1,
     };
   }
 
@@ -102,8 +106,8 @@ class ManualControl extends React.Component<IProps, IManualState> {
     };
 
     return (
-      <Container>
-        <Grid columns={3} celled padded style={{ height: '90vh' }}>
+      <div className="manual-controls">
+        <Grid columns={3} celled padded style={{ height: '81vh' }}>
           <Grid.Row style={{ height: '33%' }}>
             <Grid.Column />
             {createControl(Command.Up)}
@@ -121,43 +125,53 @@ class ManualControl extends React.Component<IProps, IManualState> {
           </Grid.Row>
         </Grid>
 
-        <Grid>
-          <Grid.Row columns={2}>
-            <Grid.Column textAlign="right">
-              <Button
-                color={this.state.mode === ControlMode.Click ? 'red' : 'grey'}
-                onClick={() => this.setState({ mode: ControlMode.Click })}
-              >
-                Click Mode
-              </Button>
-            </Grid.Column>
-            <Grid.Column textAlign="left">
-              <Button
-                color={this.state.mode === ControlMode.Arcade ? 'red' : 'grey'}
-                onClick={() => this.setState({ mode: ControlMode.Arcade })}
-              >
-                Arcade Mode
-              </Button>
-            </Grid.Column>
-          </Grid.Row>
-          <Grid.Row columns={2}>
-            <Grid.Column textAlign="right">
-              <Dropdown options={LED_COLORS} value={this.state.ledColor} onChange={this.handleLedChange} />
-            </Grid.Column>
-            <Grid.Column textAlign="left">
-              <Button primary onClick={async () => await this.props.boost.ledAsync(this.state.ledColor)}>
-                <Icon name="lightbulb outline" />
-                Set Led Color
-              </Button>
-            </Grid.Column>
-          </Grid.Row>
-          <Grid.Row columns={1}>
-            <Grid.Column>
-              <BoostControlInfo {...controlProps} />
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
-      </Container>
+        <Accordion className="extra-controls">
+          <Accordion.Title active={this.state.activeIndex === 0} index={0} onClick={this.props.onExtraControlsToggle}>
+            <Header as="h3">
+              <Icon name="dropdown" />
+              Extra controls
+            </Header>
+          </Accordion.Title>
+          <Accordion.Content active={this.state.activeIndex === 0}>
+            <Grid>
+              <Grid.Row columns={2}>
+                <Grid.Column textAlign="right">
+                  <Button
+                    color={this.state.mode === ControlMode.Click ? 'red' : 'grey'}
+                    onClick={() => this.setState({ mode: ControlMode.Click })}
+                  >
+                    Click Mode
+                  </Button>
+                </Grid.Column>
+                <Grid.Column textAlign="left">
+                  <Button
+                    color={this.state.mode === ControlMode.Arcade ? 'red' : 'grey'}
+                    onClick={() => this.setState({ mode: ControlMode.Arcade })}
+                  >
+                    Arcade Mode
+                  </Button>
+                </Grid.Column>
+              </Grid.Row>
+              <Grid.Row columns={2}>
+                <Grid.Column textAlign="right">
+                  <Dropdown options={LED_COLORS} value={this.state.ledColor} onChange={this.handleLedChange} />
+                </Grid.Column>
+                <Grid.Column textAlign="left">
+                  <Button primary onClick={async () => await this.props.boost.ledAsync(this.state.ledColor)}>
+                    <Icon name="lightbulb outline" />
+                    Set Led Color
+                  </Button>
+                </Grid.Column>
+              </Grid.Row>
+              <Grid.Row columns={1}>
+                <Grid.Column>
+                  <BoostControlInfo {...controlProps} />
+                </Grid.Column>
+              </Grid.Row>
+            </Grid>
+          </Accordion.Content>
+        </Accordion>
+      </div>
     );
   }
 }

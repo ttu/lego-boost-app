@@ -54,6 +54,7 @@ button.code-copy {
 .info-header {
   padding: 0px !important;
 }
+
 .info-items {
   text-align: center !important;
 }
@@ -73,4 +74,12 @@ button.code-copy {
   font-weight: 700;
   border-bottom: 1px solid rgba(34,36,38,.15);
   margin-bottom: 5px;
+}
+
+.manual-controls {
+  width: 100% !important;
+}
+
+.extra-controls {
+  padding-top: 20px;
 }
