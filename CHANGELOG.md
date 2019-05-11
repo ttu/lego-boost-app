@@ -2,6 +2,8 @@
 
 ### [Unreleased]
 
+### [0.8.0] - 2019-05-12
+
 - ADDED: iOS not supported notification
 - CHANGED: Message boxes and info icons to blue
 - ADDED: Manual control extra controls to accordion and changed colors of control icons
