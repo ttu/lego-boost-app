@@ -25,11 +25,12 @@ const CONFIG_STORAGE_KEY = 'boost-configuration';
 const LOCAL_STATE_STORAGE_KEY = 'local-state';
 
 const DEFAULT_BOOST_CONFIG: IBoostConfig = { driveFinetune: 1.0, turnFinetune: 1.0, leftMotor: 'A', rightMotor: 'B' };
-const DEFAULT_LOCAL_STATE = { infosVisible: true, extraControlsVisible: true, code: '' };
+const DEFAULT_LOCAL_STATE = { infosVisible: true, boostInfosVisible: true, extraControlsVisible: true, code: '' };
 
 interface IApplicationState {
   infosVisible: boolean;
   extraControlsVisible: boolean;
+  boostInfosVisible: boolean;
   code: string;
   configuration: IBoostConfig;
   isConnected: boolean;
@@ -43,6 +44,7 @@ class App extends React.Component<{}, IApplicationState> {
     const savedState = localStorage.get(LOCAL_STATE_STORAGE_KEY);
     this.state = {
       infosVisible: savedState ? savedState.infosVisible : DEFAULT_LOCAL_STATE.infosVisible,
+      boostInfosVisible: savedState ? savedState.boostInfosVisible : DEFAULT_LOCAL_STATE.boostInfosVisible,
       extraControlsVisible: savedState ? savedState.extraControlsVisible : DEFAULT_LOCAL_STATE.extraControlsVisible,
       code: savedState ? savedState.code : DEFAULT_LOCAL_STATE.code,
       configuration: localStorage.get(CONFIG_STORAGE_KEY) || DEFAULT_BOOST_CONFIG,
@@ -54,6 +56,12 @@ class App extends React.Component<{}, IApplicationState> {
     const newLocalState = { ...this.state, infosVisible: !this.state.infosVisible };
     localStorage.set(LOCAL_STATE_STORAGE_KEY, newLocalState);
     this.setState({ infosVisible: newLocalState.infosVisible });
+  };
+
+  onBoostInfoToggle = () => {
+    const newLocalState = { ...this.state, boostInfosVisible: !this.state.boostInfosVisible };
+    localStorage.set(LOCAL_STATE_STORAGE_KEY, newLocalState);
+    this.setState({ boostInfosVisible: newLocalState.boostInfosVisible });
   };
 
   onExtraControlsToggle = () => {
@@ -165,7 +173,12 @@ class App extends React.Component<{}, IApplicationState> {
               </Switch>
             </Grid.Row>
             <Grid.Row>
-              <BoostDeviceInfo {...boostProps} connectedChanged={this.updateIsConnected} />
+              <BoostDeviceInfo
+                {...boostProps}
+                connectedChanged={this.updateIsConnected}
+                boostInfosVisible={this.state.boostInfosVisible}
+                toggleVisibility={this.onBoostInfoToggle}
+              />
             </Grid.Row>
           </Grid>
         </SideBarMenu>

@@ -1,18 +1,16 @@
 import * as React from 'react';
-import { Table, Accordion, Icon, Header, Grid, Container, Label } from 'semantic-ui-react';
+import { Accordion, Icon, Header, Grid } from 'semantic-ui-react';
 import { IDeviceInfo } from '../Models';
 import LegoBoost from 'lego-boost-browser';
 
 interface IProps {
   boost: LegoBoost;
   connectedChanged: (isConnected: boolean) => void;
+  boostInfosVisible: boolean;
+  toggleVisibility: () => void;
 }
 
-interface IDeviceInfoAccordion extends IDeviceInfo {
-  activeIndex: number;
-}
-
-class BoostDeviceInfo extends React.Component<IProps, IDeviceInfoAccordion> {
+class BoostDeviceInfo extends React.Component<IProps, IDeviceInfo> {
   boost: LegoBoost;
   stateUpdaterId: NodeJS.Timeout;
   stateUpdateInterval = 200;
@@ -34,18 +32,9 @@ class BoostDeviceInfo extends React.Component<IProps, IDeviceInfoAccordion> {
         D: { action: '', angle: 0 },
         LED: { action: '', angle: 0 },
       },
-      activeIndex: 0,
       tilt: { roll: 0, pitch: 0 },
     };
   }
-
-  handleAccordionClick = (e, titleProps) => {
-    const { index } = titleProps;
-    const { activeIndex } = this.state;
-    const newIndex = activeIndex === index ? -1 : index;
-
-    this.setState({ activeIndex: newIndex });
-  };
 
   componentDidMount = () => {
     this.stateUpdaterId = setInterval(() => {
@@ -92,22 +81,18 @@ class BoostDeviceInfo extends React.Component<IProps, IDeviceInfoAccordion> {
 
   componentWillUnmount() {
     clearInterval(this.stateUpdaterId);
-  }
-
-  shouldComponentUpdate = (nextProps, nextState) => {
-    return true;
   };
 
   render() {
     return (
       <Accordion fluid>
-        <Accordion.Title active={this.state.activeIndex === 0} index={0} onClick={this.handleAccordionClick}>
+        <Accordion.Title active={this.props.boostInfosVisible} index={0} onClick={this.props.toggleVisibility}>
           <Header as="h3">
             <Icon name="dropdown" />
             Boost information
           </Header>
         </Accordion.Title>
-        <Accordion.Content active={this.state.activeIndex === 0}>
+        <Accordion.Content active={this.props.boostInfosVisible}>
           <Grid centered className="info-items">
             <Grid.Row>
               <Grid.Column className="info-item">
