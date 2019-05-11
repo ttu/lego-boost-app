@@ -115,7 +115,7 @@ class CodeControl extends React.Component<IProps, IState> {
   render() {
     return (
       <Container>
-        <Container style={{'paddingBottom':'20px'}}>
+        <Container style={{ paddingBottom: '20px' }}>
           <MessageBlock visible={this.props.infoVisible} infoToggle={this.props.infoToggle} content={INFO_TEXT} />
         </Container>
 

@@ -81,7 +81,7 @@ class BoostDeviceInfo extends React.Component<IProps, IDeviceInfo> {
 
   componentWillUnmount() {
     clearInterval(this.stateUpdaterId);
-  };
+  }
 
   render() {
     return (

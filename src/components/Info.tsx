@@ -29,15 +29,16 @@ const Info = ({ version, date }: IAboutProps) => (
     <Container textAlign="left">
       <Header as="h4">Common Problems</Header>
       <List bulleted>
-        <List.Item>Connect-button doesn't work: check troubleshoot guide from below</List.Item>
+        <List.Item>Connect-button doesn't work: Check troubleshoot guide from below</List.Item>
         <List.Item>
           Lego Boost's distance sensor doesn't work: Remove the sensor from the Lego Boost and attach it again
         </List.Item>
         <List.Item>Manual control won't work: Refresh the page and reconnect</List.Item>
         <List.Item>In case of any unknown problem: Refresh the page and reconnect</List.Item>
+        <List.Item>Controls don't work or connection is lost: Check Lego Boost's battery charge</List.Item>
         <List.Item>
           Page shows no connection, but Boost's led shows it is connected: Press power button ~10sec to reset Boost's
-          connection.
+          connection
         </List.Item>
       </List>
     </Container>

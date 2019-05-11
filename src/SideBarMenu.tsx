@@ -94,5 +94,3 @@ class SideBarMenu extends React.Component<IBarProps, IBarState> {
 }
 
 export default SideBarMenu;
-
-// export default withRouter(SideBarMenu);

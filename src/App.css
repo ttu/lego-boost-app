@@ -1,29 +1,29 @@
 .up-control {
-  background-image:url(./images/triangle-up.svg);
+  background-image: url(./images/triangle-up.svg);
   background-size: cover;
   background-position: center;
 }
 
 .down-control {
-  background-image:url(./images/triangle-down.svg);
+  background-image: url(./images/triangle-down.svg);
   background-size: cover;
   background-position: center;
 }
 
 .left-control {
-  background-image:url(./images/triangle-left.svg);
+  background-image: url(./images/triangle-left.svg);
   background-size: cover;
   background-position: center;
 }
 
 .right-control {
-  background-image:url(./images/triangle-right.svg);
+  background-image: url(./images/triangle-right.svg);
   background-size: cover;
   background-position: center;
 }
 
 .stop-control {
-  background-image:url(./images/stop-circle.svg);
+  background-image: url(./images/stop-circle.svg);
   background-size: cover;
   background-position: center;
 }
@@ -65,14 +65,14 @@ button.code-copy {
   padding: 10px;
   min-width: 100px;
   background: #f9fafb;
-  box-shadow: 0 2px 25px 0 rgba(34,36,38,.02) inset;
-  border: 1px solid rgba(34,36,38,.15);
+  box-shadow: 0 2px 25px 0 rgba(34, 36, 38, 0.02) inset;
+  border: 1px solid rgba(34, 36, 38, 0.15);
   border-radius: 4pt;
 }
 
 .info-item-heder {
   font-weight: 700;
-  border-bottom: 1px solid rgba(34,36,38,.15);
+  border-bottom: 1px solid rgba(34, 36, 38, 0.15);
   margin-bottom: 5px;
 }
 
