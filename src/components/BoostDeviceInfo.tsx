@@ -100,7 +100,7 @@ class BoostDeviceInfo extends React.Component<IProps, IDeviceInfo> {
                   <Icon name="bluetooth b" />
                   <label>BLE</label>
                 </div>
-                <div>Connected</div>
+                <div>Status</div>
                 <div>
                   {this.state.connected ? <Icon name="circle" color="green" /> : <Icon name="circle" color="red" />}
                 </div>
