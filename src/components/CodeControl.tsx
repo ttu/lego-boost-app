@@ -1,7 +1,7 @@
 import LegoBoost from 'lego-boost-browser';
 import * as React from 'react';
 import MonacoEditor from 'react-monaco-editor';
-import { Grid, TextArea, Button, Header, Container, Accordion, Icon, Divider, Message } from 'semantic-ui-react';
+import { Grid, TextArea, Button, Header, Container, Accordion, Icon, Divider, Message, SemanticICONS } from 'semantic-ui-react';
 import * as monacoEditor from 'monaco-editor/esm/vs/editor/editor.api';
 
 import MessageBlock from './MessageBlock';
@@ -21,7 +21,13 @@ interface IState {
   codeToRun: string;
   activeIndex: number;
   executionError: string;
+  editorWidth: string;
+  editorHeight: string;
+  editorIcon: SemanticICONS;
 }
+
+const EDITOR_DEFAULT_HEIGHT = '500';
+const EDITOR_DEFAULT_ICON = 'arrow circle down';
 
 const INFO_TEXT = `Insert the code inside the async function (starting from line 6). Press the Execute button to run the code.`;
 
@@ -38,6 +44,7 @@ const MONACO_OPTIONS: monacoEditor.editor.IEditorConstructionOptions = {
   language: 'typescript',
   theme: 'vs-dark',
   formatOnPaste: true,
+  automaticLayout: true,
 };
 
 class CodeControl extends React.Component<IProps, IState> {
@@ -47,6 +54,9 @@ class CodeControl extends React.Component<IProps, IState> {
       codeToRun: this.props.code || CODE_EXAMPLES[0].code,
       executionError: '',
       activeIndex: 0,
+      editorWidth: '100%',
+      editorHeight: EDITOR_DEFAULT_HEIGHT,
+      editorIcon: EDITOR_DEFAULT_ICON
     };
 
     // Need to set this at the constructor as can't set before eval and remove after that as using async function, it is not known when eval is ready
@@ -112,6 +122,12 @@ class CodeControl extends React.Component<IProps, IState> {
 
   copyCode = id => this.setState({ codeToRun: CODE_EXAMPLES[id].code });
 
+  toggleEditorSize = () => {
+    const editorHeight = this.state.editorHeight === EDITOR_DEFAULT_HEIGHT ? '85vh' : EDITOR_DEFAULT_HEIGHT;
+    const editorIcon = this.state.editorIcon ===EDITOR_DEFAULT_ICON ? 'arrow circle up' : EDITOR_DEFAULT_ICON;
+    this.setState({ editorHeight, editorIcon });
+  }
+
   render() {
     return (
       <Container>
@@ -124,12 +140,13 @@ class CodeControl extends React.Component<IProps, IState> {
             language="typescript"
             value={TEMPLATE.replace('%CODE%', this.state.codeToRun)}
             options={MONACO_OPTIONS}
-            width="100%"
-            height="400"
+            width={this.state.editorWidth}
+            height={this.state.editorHeight}
             onChange={this.updateMonacoCode}
             editorWillMount={this.editorWillMount}
             editorDidMount={this.editorDidMount}
           />
+          <Icon color="blue" className="dismissed-info" name={this.state.editorIcon} onClick={this.toggleEditorSize} />
         </Container>
 
         <br />
@@ -164,7 +181,7 @@ class CodeControl extends React.Component<IProps, IState> {
                   <Container key={example.header}>
                     <Header as="h4">{example.header}</Header>
                     <Container>{example.description}</Container>
-                    <TextArea value={example.code} readOnly autoHeight style={{ minWidth: 400, maxWidth: 500 }} />
+                    <TextArea value={example.code} readOnly style={{ minWidth: 400, maxWidth: 500 }} />
                     <Button
                       circular
                       className="code-copy"
