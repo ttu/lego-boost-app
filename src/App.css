@@ -83,3 +83,7 @@ button.code-copy {
 .extra-controls {
   padding-top: 20px;
 }
+
+.connect-item {
+  cursor: pointer;
+}

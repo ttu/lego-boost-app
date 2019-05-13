@@ -22,12 +22,12 @@ class SideBarMenu extends React.Component<IBarProps, IBarState> {
 
   getConnectedItem = () =>
     this.props.connected ? (
-      <div onClick={_ => this.props.connect()}>
+      <div className="connect-item" onClick={_ => this.props.connect()}>
         <Icon name="circle" color="green" />
         Connected
       </div>
     ) : (
-      <div onClick={_ => this.props.connect()}>
+      <div className="connect-item" onClick={_ => this.props.connect()}>
         <Icon name="circle" color="red" />
         Not connected
       </div>
