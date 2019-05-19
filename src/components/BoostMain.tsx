@@ -18,6 +18,8 @@ class BoostMain extends React.Component<IProps> {
 
   isIos = () => /(iPhone|iPad|iPod)/.test(navigator.userAgent);
 
+  isWebBluetoothSupported = () => navigator.bluetooth ? true : false;
+
   render() {
     if (this.isIos()) {
       return (
@@ -27,6 +29,19 @@ class BoostMain extends React.Component<IProps> {
             icon="apple"
             header="Apple iOS not supported"
             content="Unfortunately Apple iOS (iPhone, iPad) doesn't support Web Bluetooth API, so Lego Boost Control can't connect to Bluetooth devices"
+          />
+        </Container>
+      );
+    }
+
+    if (!this.isWebBluetoothSupported()) {
+      return (
+        <Container>
+          <Message
+            negative
+            icon="bluetooth"
+            header="Device doesn't support Web Bluetooth"
+            content="Your device doesn't support Web Bluetooth API. Try to turn on Experimental Platform Features from Chrome. Copy to address bar: chrome://flags/#enable-experimental-web-platform-features"
           />
         </Container>
       );
