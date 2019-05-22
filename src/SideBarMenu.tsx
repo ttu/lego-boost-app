@@ -48,31 +48,31 @@ class SideBarMenu extends React.Component<IBarProps, IBarState> {
           visible={visible}
           width="wide"
         >
-          <Menu.Item active={location.pathname === '/'} as={Link} to="/" onClick={this.handleSidebarHide}>
+          <Menu.Item active={window.location.pathname === '/'} as={Link} to="/" onClick={this.handleSidebarHide}>
             <Icon name="home" />
             Main
           </Menu.Item>
-          <Menu.Item active={location.pathname === '/code'} as={Link} to="/code" onClick={this.handleSidebarHide}>
+          <Menu.Item active={window.location.pathname === '/code'} as={Link} to="/code" onClick={this.handleSidebarHide}>
             <Icon name="file code outline" />
             Code Editor
           </Menu.Item>
-          <Menu.Item active={location.pathname === '/ai'} as={Link} to="/ai" onClick={this.handleSidebarHide}>
+          <Menu.Item active={window.location.pathname === '/ai'} as={Link} to="/ai" onClick={this.handleSidebarHide}>
             <Icon name="wechat" />
             AI Mode
           </Menu.Item>
-          <Menu.Item active={location.pathname === '/manual'} as={Link} to="/manual" onClick={this.handleSidebarHide}>
+          <Menu.Item active={window.location.pathname === '/manual'} as={Link} to="/manual" onClick={this.handleSidebarHide}>
             <Icon name="gamepad" />
             Manual Control
           </Menu.Item>
-          <Menu.Item active={location.pathname === '/motors'} as={Link} to="/motors" onClick={this.handleSidebarHide}>
+          <Menu.Item active={window.location.pathname === '/motors'} as={Link} to="/motors" onClick={this.handleSidebarHide}>
             <Icon name="server" />
             Individual Motors
           </Menu.Item>
-          <Menu.Item active={location.pathname === '/config'} as={Link} to="/config" onClick={this.handleSidebarHide}>
+          <Menu.Item active={window.location.pathname === '/config'} as={Link} to="/config" onClick={this.handleSidebarHide}>
             <Icon name="dashboard" />
             Configure
           </Menu.Item>
-          <Menu.Item active={location.pathname === '/info'} as={Link} to="/info" onClick={this.handleSidebarHide}>
+          <Menu.Item active={window.location.pathname === '/info'} as={Link} to="/info" onClick={this.handleSidebarHide}>
             <Icon name="info circle" />
             Info
           </Menu.Item>

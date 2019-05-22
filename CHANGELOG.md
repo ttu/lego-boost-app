@@ -2,8 +2,9 @@
 
 ### [Unreleased]
 
-* ADDED: Code editor to full screen button
-* ADDED: Web Bluetooth not supported notification
+- ADDED: Code editor to full size button
+- CHANGED: Minor UI updates
+- ADDED: Web Bluetooth not supported notification
 
 ### [0.8.0] - 2019-05-12
 

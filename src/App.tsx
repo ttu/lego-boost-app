@@ -24,8 +24,26 @@ const APP_VERSION = process.env.REACT_APP_VERSION || 'not defined';
 const CONFIG_STORAGE_KEY = 'boost-configuration';
 const LOCAL_STATE_STORAGE_KEY = 'local-state';
 
-const DEFAULT_BOOST_CONFIG: IBoostConfig = { driveFinetune: 1.0, turnFinetune: 1.0, leftMotor: 'A', rightMotor: 'B' };
-const DEFAULT_LOCAL_STATE = { infosVisible: true, boostInfosVisible: true, extraControlsVisible: true, code: '' };
+const DEFAULT_BOOST_CONFIG: IBoostConfig = {
+  driveFinetune: 1.0,
+  turnFinetune: 1.0,
+  leftMotor: 'A',
+  rightMotor: 'B',
+};
+
+const DEFAULT_STATE: IStoredApplicationState = {
+  infosVisible: true,
+  boostInfosVisible: true,
+  extraControlsVisible: false,
+  code: '',
+};
+
+interface IStoredApplicationState {
+  infosVisible: boolean;
+  boostInfosVisible: boolean;
+  extraControlsVisible: boolean;
+  code: string;
+}
 
 interface IApplicationState {
   infosVisible: boolean;
@@ -41,16 +59,18 @@ class App extends React.Component<{}, IApplicationState> {
 
   constructor(props) {
     super(props);
-    const savedState = localStorage.get(LOCAL_STATE_STORAGE_KEY);
+    const savedState = localStorage.get(LOCAL_STATE_STORAGE_KEY) as IStoredApplicationState;
     this.state = {
-      infosVisible: savedState ? savedState.infosVisible : DEFAULT_LOCAL_STATE.infosVisible,
-      boostInfosVisible: savedState ? savedState.boostInfosVisible : DEFAULT_LOCAL_STATE.boostInfosVisible,
-      extraControlsVisible: savedState ? savedState.extraControlsVisible : DEFAULT_LOCAL_STATE.extraControlsVisible,
-      code: savedState ? savedState.code : DEFAULT_LOCAL_STATE.code,
-      configuration: localStorage.get(CONFIG_STORAGE_KEY) || DEFAULT_BOOST_CONFIG,
+      infosVisible: savedState && this.isBoolean(savedState.infosVisible) ? savedState.infosVisible : DEFAULT_STATE.infosVisible,
+      boostInfosVisible: savedState && this.isBoolean(savedState.boostInfosVisible) ? savedState.boostInfosVisible : DEFAULT_STATE.boostInfosVisible,
+      extraControlsVisible: savedState && this.isBoolean(savedState.extraControlsVisible) ? savedState.extraControlsVisible : DEFAULT_STATE.extraControlsVisible,
+      code: savedState ? savedState.code : DEFAULT_STATE.code,
+      configuration: (localStorage.get(CONFIG_STORAGE_KEY) as IBoostConfig) || DEFAULT_BOOST_CONFIG,
       isConnected: false,
     };
   }
+
+  isBoolean = (value) => typeof value === 'boolean';
 
   onInfoToggle = () => {
     const newLocalState = { ...this.state, infosVisible: !this.state.infosVisible };

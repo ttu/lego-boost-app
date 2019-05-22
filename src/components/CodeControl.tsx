@@ -1,7 +1,18 @@
 import LegoBoost from 'lego-boost-browser';
 import * as React from 'react';
 import MonacoEditor from 'react-monaco-editor';
-import { Grid, TextArea, Button, Header, Container, Accordion, Icon, Divider, Message, SemanticICONS } from 'semantic-ui-react';
+import {
+  Grid,
+  TextArea,
+  Button,
+  Header,
+  Container,
+  Accordion,
+  Icon,
+  Divider,
+  Message,
+  SemanticICONS,
+} from 'semantic-ui-react';
 import * as monacoEditor from 'monaco-editor/esm/vs/editor/editor.api';
 
 import MessageBlock from './MessageBlock';
@@ -56,7 +67,7 @@ class CodeControl extends React.Component<IProps, IState> {
       activeIndex: 0,
       editorWidth: '100%',
       editorHeight: EDITOR_DEFAULT_HEIGHT,
-      editorIcon: EDITOR_DEFAULT_ICON
+      editorIcon: EDITOR_DEFAULT_ICON,
     };
 
     // Need to set this at the constructor as can't set before eval and remove after that as using async function, it is not known when eval is ready
@@ -124,9 +135,9 @@ class CodeControl extends React.Component<IProps, IState> {
 
   toggleEditorSize = () => {
     const editorHeight = this.state.editorHeight === EDITOR_DEFAULT_HEIGHT ? '85vh' : EDITOR_DEFAULT_HEIGHT;
-    const editorIcon = this.state.editorIcon ===EDITOR_DEFAULT_ICON ? 'arrow circle up' : EDITOR_DEFAULT_ICON;
+    const editorIcon = this.state.editorIcon === EDITOR_DEFAULT_ICON ? 'arrow circle up' : EDITOR_DEFAULT_ICON;
     this.setState({ editorHeight, editorIcon });
-  }
+  };
 
   render() {
     return (
