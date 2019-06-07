@@ -70,31 +70,22 @@ class App extends React.Component<{}, IApplicationState> {
     };
   }
 
-  isBoolean = (value) => typeof value === 'boolean';
+  isBoolean = (value: any) => typeof value === 'boolean';
 
-  onInfoToggle = () => {
-    const newLocalState = { ...this.state, infosVisible: !this.state.infosVisible };
-    localStorage.set(LOCAL_STATE_STORAGE_KEY, newLocalState);
-    this.setState({ infosVisible: newLocalState.infosVisible });
-  };
+  onInfoToggle = () => this.updateToStorageAndState('infosVisible', !this.state.infosVisible);
 
-  onBoostInfoToggle = () => {
-    const newLocalState = { ...this.state, boostInfosVisible: !this.state.boostInfosVisible };
-    localStorage.set(LOCAL_STATE_STORAGE_KEY, newLocalState);
-    this.setState({ boostInfosVisible: newLocalState.boostInfosVisible });
-  };
+  onBoostInfoToggle = () => this.updateToStorageAndState('boostInfosVisible', !this.state.boostInfosVisible);
 
-  onExtraControlsToggle = () => {
-    const newLocalState = { ...this.state, extraControlsVisible: !this.state.extraControlsVisible };
-    localStorage.set(LOCAL_STATE_STORAGE_KEY, newLocalState);
-    this.setState({ extraControlsVisible: newLocalState.extraControlsVisible });
-  };
+  onExtraControlsToggle = () => this.updateToStorageAndState('extraControlsVisible', !this.state.extraControlsVisible);
 
-  updateCode = (code: string) => {
-    const newLocalState = { ...this.state, code };
+  updateCode = (code: string) => this.updateToStorageAndState('code', code);
+  
+  updateToStorageAndState = (propName: string, value: any) => {
+    const newLocalState = { ...this.state, [propName]: value };
     localStorage.set(LOCAL_STATE_STORAGE_KEY, newLocalState);
-    this.setState({ code });
-  };
+    // @ts-ignore
+    this.setState({ [propName]: value });
+  }
 
   saveCodeToStorage = (code: string) => {
     const newLocalState = { ...this.state, code };
