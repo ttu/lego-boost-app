@@ -29,3 +29,16 @@ export interface IBoostConfig extends IConfiguration {
   driveFinetune?: number;
   turnFinetune?: number;
 }
+
+export enum ControlMode {
+  Click,
+  Arcade,
+}
+
+export interface IStoredApplicationState {
+  infosVisible: boolean;
+  boostInfosVisible: boolean;
+  extraControlsVisible: boolean;
+  code: string;
+  controlMode: ControlMode;
+}

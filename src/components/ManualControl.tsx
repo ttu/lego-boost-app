@@ -1,13 +1,16 @@
 import LegoBoost from 'lego-boost-browser';
 import * as React from 'react';
-import { Container, Grid, Button, Dropdown, Icon, Accordion, Header } from 'semantic-ui-react';
+import { Grid, Button, Dropdown, Icon, Accordion, Header } from 'semantic-ui-react';
 
 import BoostControlInfo from './BoostControlInfo';
+import { ControlMode } from '../Models';
 
-interface IProps {
+interface IManualProps {
   boost: LegoBoost;
   extraControlsVisible: boolean;
   onExtraControlsToggle: () => void;
+  controlMode: ControlMode;
+  onUpdateControlMode: (controlModel: ControlMode) => void;
 }
 
 interface IManualState {
@@ -15,11 +18,6 @@ interface IManualState {
   mode: ControlMode;
   ledColor: string;
   activeIndex: number;
-}
-
-enum ControlMode {
-  Click,
-  Arcade,
 }
 
 enum Command {
@@ -45,12 +43,12 @@ const LED_COLORS = [
   { key: 'white', value: 'white', text: 'White' },
 ];
 
-class ManualControl extends React.Component<IProps, IManualState> {
-  constructor(props) {
+class ManualControl extends React.Component<IManualProps, IManualState> {
+  constructor(props: IManualProps) {
     super(props);
     this.state = {
       lastCommand: '',
-      mode: ControlMode.Click,
+      mode: props.controlMode || ControlMode.Click,
       ledColor: 'off',
       activeIndex: props.extraControlsVisible ? 0 : -1,
     };
@@ -138,7 +136,7 @@ class ManualControl extends React.Component<IProps, IManualState> {
                 <Grid.Column textAlign="right">
                   <Button
                     color={this.state.mode === ControlMode.Click ? 'red' : 'grey'}
-                    onClick={() => this.setState({ mode: ControlMode.Click })}
+                    onClick={() => this.props.onUpdateControlMode(ControlMode.Click)}
                   >
                     Click Mode
                   </Button>
@@ -146,7 +144,7 @@ class ManualControl extends React.Component<IProps, IManualState> {
                 <Grid.Column textAlign="left">
                   <Button
                     color={this.state.mode === ControlMode.Arcade ? 'red' : 'grey'}
-                    onClick={() => this.setState({ mode: ControlMode.Arcade })}
+                    onClick={() => this.props.onUpdateControlMode(ControlMode.Arcade)}
                   >
                     Arcade Mode
                   </Button>

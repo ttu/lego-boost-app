@@ -16,7 +16,7 @@ import CodeControl from './components/CodeControl';
 import Info from './components/Info';
 import MotorControl from './components/MotorControl';
 import BoostConfiguration from './components/BoostConfiguration';
-import { IBoostConfig } from './Models';
+import { IBoostConfig, ControlMode, IStoredApplicationState } from './Models';
 import SideBarMenu from './SideBarMenu';
 
 const APP_BUILD_TIME = preval`module.exports = new Date().toLocaleString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });`;
@@ -36,14 +36,8 @@ const DEFAULT_STATE: IStoredApplicationState = {
   boostInfosVisible: true,
   extraControlsVisible: false,
   code: '',
+  controlMode: ControlMode.Click
 };
-
-interface IStoredApplicationState {
-  infosVisible: boolean;
-  boostInfosVisible: boolean;
-  extraControlsVisible: boolean;
-  code: string;
-}
 
 interface IApplicationState {
   infosVisible: boolean;
@@ -52,6 +46,7 @@ interface IApplicationState {
   code: string;
   configuration: IBoostConfig;
   isConnected: boolean;
+  controlMode: ControlMode;
 }
 
 class App extends React.Component<{}, IApplicationState> {
@@ -65,6 +60,7 @@ class App extends React.Component<{}, IApplicationState> {
       boostInfosVisible: savedState && this.isBoolean(savedState.boostInfosVisible) ? savedState.boostInfosVisible : DEFAULT_STATE.boostInfosVisible,
       extraControlsVisible: savedState && this.isBoolean(savedState.extraControlsVisible) ? savedState.extraControlsVisible : DEFAULT_STATE.extraControlsVisible,
       code: savedState ? savedState.code : DEFAULT_STATE.code,
+      controlMode: savedState && savedState.controlMode || DEFAULT_STATE.controlMode,
       configuration: (localStorage.get(CONFIG_STORAGE_KEY) as IBoostConfig) || DEFAULT_BOOST_CONFIG,
       isConnected: false,
     };
@@ -79,18 +75,17 @@ class App extends React.Component<{}, IApplicationState> {
   onExtraControlsToggle = () => this.updateToStorageAndState('extraControlsVisible', !this.state.extraControlsVisible);
 
   updateCode = (code: string) => this.updateToStorageAndState('code', code);
-  
+
+  onUpdateControlMode = (controlMode: ControlMode) => this.updateToStorageAndState('controlMode', controlMode);
+
+  saveCodeToStorage = (code: string) => localStorage.set(LOCAL_STATE_STORAGE_KEY, { ...this.state, code });
+
   updateToStorageAndState = (propName: string, value: any) => {
     const newLocalState = { ...this.state, [propName]: value };
     localStorage.set(LOCAL_STATE_STORAGE_KEY, newLocalState);
     // @ts-ignore
     this.setState({ [propName]: value });
   }
-
-  saveCodeToStorage = (code: string) => {
-    const newLocalState = { ...this.state, code };
-    localStorage.set(LOCAL_STATE_STORAGE_KEY, newLocalState);
-  };
 
   updateConfig = (c: IBoostConfig) => {
     this.setState(prevState => {
@@ -135,6 +130,8 @@ class App extends React.Component<{}, IApplicationState> {
     const CreateManualControl = () => (
       <ManualControl
         {...boostProps}
+        controlMode={this.state.controlMode}
+        onUpdateControlMode={this.onUpdateControlMode}
         extraControlsVisible={this.state.extraControlsVisible}
         onExtraControlsToggle={this.onExtraControlsToggle}
       />
