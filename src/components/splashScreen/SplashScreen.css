@@ -6,16 +6,31 @@
 }
 
 .SplashScreen-logo {
-  animation: SplashScreen-logo-spin infinite 0.6s linear;
+  -webkit-animation: rotation 0.6s infinite linear;
+  -moz-animation: rotation 0.6s infinite linear;
+  -o-animation: rotation 0.6s infinite linear;
+  animation: rotate 0.6s infinite linear;
   height: 40vmin;
+  width: 40vmin;
   pointer-events: none;
 }
 
-@keyframes SplashScreen-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+@-webkit-keyframes rotate {
+  from {-webkit-transform: rotate(0deg);}
+  to {-webkit-transform: rotate(360deg);}
+}
+
+@-moz-keyframes rotate {
+  from {-moz-transform: rotate(0deg);}
+  to {-moz-transform: rotate(360deg);}
+}
+
+@-o-keyframes rotate {
+  from {-o-transform: rotate(0deg);}
+  to {-o-transform: rotate(360deg);}
+}
+
+@keyframes rotate {
+  from {transform: rotate(0deg);}
+  to {transform: rotate(360deg);}
 }
