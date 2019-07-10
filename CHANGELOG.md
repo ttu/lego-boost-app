@@ -6,6 +6,7 @@
 - CHANGED: Minor UI updates
 - ADDED: Web Bluetooth not supported notification
 - ADDED: Save control mode to local storage
+- CHANGED: Split manual control to two controls
 
 ### [0.8.0] - 2019-05-12
 

@@ -18,6 +18,7 @@ import MotorControl from './components/MotorControl';
 import BoostConfiguration from './components/BoostConfiguration';
 import { IBoostConfig, ControlMode, IStoredApplicationState } from './Models';
 import SideBarMenu from './SideBarMenu';
+import ManualExtraControl from './components/ManualExtraControl';
 
 const APP_BUILD_TIME = preval`module.exports = new Date().toLocaleString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });`;
 const APP_VERSION = process.env.REACT_APP_VERSION || 'not defined';
@@ -36,7 +37,7 @@ const DEFAULT_STATE: IStoredApplicationState = {
   boostInfosVisible: true,
   extraControlsVisible: false,
   code: '',
-  controlMode: ControlMode.Click
+  controlMode: ControlMode.Click,
 };
 
 interface IApplicationState {
@@ -56,11 +57,18 @@ class App extends React.Component<{}, IApplicationState> {
     super(props);
     const savedState = localStorage.get(LOCAL_STATE_STORAGE_KEY) as IStoredApplicationState;
     this.state = {
-      infosVisible: savedState && this.isBoolean(savedState.infosVisible) ? savedState.infosVisible : DEFAULT_STATE.infosVisible,
-      boostInfosVisible: savedState && this.isBoolean(savedState.boostInfosVisible) ? savedState.boostInfosVisible : DEFAULT_STATE.boostInfosVisible,
-      extraControlsVisible: savedState && this.isBoolean(savedState.extraControlsVisible) ? savedState.extraControlsVisible : DEFAULT_STATE.extraControlsVisible,
+      infosVisible:
+        savedState && this.isBoolean(savedState.infosVisible) ? savedState.infosVisible : DEFAULT_STATE.infosVisible,
+      boostInfosVisible:
+        savedState && this.isBoolean(savedState.boostInfosVisible)
+          ? savedState.boostInfosVisible
+          : DEFAULT_STATE.boostInfosVisible,
+      extraControlsVisible:
+        savedState && this.isBoolean(savedState.extraControlsVisible)
+          ? savedState.extraControlsVisible
+          : DEFAULT_STATE.extraControlsVisible,
       code: savedState ? savedState.code : DEFAULT_STATE.code,
-      controlMode: savedState && savedState.controlMode || DEFAULT_STATE.controlMode,
+      controlMode: (savedState && savedState.controlMode) || DEFAULT_STATE.controlMode,
       configuration: (localStorage.get(CONFIG_STORAGE_KEY) as IBoostConfig) || DEFAULT_BOOST_CONFIG,
       isConnected: false,
     };
@@ -85,7 +93,7 @@ class App extends React.Component<{}, IApplicationState> {
     localStorage.set(LOCAL_STATE_STORAGE_KEY, newLocalState);
     // @ts-ignore
     this.setState({ [propName]: value });
-  }
+  };
 
   updateConfig = (c: IBoostConfig) => {
     this.setState(prevState => {
@@ -127,8 +135,9 @@ class App extends React.Component<{}, IApplicationState> {
         configuration={this.state.configuration}
       />
     );
-    const CreateManualControl = () => (
-      <ManualControl
+    const CreateManualControl = () => <ManualControl {...boostProps} controlMode={this.state.controlMode} />;
+    const CreateManualExtraControl = () => (
+      <ManualExtraControl
         {...boostProps}
         controlMode={this.state.controlMode}
         onUpdateControlMode={this.onUpdateControlMode}
@@ -168,10 +177,11 @@ class App extends React.Component<{}, IApplicationState> {
       <BrowserRouter>
         <SideBarMenu connected={this.state.isConnected} connect={this.connect}>
           <Grid centered>
-            <Grid.Row>
+            <Grid.Row className="">
               <Switch>
                 <Route exact path="/" component={CreateBoostMain} />
                 <Route path="/manual" component={CreateManualControl} />
+                <Route path="/manualextra" component={CreateManualExtraControl} />
                 <Route path="/motors" component={CreateMotorControl} />
                 <Route path="/ai" component={CreateAiControl} />
                 <Route path="/code" component={CreateCodeControl} />
@@ -180,7 +190,7 @@ class App extends React.Component<{}, IApplicationState> {
                 <Route render={() => <Redirect to="/" />} />
               </Switch>
             </Grid.Row>
-            <Grid.Row>
+            <Grid.Row className="main-row">
               <BoostDeviceInfo
                 {...boostProps}
                 connectedChanged={this.updateIsConnected}

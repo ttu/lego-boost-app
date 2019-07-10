@@ -64,6 +64,10 @@ class SideBarMenu extends React.Component<IBarProps, IBarState> {
             <Icon name="gamepad" />
             Manual Control
           </Menu.Item>
+          <Menu.Item active={window.location.pathname === '/manualextra'} as={Link} to="/manualextra" onClick={this.handleSidebarHide}>
+            <Icon name="lightbulb outline" />
+            Manual Extra Control
+          </Menu.Item>
           <Menu.Item active={window.location.pathname === '/motors'} as={Link} to="/motors" onClick={this.handleSidebarHide}>
             <Icon name="server" />
             Individual Motors

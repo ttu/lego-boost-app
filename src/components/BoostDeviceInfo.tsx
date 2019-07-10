@@ -83,9 +83,18 @@ class BoostDeviceInfo extends React.Component<IProps, IDeviceInfo> {
     clearInterval(this.stateUpdaterId);
   }
 
+  showInfo = () => {
+    // TODO: Get from props
+    return window.location.pathname !== '/manual';
+  }
+
   render() {
+    if (!this.showInfo()) {
+      return null;
+    }
+
     return (
-      <Accordion fluid>
+      <Accordion fluid style={{ padding: '20px' }}>
         <Accordion.Title active={this.props.boostInfosVisible} index={0} onClick={this.props.toggleVisibility}>
           <Header as="h3">
             <Icon name="dropdown" />

@@ -29,7 +29,7 @@
 }
 
 #root {
-  min-height: 100%;
+  min-height: 100vh;
 }
 
 .all-content {
@@ -78,6 +78,7 @@ button.code-copy {
 
 .manual-controls {
   width: 100% !important;
+  height: 100% !important;
 }
 
 .extra-controls {
@@ -86,4 +87,8 @@ button.code-copy {
 
 .connect-item {
   cursor: pointer;
+}
+
+.main-row {
+  padding: 0px !important;
 }
