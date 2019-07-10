@@ -62,13 +62,19 @@ class ManualExtraControl extends React.Component<IManualProps, IManualState> {
     return (
       <div className="manual-controls">
         <Grid>
-          <Grid.Row>Set control mode:</Grid.Row>
+          <Grid.Row columns={2} centered>
+            <Header as="h4">
+              <Icon name="gamepad" />
+              Select Control Mode
+            </Header>
+          </Grid.Row>
           <Grid.Row columns={2}>
             <Grid.Column textAlign="right">
               <Button
                 color={this.state.mode === ControlMode.Click ? 'red' : 'grey'}
                 onClick={() => this.props.onUpdateControlMode(ControlMode.Click)}
               >
+                <Icon name="pointing up" />
                 Click Mode
               </Button>
             </Grid.Column>
@@ -77,9 +83,16 @@ class ManualExtraControl extends React.Component<IManualProps, IManualState> {
                 color={this.state.mode === ControlMode.Arcade ? 'red' : 'grey'}
                 onClick={() => this.props.onUpdateControlMode(ControlMode.Arcade)}
               >
+                <Icon name="gamepad" />
                 Arcade Mode
               </Button>
             </Grid.Column>
+          </Grid.Row>
+          <Grid.Row columns={1} centered>
+            <Header as="h4">
+              <Icon name="lightbulb" />
+              Set Led Color
+            </Header>
           </Grid.Row>
           <Grid.Row columns={2}>
             <Grid.Column textAlign="right">
@@ -88,9 +101,15 @@ class ManualExtraControl extends React.Component<IManualProps, IManualState> {
             <Grid.Column textAlign="left">
               <Button primary onClick={async () => await this.props.boost.ledAsync(this.state.ledColor)}>
                 <Icon name="lightbulb outline" />
-                Set Led Color
+                Set Color
               </Button>
             </Grid.Column>
+          </Grid.Row>
+          <Grid.Row columns={1} centered>
+            <Header as="h4">
+              <Icon name="info" />
+              Control Information
+            </Header>
           </Grid.Row>
           <Grid.Row columns={1}>
             <Grid.Column>
