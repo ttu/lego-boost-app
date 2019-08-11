@@ -40,6 +40,7 @@ const Info = ({ version, date }: IAboutProps) => (
           Page shows no connection, but Boost's led shows it is connected: Press power button ~10sec to reset Boost's
           connection
         </List.Item>
+        <List.Item>Boost's firmware is older than 2.0.00.0017</List.Item>
       </List>
     </Container>
 

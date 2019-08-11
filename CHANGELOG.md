@@ -7,6 +7,7 @@
 - ADDED: Web Bluetooth not supported notification
 - ADDED: Save control mode to local storage
 - CHANGED: Split manual control to two controls
+- FIXED: Update lego-boost-browser package to fix support for FW 2.0.00.0017
 
 ### [0.8.0] - 2019-05-12
 
