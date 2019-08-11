@@ -1,6 +1,6 @@
 {
   "name": "lego-boost-app",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "homepage": "https://legoboost.azurewebsites.net/",
   "scripts": {
     "start": "rescripts start",
