@@ -2,16 +2,16 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, Sidebar, Segment, Icon } from 'semantic-ui-react';
 
-interface IBarProps {
+interface SideBarMenuProps {
   connected: boolean;
   connect: () => void;
 }
 
-interface IBarState {
+interface SideBarMenuState {
   visible: boolean;
 }
 
-class SideBarMenu extends React.Component<IBarProps, IBarState> {
+class SideBarMenu extends React.Component<SideBarMenuProps, SideBarMenuState> {
   constructor(props) {
     super(props);
     this.state = { visible: false };

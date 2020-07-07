@@ -19,7 +19,7 @@ import MessageBlock from './MessageBlock';
 import { legoBoostTypes } from './data/BoostTypes';
 import { CODE_EXAMPLES } from './data/CodeExamples';
 
-interface IProps {
+interface CodeControlProps {
   boost: LegoBoost;
   infoVisible: boolean;
   infoToggle: () => void;
@@ -28,7 +28,7 @@ interface IProps {
   saveCodeToStorage: (code: string) => void;
 }
 
-interface IState {
+interface CodeControlState {
   codeToRun: string;
   activeIndex: number;
   executionError: string;
@@ -58,7 +58,7 @@ const MONACO_OPTIONS: monacoEditor.editor.IEditorConstructionOptions = {
   automaticLayout: true,
 };
 
-class CodeControl extends React.Component<IProps, IState> {
+class CodeControl extends React.Component<CodeControlProps, CodeControlState> {
   constructor(props) {
     super(props);
     this.state = {

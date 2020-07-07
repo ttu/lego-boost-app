@@ -4,13 +4,13 @@ import { Grid, Button, Container, Segment, Header, Icon } from 'semantic-ui-reac
 import { Slider } from 'react-semantic-ui-range';
 import MessageBlock from './MessageBlock';
 
-interface IProps {
+interface MotorControlProps {
   boost: LegoBoost;
   infoVisible: boolean;
   infoToggle: () => void;
 }
 
-interface IState {
+interface MotorControlState {
   A: number;
   B: number;
   AB: number;
@@ -18,7 +18,7 @@ interface IState {
   D: number;
 }
 
-class MotorControl extends React.Component<IProps, IState> {
+class MotorControl extends React.Component<MotorControlProps, MotorControlState> {
   constructor(props) {
     super(props);
     this.state = {

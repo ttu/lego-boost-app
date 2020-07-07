@@ -16,7 +16,7 @@ import CodeControl from './components/CodeControl';
 import Info from './components/Info';
 import MotorControl from './components/MotorControl';
 import BoostConfiguration from './components/BoostConfiguration';
-import { IBoostConfig, ControlMode, IStoredApplicationState } from './Models';
+import { BoostConfig, ControlMode, StoredApplicationState } from './Models';
 import SideBarMenu from './SideBarMenu';
 import ManualExtraControl from './components/ManualExtraControl';
 
@@ -25,14 +25,14 @@ const APP_VERSION = process.env.REACT_APP_VERSION || 'not defined';
 const CONFIG_STORAGE_KEY = 'boost-configuration';
 const LOCAL_STATE_STORAGE_KEY = 'local-state';
 
-const DEFAULT_BOOST_CONFIG: IBoostConfig = {
+const DEFAULT_BOOST_CONFIG: BoostConfig = {
   driveFinetune: 1.0,
   turnFinetune: 1.0,
   leftMotor: 'A',
   rightMotor: 'B',
 };
 
-const DEFAULT_STATE: IStoredApplicationState = {
+const DEFAULT_STATE: StoredApplicationState = {
   infosVisible: true,
   boostInfosVisible: true,
   extraControlsVisible: false,
@@ -45,7 +45,7 @@ interface IApplicationState {
   extraControlsVisible: boolean;
   boostInfosVisible: boolean;
   code: string;
-  configuration: IBoostConfig;
+  configuration: BoostConfig;
   isConnected: boolean;
   controlMode: ControlMode;
 }
@@ -55,7 +55,7 @@ class App extends React.Component<{}, IApplicationState> {
 
   constructor(props) {
     super(props);
-    const savedState = localStorage.get(LOCAL_STATE_STORAGE_KEY) as IStoredApplicationState;
+    const savedState = localStorage.get(LOCAL_STATE_STORAGE_KEY) as StoredApplicationState;
     this.state = {
       infosVisible:
         savedState && this.isBoolean(savedState.infosVisible) ? savedState.infosVisible : DEFAULT_STATE.infosVisible,
@@ -69,7 +69,7 @@ class App extends React.Component<{}, IApplicationState> {
           : DEFAULT_STATE.extraControlsVisible,
       code: savedState ? savedState.code : DEFAULT_STATE.code,
       controlMode: (savedState && savedState.controlMode) || DEFAULT_STATE.controlMode,
-      configuration: (localStorage.get(CONFIG_STORAGE_KEY) as IBoostConfig) || DEFAULT_BOOST_CONFIG,
+      configuration: (localStorage.get(CONFIG_STORAGE_KEY) as BoostConfig) || DEFAULT_BOOST_CONFIG,
       isConnected: false,
     };
   }
@@ -95,7 +95,7 @@ class App extends React.Component<{}, IApplicationState> {
     this.setState({ [propName]: value });
   };
 
-  updateConfig = (c: IBoostConfig) => {
+  updateConfig = (c: BoostConfig) => {
     this.setState(prevState => {
       const prevConfig = prevState.configuration;
       const newConfig = {

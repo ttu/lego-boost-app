@@ -8,7 +8,8 @@
     "member-access": false,
     "jsx-boolean-value": false,
     "jsx-no-lambda": false,
-    "no-eval": false
+    "no-eval": false,
+    "interface-name": false
   },
   "linterOptions": {
     "exclude": ["src/serviceWorker.ts", "config/**/*.js", "node_modules/**/*.ts", "coverage/lcov-report/*.js"]

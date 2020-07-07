@@ -1,16 +1,16 @@
 import * as React from 'react';
 import { Accordion, Icon, Header, Grid } from 'semantic-ui-react';
-import { IDeviceInfo } from '../Models';
+import { DeviceInfo } from '../Models';
 import LegoBoost from 'lego-boost-browser';
 
-interface IProps {
+interface BoostDeviceInfoProps {
   boost: LegoBoost;
   connectedChanged: (isConnected: boolean) => void;
   boostInfosVisible: boolean;
   toggleVisibility: () => void;
 }
 
-class BoostDeviceInfo extends React.Component<IProps, IDeviceInfo> {
+class BoostDeviceInfo extends React.Component<BoostDeviceInfoProps, DeviceInfo> {
   boost: LegoBoost;
   stateUpdaterId: NodeJS.Timeout;
   stateUpdateInterval = 200;

@@ -4,14 +4,14 @@ import { Button, Grid, Container, Icon, Message } from 'semantic-ui-react';
 import MessageBlock from './MessageBlock';
 import { IConfiguration } from 'lego-boost-browser/dist/hub/hubAsync';
 
-interface IProps {
+interface BoostMainProps {
   boost: LegoBoost;
   infoVisible: boolean;
   infoToggle: () => void;
   configuration?: IConfiguration;
 }
 
-class BoostMain extends React.Component<IProps> {
+class BoostMain extends React.Component<BoostMainProps> {
   constructor(props) {
     super(props);
   }

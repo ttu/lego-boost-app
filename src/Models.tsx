@@ -1,6 +1,6 @@
 import { IConfiguration } from 'lego-boost-browser/dist/hub/hubAsync';
 
-export interface IControlData {
+export interface ControlData {
   speed: number;
   turnAngle: number;
   input: any;
@@ -8,7 +8,7 @@ export interface IControlData {
   updateInputMode: any;
 }
 
-export interface IDeviceInfo {
+export interface DeviceInfo {
   connected: boolean;
   distance: number;
   color: string;
@@ -25,7 +25,7 @@ export interface IDeviceInfo {
   };
 }
 
-export interface IBoostConfig extends IConfiguration {
+export interface BoostConfig extends IConfiguration {
   driveFinetune?: number;
   turnFinetune?: number;
 }
@@ -35,7 +35,7 @@ export enum ControlMode {
   Arcade,
 }
 
-export interface IStoredApplicationState {
+export interface StoredApplicationState {
   infosVisible: boolean;
   boostInfosVisible: boolean;
   extraControlsVisible: boolean;

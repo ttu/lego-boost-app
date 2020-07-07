@@ -3,13 +3,13 @@ import * as React from 'react';
 import { Grid, Button, Container } from 'semantic-ui-react';
 import MessageBlock from './MessageBlock';
 
-interface IProps {
+interface AiControlProps {
   boost: LegoBoost;
   infoVisible: boolean;
   infoToggle: () => void;
 }
 
-class AiControl extends React.Component<IProps> {
+class AiControl extends React.Component<AiControlProps> {
   constructor(props) {
     super(props);
   }

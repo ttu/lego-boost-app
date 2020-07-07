@@ -5,7 +5,7 @@ import { Grid, Button, Dropdown, Icon, Accordion, Header } from 'semantic-ui-rea
 import BoostControlInfo from './BoostControlInfo';
 import { ControlMode } from '../Models';
 
-interface IManualProps {
+interface ManualExtraControlProps {
   boost: LegoBoost;
   extraControlsVisible: boolean;
   onExtraControlsToggle: () => void;
@@ -13,7 +13,7 @@ interface IManualProps {
   onUpdateControlMode: (controlModel: ControlMode) => void;
 }
 
-interface IManualState {
+interface ManualExtraControlState {
   lastCommand: string;
   mode: ControlMode;
   ledColor: string;
@@ -43,8 +43,8 @@ const LED_COLORS = [
   { key: 'white', value: 'white', text: 'White' },
 ];
 
-class ManualExtraControl extends React.Component<IManualProps, IManualState> {
-  constructor(props: IManualProps) {
+class ManualExtraControl extends React.Component<ManualExtraControlProps, ManualExtraControlState> {
+  constructor(props: ManualExtraControlProps) {
     super(props);
     this.state = {
       lastCommand: '',

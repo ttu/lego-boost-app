@@ -2,18 +2,18 @@ import LegoBoost from 'lego-boost-browser';
 import * as React from 'react';
 import { Grid, Button, Container, Dropdown, Icon } from 'semantic-ui-react';
 import MessageBlock from './MessageBlock';
-import { IBoostConfig } from '../Models';
+import { BoostConfig } from '../Models';
 
-interface IProps {
+interface BoostConfigurationProps {
   boost: LegoBoost;
   infoVisible: boolean;
   infoToggle: () => void;
-  configuration: IBoostConfig;
-  updataConfig: (c: IBoostConfig) => void;
+  configuration: BoostConfig;
+  updataConfig: (c: BoostConfig) => void;
   resetConfig: () => void;
 }
 
-class BoostConfiguration extends React.Component<IProps> {
+class BoostConfiguration extends React.Component<BoostConfigurationProps> {
   stateOptions = [
     { key: 'A', value: 'A', text: 'A' },
     { key: 'B', value: 'B', text: 'B' },

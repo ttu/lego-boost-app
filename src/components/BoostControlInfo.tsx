@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { Table } from 'semantic-ui-react';
-import { IControlData } from '../Models';
+import { ControlData } from '../Models';
 import LegoBoost from 'lego-boost-browser';
 
-interface IProps {
+interface BoostControlInfoProps {
   boost: LegoBoost;
 }
 
-class BoostControlInfo extends React.Component<IProps, IControlData> {
+class BoostControlInfo extends React.Component<BoostControlInfoProps, ControlData> {
   boost: LegoBoost;
   stateUpdaterId: NodeJS.Timeout;
   stateUpdateInterval = 500;

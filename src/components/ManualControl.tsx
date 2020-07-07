@@ -4,12 +4,12 @@ import { Grid } from 'semantic-ui-react';
 
 import { ControlMode } from '../Models';
 
-interface IManualProps {
+interface ManualControlProps {
   boost: LegoBoost;
   controlMode: ControlMode;
 }
 
-interface IManualState {
+interface ManualControlState {
   lastCommand: string;
   mode: ControlMode;
 }
@@ -23,8 +23,8 @@ enum Command {
   Stop = 'stop',
 }
 
-class ManualControl extends React.Component<IManualProps, IManualState> {
-  constructor(props: IManualProps) {
+class ManualControl extends React.Component<ManualControlProps, ManualControlState> {
+  constructor(props: ManualControlProps) {
     super(props);
     this.state = {
       lastCommand: '',
