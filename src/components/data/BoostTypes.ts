@@ -5,6 +5,8 @@ declare module 'lego-boost-browser' {
         private hubControl;
         private color;
         private updateTimer;
+        private configuration;
+        private logDebug;
         /**
          * Information from Lego Boost motos and sensors
          * @property LegoBoost#deviceInfo
@@ -64,10 +66,12 @@ declare module 'lego-boost-browser' {
         /**
          * Drive forward until wall is reaced or drive backwards 100meters
          * @method LegoBoost#connect
-         * @param {IConfiguration} [configuration={}] Lego boost motor and control configuration
+         * @param {BoostConfiguration} [configuration={}] Lego boost motor and control configuration
          * @returns {Promise}
          */
-        connect(configuration?: IConfiguration): Promise<void>;
+        connect(configuration?: BoostConfiguration): Promise<void>;
+        private initHub;
+        private handleGattDisconnect;
         /**
          * Change the color of the led between pink and orange
          * @method LegoBoost#changeLed
@@ -101,9 +105,9 @@ declare module 'lego-boost-browser' {
         /**
          * Update Boost motor and control configuration
          * @method LegoBoost#updateConfiguration
-         * @param {IConfiguration} configuration Boost motor and control configuration
+         * @param {BoostConfiguration} configuration Boost motor and control configuration
          */
-        updateConfiguration(configuration: IConfiguration): void;
+        updateConfiguration(configuration: BoostConfiguration): void;
         /**
          * Control the LED on the Move Hub
          * @method LegoBoost#led
