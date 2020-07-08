@@ -2,13 +2,13 @@ import LegoBoost from 'lego-boost-browser';
 import * as React from 'react';
 import { Button, Grid, Container, Icon, Message } from 'semantic-ui-react';
 import MessageBlock from './MessageBlock';
-import { IConfiguration } from 'lego-boost-browser/dist/hub/hubAsync';
+import { BoostConfiguration } from 'lego-boost-browser/dist/hub/hubAsync';
 
 interface BoostMainProps {
   boost: LegoBoost;
   infoVisible: boolean;
   infoToggle: () => void;
-  configuration?: IConfiguration;
+  configuration?: BoostConfiguration;
 }
 
 class BoostMain extends React.Component<BoostMainProps> {

@@ -1,4 +1,4 @@
-import { IConfiguration } from 'lego-boost-browser/dist/hub/hubAsync';
+import { BoostConfiguration } from 'lego-boost-browser/dist/hub/hubAsync';
 
 export interface ControlData {
   speed: number;
@@ -25,7 +25,7 @@ export interface DeviceInfo {
   };
 }
 
-export interface BoostConfig extends IConfiguration {
+export interface BoostConfig extends BoostConfiguration {
   driveFinetune?: number;
   turnFinetune?: number;
 }

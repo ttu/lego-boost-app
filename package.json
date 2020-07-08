@@ -7,7 +7,7 @@
     "build": "rescripts build",
     "test": "rescripts test --env=jsdom",
     "eject": "rescripts eject",
-    "lint": "tslint --project ./tsconfig.json"
+    "lint": "tsc --noEmit && tslint --project ./tsconfig.json"
   },
   "dependencies": {
     "lego-boost-browser": "git+https://github.com/ttu/lego-boost-browser.git",
