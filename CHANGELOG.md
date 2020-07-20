@@ -2,6 +2,8 @@
 
 ### [Unreleased]
 
+- CHANGED: Update Lego Boost Browser Types
+
 ### [0.9.0] - 2019-08-11
 
 - ADDED: Code editor to full size button

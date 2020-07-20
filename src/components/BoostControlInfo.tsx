@@ -21,7 +21,7 @@ class BoostControlInfo extends React.Component<BoostControlInfoProps, ControlDat
   componentDidMount = () => {
     this.stateUpdaterId = setInterval(() => {
       this.setState({
-        forceState: this.boost.controlData.forceState,
+        state: this.boost.controlData.state,
         input: this.boost.controlData.input,
         speed: this.boost.controlData.speed,
         turnAngle: this.boost.controlData.turnAngle,

@@ -1,10 +1,13 @@
 import { BoostConfiguration } from 'lego-boost-browser/dist/hub/hubAsync';
+import { State } from 'lego-boost-browser/dist/types';
+
+// TODO: Use ControlData and DeviceInfo from lego-boost-browser
 
 export interface ControlData {
   speed: number;
   turnAngle: number;
   input: any;
-  forceState: boolean;
+  state?: State;
   updateInputMode: any;
 }
 
