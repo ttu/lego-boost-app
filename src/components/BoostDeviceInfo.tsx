@@ -105,7 +105,7 @@ class BoostDeviceInfo extends React.Component<BoostDeviceInfoProps, DeviceInfo> 
           <Grid centered className="info-items">
             <Grid.Row>
               <Grid.Column className="info-item">
-                <div className="info-item-heder">
+                <div className="info-item-header">
                   <Icon name="bluetooth b" />
                   <label>BLE</label>
                 </div>
@@ -115,7 +115,7 @@ class BoostDeviceInfo extends React.Component<BoostDeviceInfoProps, DeviceInfo> 
                 </div>
               </Grid.Column>
               {/* <Grid.Column className="info-item">
-                <div className="info-item-heder">
+                <div className="info-item-header">
                   <Icon name="bluetooth b" />
                   <label>BLE</label>
                 </div>
@@ -123,7 +123,7 @@ class BoostDeviceInfo extends React.Component<BoostDeviceInfoProps, DeviceInfo> 
                 <div>{this.state.rssi === 0 ? <Icon name="close" /> : this.state.rssi}</div>
               </Grid.Column> */}
               <Grid.Column className="info-item">
-                <div className="info-item-heder">
+                <div className="info-item-header">
                   <Icon name="camera" />
                   Sensor
                 </div>
@@ -131,7 +131,7 @@ class BoostDeviceInfo extends React.Component<BoostDeviceInfoProps, DeviceInfo> 
                 <div>{this.state.distance === Number.MAX_SAFE_INTEGER ? <Icon name="close" /> : this.state.color}</div>
               </Grid.Column>
               <Grid.Column className="info-item">
-                <div className="info-item-heder">
+                <div className="info-item-header">
                   <Icon name="camera" />
                   Sensor
                 </div>
@@ -141,7 +141,7 @@ class BoostDeviceInfo extends React.Component<BoostDeviceInfoProps, DeviceInfo> 
                 </div>
               </Grid.Column>
               <Grid.Column className="info-item">
-                <div className="info-item-heder">
+                <div className="info-item-header">
                   <Icon name="server" />
                   Sensor
                 </div>
@@ -157,7 +157,7 @@ class BoostDeviceInfo extends React.Component<BoostDeviceInfoProps, DeviceInfo> 
             <Grid.Row>
               {Object.keys(this.state.ports).map(element => (
                 <Grid.Column className="info-item" key={element}>
-                  <div className="info-item-heder">
+                  <div className="info-item-header">
                     <Icon name="cog" />
                     {element}
                   </div>
