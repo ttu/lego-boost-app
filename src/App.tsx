@@ -77,6 +77,11 @@ class App extends React.Component<{}, IApplicationState> {
       isConnected: false,
       controlData: this.boost.controlData
     };
+
+    // logDebug is a private, so must ignore ts errors
+    // @ts-ignore
+    // tslint:disable-next-line: no-console
+    this.boost.logDebug = console.log;
   }
 
   isBoolean = (value: any) => typeof value === 'boolean';
