@@ -19,6 +19,7 @@ import BoostConfiguration from './components/BoostConfiguration';
 import { BoostConfig, ControlMode, StoredApplicationState } from './Models';
 import SideBarMenu from './SideBarMenu';
 import ManualExtraControl from './components/ManualExtraControl';
+import { ControlData } from 'lego-boost-browser/dist/types';
 
 const APP_BUILD_TIME = preval`module.exports = new Date().toLocaleString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });`;
 const APP_VERSION = process.env.REACT_APP_VERSION || 'not defined';
@@ -48,10 +49,13 @@ interface IApplicationState {
   configuration: BoostConfig;
   isConnected: boolean;
   controlMode: ControlMode;
+  controlData: ControlData
 }
 
 class App extends React.Component<{}, IApplicationState> {
-  boost = new LegoBoost();
+  boost: LegoBoost = new LegoBoost();
+  stateUpdaterId: NodeJS.Timeout;
+  stateUpdateInterval = 500;
 
   constructor(props) {
     super(props);
@@ -71,6 +75,7 @@ class App extends React.Component<{}, IApplicationState> {
       controlMode: (savedState && savedState.controlMode) || DEFAULT_STATE.controlMode,
       configuration: (localStorage.get(CONFIG_STORAGE_KEY) as BoostConfig) || DEFAULT_BOOST_CONFIG,
       isConnected: false,
+      controlData: this.boost.controlData
     };
   }
 
@@ -124,6 +129,19 @@ class App extends React.Component<{}, IApplicationState> {
     this.setState({ configuration: DEFAULT_BOOST_CONFIG });
   };
 
+  componentDidMount = () => {
+    // TODO: Move controlData and deviceInfo update from components to here
+    this.stateUpdaterId = setInterval(() => {
+      this.setState({
+        controlData: this.boost.controlData,
+      });
+    }, this.stateUpdateInterval);
+  };
+
+  componentWillUnmount() {
+    clearInterval(this.stateUpdaterId);
+  };
+
   public render() {
     const boostProps = { boost: this.boost };
 
@@ -146,7 +164,7 @@ class App extends React.Component<{}, IApplicationState> {
       />
     );
     const CreateAiControl = () => (
-      <AiControl {...boostProps} infoVisible={this.state.infosVisible} infoToggle={this.onInfoToggle} />
+      <AiControl {...boostProps} controlData={this.state.controlData} infoVisible={this.state.infosVisible} infoToggle={this.onInfoToggle} />
     );
     const CreateConfigurationControl = () => (
       <BoostConfiguration

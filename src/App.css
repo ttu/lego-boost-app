@@ -70,6 +70,10 @@ button.code-copy {
   border-radius: 4pt;
 }
 
+.selected {
+  background: #21ba45
+}
+
 .info-item-header {
   font-weight: 700;
   border-bottom: 1px solid rgba(34, 36, 38, 0.15);
