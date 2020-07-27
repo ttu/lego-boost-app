@@ -96,8 +96,6 @@ class App extends React.Component<{}, ApplicationState> {
 
   onUpdateControlMode = (controlMode: ControlMode) => this.updateToStorageAndState('controlMode', controlMode);
 
-  saveCodeToStorage = (code: string) => localStorage.set(LOCAL_STATE_STORAGE_KEY, { ...this.state, code });
-
   updateToStorageAndState = (propName: string, value: any) => {
     const newLocalState = { ...this.state, [propName]: value };
     localStorage.set(LOCAL_STATE_STORAGE_KEY, newLocalState);
@@ -194,7 +192,6 @@ class App extends React.Component<{}, ApplicationState> {
         {...boostProps}
         code={this.state.code}
         updateCode={this.updateCode}
-        saveCodeToStorage={this.saveCodeToStorage}
         infoVisible={this.state.infosVisible}
         infoToggle={this.onInfoToggle}
       />

@@ -25,7 +25,6 @@ interface CodeControlProps {
   infoToggle: () => void;
   code: string;
   updateCode: (code: string) => void;
-  saveCodeToStorage: (code: string) => void;
 }
 
 interface CodeControlState {
@@ -59,7 +58,7 @@ const MONACO_OPTIONS: monacoEditor.editor.IEditorConstructionOptions = {
 };
 
 class CodeControl extends React.Component<CodeControlProps, CodeControlState> {
-  constructor(props) {
+  constructor(props: CodeControlProps) {
     super(props);
     this.state = {
       codeToRun: this.props.code || CODE_EXAMPLES[0].code,
@@ -78,6 +77,14 @@ class CodeControl extends React.Component<CodeControlProps, CodeControlState> {
       this.setState({ executionError: e.reason.message || 'Unknown error' });
     };
   }
+
+  shouldComponentUpdate = (nextProps: CodeControlProps, nextState: CodeControlState) => {
+    return (
+      this.props.code !== nextProps.code ||
+      this.props.infoVisible !== nextProps.infoVisible ||
+      this.state.codeToRun !== nextState.codeToRun
+    );
+  };
 
   componentWillUnmount = () => {
     if (this.props.code !== this.state.codeToRun) {
@@ -99,8 +106,7 @@ class CodeControl extends React.Component<CodeControlProps, CodeControlState> {
     let codeToRun = newValue.substr(newValue.indexOf('async () => {') + 14);
     codeToRun = codeToRun.substr(0, codeToRun.length - 2);
     this.setState({ codeToRun });
-    // TODO: Fix updateCode so it won't render on every update
-    this.props.saveCodeToStorage(codeToRun);
+    this.props.updateCode(codeToRun);
   };
 
   handleAccordionClick = (e, titleProps) => {
