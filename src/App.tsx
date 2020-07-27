@@ -41,7 +41,7 @@ const DEFAULT_STATE: StoredApplicationState = {
   controlMode: ControlMode.Click,
 };
 
-interface IApplicationState {
+interface ApplicationState {
   infosVisible: boolean;
   extraControlsVisible: boolean;
   boostInfosVisible: boolean;
@@ -49,10 +49,10 @@ interface IApplicationState {
   configuration: BoostConfig;
   isConnected: boolean;
   controlMode: ControlMode;
-  controlData: ControlData
+  controlData: ControlData;
 }
 
-class App extends React.Component<{}, IApplicationState> {
+class App extends React.Component<{}, ApplicationState> {
   boost: LegoBoost = new LegoBoost();
   stateUpdaterId: NodeJS.Timeout;
   stateUpdateInterval = 500;
@@ -75,7 +75,7 @@ class App extends React.Component<{}, IApplicationState> {
       controlMode: (savedState && savedState.controlMode) || DEFAULT_STATE.controlMode,
       configuration: (localStorage.get(CONFIG_STORAGE_KEY) as BoostConfig) || DEFAULT_BOOST_CONFIG,
       isConnected: false,
-      controlData: this.boost.controlData
+      controlData: this.boost.controlData,
     };
 
     // logDebug is a private, so must ignore ts errors
@@ -145,7 +145,7 @@ class App extends React.Component<{}, IApplicationState> {
 
   componentWillUnmount() {
     clearInterval(this.stateUpdaterId);
-  };
+  }
 
   public render() {
     const boostProps = { boost: this.boost };
@@ -169,7 +169,12 @@ class App extends React.Component<{}, IApplicationState> {
       />
     );
     const CreateAiControl = () => (
-      <AiControl {...boostProps} controlData={this.state.controlData} infoVisible={this.state.infosVisible} infoToggle={this.onInfoToggle} />
+      <AiControl
+        {...boostProps}
+        controlData={this.state.controlData}
+        infoVisible={this.state.infosVisible}
+        infoToggle={this.onInfoToggle}
+      />
     );
     const CreateConfigurationControl = () => (
       <BoostConfiguration
@@ -202,14 +207,14 @@ class App extends React.Component<{}, IApplicationState> {
           <Grid centered>
             <Grid.Row className="">
               <Switch>
-                <Route exact path="/" component={CreateBoostMain} />
-                <Route path="/manual" component={CreateManualControl} />
-                <Route path="/manualextra" component={CreateManualExtraControl} />
-                <Route path="/motors" component={CreateMotorControl} />
-                <Route path="/ai" component={CreateAiControl} />
-                <Route path="/code" component={CreateCodeControl} />
-                <Route path="/config" component={CreateConfigurationControl} />
-                <Route path="/info" component={CreateInfoComponent} />
+                <Route exact path="/" render={CreateBoostMain} />
+                <Route path="/manual" render={CreateManualControl} />
+                <Route path="/manualextra" render={CreateManualExtraControl} />
+                <Route path="/motors" render={CreateMotorControl} />
+                <Route path="/ai" render={CreateAiControl} />
+                <Route path="/code" render={CreateCodeControl} />
+                <Route path="/config" render={CreateConfigurationControl} />
+                <Route path="/info" render={CreateInfoComponent} />
                 <Route render={() => <Redirect to="/" />} />
               </Switch>
             </Grid.Row>
