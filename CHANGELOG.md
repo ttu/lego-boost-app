@@ -2,6 +2,8 @@
 
 ### [Unreleased]
 
+### [0.10.0] - 2021-04-10
+
 - FIXED: Code control to show saved code correctly on update
 - ADDED: Show current state in AI control
 - CHANGED: Update Lego Boost Browser Types
